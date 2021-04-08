@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <select id="findProdotto" parameterType="String" resultMap="prodottomap">
+		SELECT c.*, p.nome as nomeprodotto, p.categoria as categoriaprodotto,
+		p.prezzo as prezzoprodotto, p.url as urlprodotto
+		FROM carrello c inner join prodotto p on c.id_prodotto=p.id where
+		cookie = #{cookie}
+	</select>
+	
+	<resultMap id="prodottomap" type="it.exolab.ecommerce.model.Carrello">
+		<result property="id" column="id" />
+		<result property="id_prodotto" column="id_prodotto" />
+		<result property="cookie" column="cookie" />
+		<result property="quantita" column="quantita" />
+		<result property="prezzo" column="prezzo" />
+		<result property="data_creazione" column="data_creazione" />
+		<result property="totale" column="totale" />
+		
+	  <association property="prodotto" javaType="it.exolab.ecommerce.model.Prodotto">
+	  
+	    <result property="nome" column="nomeprodotto"/>
+	    <result property="categoria" column="categoriaprodotto"/>
+	    <result property="prezzo" column="prezzoprodotto"/>
+	    <result property="url" column="urlprodotto"/>
+	    
+	  </association>
+	</resultMap>

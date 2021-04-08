@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="GestionaleTL">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource"/>
+        <dependent-module archiveName="mysql-connector-java-5.1.46.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/dev/librerie/mysql-connector-java-5.1.46.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="taglibs-standard-impl-1.2.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/dev/librerie/taglibs-standard-impl-1.2.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="taglibs-standard-spec-1.2.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/dev/librerie/taglibs-standard-spec-1.2.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="mybatis-3.5.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/dev/librerie/mybatis-3.5.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="taglibs-standard-jstlel-1.2.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/dev/librerie/taglibs-standard-jstlel-1.2.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="GestionaleTL"/>
+        <property name="java-output-path" value="/GestionaleTL/build/classes"/>
+    </wb-module>
+</project-modules>
