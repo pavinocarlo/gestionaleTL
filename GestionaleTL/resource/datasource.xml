@@ -20,7 +20,7 @@
 
 	
    <mappers>
-      <mapper resource = "Condominio.xml"/>
+      <mapper resource = "Abitazione.xml"/>
          
    </mappers>
    

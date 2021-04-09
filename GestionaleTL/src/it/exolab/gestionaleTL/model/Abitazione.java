@@ -6,7 +6,7 @@ import java.util.List;
 public class Abitazione {
 	
 	private int id;
-	private String interno;
+	private String interno, idirizzo;
 	private List<User> listaUser= new ArrayList<User>();
 	private List<Votazione> listaVoti= new ArrayList<Votazione>();
 	
@@ -16,18 +16,22 @@ public class Abitazione {
 	public Abitazione() {
 		
 	}
-	public Abitazione(int id, String interno, List<User> listaUser, List<Votazione> listaVoti) {
+	
+	public Abitazione(int id, String interno, String idirizzo, List<User> listaUser, List<Votazione> listaVoti) {
 	
 		this.id = id;
 		this.interno = interno;
+		this.idirizzo = idirizzo;
 		this.listaUser = listaUser;
 		this.listaVoti = listaVoti;
 	}
+
 	@Override
 	public String toString() {
-		return "Abitazione [id=" + id + ", interno=" + interno + ", listaUser=" + listaUser + ", listaVoti=" + listaVoti
-				+ "]";
+		return "Abitazione [id=" + id + ", interno=" + interno + ", idirizzo=" + idirizzo + ", listaUser=" + listaUser
+				+ ", listaVoti=" + listaVoti + "]";
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -52,7 +56,13 @@ public class Abitazione {
 	public void setListaVoti(List<Votazione> listaVoti) {
 		this.listaVoti = listaVoti;
 	}
-
+	public String getIdirizzo() {
+		return idirizzo;
+	}
+	public void setIdirizzo(String idirizzo) {
+		this.idirizzo = idirizzo;
+	}
+	
 	
 	
 }
