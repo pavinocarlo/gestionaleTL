@@ -1,13 +1,15 @@
 package it.exolab.gestionaleTL.crud;
 
+import it.exolab.gestionaleTL.mapper.AbitazioneMapper;
+import it.exolab.gestionaleTL.model.Abitazione;
 import it.exolab.gestionaleTL.mybatis.SqlMapFactory;
 
 public class AbitazioneCrud {
 
-	public Condominio find(Integer id){
+	public Abitazione find(Integer id){
 		SqlMapFactory.instance().openSession();
-		CondominioMapper mapper =  SqlMapFactory.instance().getMapper(CondominioMapper.class);
-		Condominio ret = mapper.find(id);
+		AbitazioneMapper mapper =  SqlMapFactory.instance().getMapper(AbitazioneMapper.class);
+		Abitazione ret = mapper.find(id);
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 		return ret;

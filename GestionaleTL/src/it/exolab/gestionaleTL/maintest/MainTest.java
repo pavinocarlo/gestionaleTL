@@ -1,14 +1,15 @@
 package it.exolab.gestionaleTL.maintest;
 
-import it.exolab.gestionaleTL.crud.CondominioCrud;
+import it.exolab.gestionaleTL.crud.AbitazioneCrud;
+
 
 public class MainTest {
 
 	public static void main(String[] args) {
 
-		CondominioCrud condominioCrud = new CondominioCrud();
+		AbitazioneCrud abitazioneCrud = new AbitazioneCrud();
 		
-		System.out.println(condominioCrud.find(3));
+		System.out.println(abitazioneCrud.find(1));
 
 	}
 
