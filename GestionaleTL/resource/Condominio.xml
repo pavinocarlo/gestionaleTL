@@ -3,7 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <select id="find" parameterType="String" resultMap="condominiomap">
+  
+ <mapper namespace="it.exolab.gestionaleTL.mapper.CondominioMapper">
+  
+  
+  <select id="find" parameterType="Integer" resultMap="condominiomap">
+		select
 		c.id AS condominio_id, c.indirizzo AS condominio_indirizzo,
 		a.id AS abitazione_id, a.interno AS abitazione_interno,
 		v.id AS votazione_id, v.voto AS votazione_voto,
@@ -19,25 +24,25 @@
 		WHERE c.id = ${id};
 	</select>
 	
-	<resultMap id="condominiomap" type="it.exolab.ecommerce.model.Condominio">
+	<resultMap id="condominiomap" type="it.exolab.gestionaleTL.model.Condominio">
 		<result property="id" column="condominio_id" />
 		<result property="indirizzo" column="condominio_indirizzo" />
 		
-	 <association property="abitazione" javaType="it.exolab.ecommerce.model.Abitazione">
+	 <association property="abitazione" javaType="it.exolab.gestionaleTL.model.Abitazione">
 	  
 	    <result property="id" column="abitazione_id"/>
 	    <result property="interno" column="abitazione_interno"/>
 	    
 	  </association>
 	  
-	  <association property="votazione" javaType="it.exolab.ecommerce.model.Votazione">
+	  <association property="votazione" javaType="it.exolab.gestionaleTL.model.Votazione">
 	  
 	    <result property="id" column="votazione_id"/>
 	    <result property="voto" column="votazione_voto"/>
 	    
 	  </association>
 	  
-	   <association property="user" javaType="it.exolab.ecommerce.model.User">
+	   <association property="user" javaType="it.exolab.gestionaleTL.model.User">
 	  
 	    <result property="id" column="user_id"/>
 	    <result property="cf" column="user_cf"/>
@@ -52,10 +57,11 @@
 	    
 	  </association>
 	  
-	  <association property="ruolo" javaType="it.exolab.ecommerce.model.Ruolo">
+	  <association property="ruolo" javaType="it.exolab.gestionaleTL.model.Ruolo">
 	  
 	    <result property="id" column="ruolo_id"/>
 	    <result property="ruolo" column="ruolo_ruolo"/>
 	    
 	  </association>
 	</resultMap>
+</mapper>
