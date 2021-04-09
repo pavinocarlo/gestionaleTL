@@ -22,7 +22,6 @@
 		WHERE a.id = ${id};
 	</select>
 
-		
 	 <resultMap id="abitazionemap" type="it.exolab.gestionaleTL.model.Abitazione">
 	  
 	    <result property="id" column="abitazione_id"/>
@@ -56,8 +55,6 @@
 		  </association>
 	  
 	  </association>
-	  
-	  
-	 
+
 	</resultMap>
 </mapper>

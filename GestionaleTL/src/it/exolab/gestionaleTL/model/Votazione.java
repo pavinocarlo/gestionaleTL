@@ -9,8 +9,6 @@ public class Votazione {
 
 	}
 
-
-
 	public Votazione(int id, int voto) {
 		super();
 		this.id = id;

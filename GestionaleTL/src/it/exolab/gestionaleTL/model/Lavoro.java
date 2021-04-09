@@ -16,7 +16,6 @@ public class Lavoro {
 	
 	public Lavoro(int id, String nome, String esito_voto, String stato, Documentazione documentazione,
 			List<Votazione> listaVoti) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.esito_voto = esito_voto;

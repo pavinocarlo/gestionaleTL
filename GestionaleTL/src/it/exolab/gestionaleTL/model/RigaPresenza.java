@@ -5,9 +5,6 @@ public class RigaPresenza {
 	private int id, id_riunione, id_user, adesione, presenza;
 
 	
-	
-	
-	
 	public RigaPresenza() {
 
 	}
