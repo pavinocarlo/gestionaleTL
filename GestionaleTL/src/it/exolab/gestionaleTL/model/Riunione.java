@@ -11,5 +11,90 @@ public class Riunione {
 	private String ordine_del_giorno, luogo;
 	private List<RigaPresenza> listaProprietari = new ArrayList<RigaPresenza>();
 	private List<RigaArgomento> listaArgomenti = new ArrayList<RigaArgomento>();
+	
+	
+	
+	
+	
+	public Riunione() {
 
+	}
+	public Riunione(int id, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
+			Timestamp fine_riunione, String ordine_del_giorno, String luogo, List<RigaPresenza> listaProprietari,
+			List<RigaArgomento> listaArgomenti) {
+
+		this.id = id;
+		this.data_comunicazione = data_comunicazione;
+		this.data_riunione = data_riunione;
+		this.inizio_riunione = inizio_riunione;
+		this.fine_riunione = fine_riunione;
+		this.ordine_del_giorno = ordine_del_giorno;
+		this.luogo = luogo;
+		this.listaProprietari = listaProprietari;
+		this.listaArgomenti = listaArgomenti;
+	}
+	@Override
+	public String toString() {
+		return "Riunione [id=" + id + ", data_comunicazione=" + data_comunicazione + ", data_riunione=" + data_riunione
+				+ ", inizio_riunione=" + inizio_riunione + ", fine_riunione=" + fine_riunione + ", ordine_del_giorno="
+				+ ordine_del_giorno + ", luogo=" + luogo + ", listaProprietari=" + listaProprietari
+				+ ", listaArgomenti=" + listaArgomenti + "]";
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Timestamp getData_comunicazione() {
+		return data_comunicazione;
+	}
+	public void setData_comunicazione(Timestamp data_comunicazione) {
+		this.data_comunicazione = data_comunicazione;
+	}
+	public Timestamp getData_riunione() {
+		return data_riunione;
+	}
+	public void setData_riunione(Timestamp data_riunione) {
+		this.data_riunione = data_riunione;
+	}
+	public Timestamp getInizio_riunione() {
+		return inizio_riunione;
+	}
+	public void setInizio_riunione(Timestamp inizio_riunione) {
+		this.inizio_riunione = inizio_riunione;
+	}
+	public Timestamp getFine_riunione() {
+		return fine_riunione;
+	}
+	public void setFine_riunione(Timestamp fine_riunione) {
+		this.fine_riunione = fine_riunione;
+	}
+	public String getOrdine_del_giorno() {
+		return ordine_del_giorno;
+	}
+	public void setOrdine_del_giorno(String ordine_del_giorno) {
+		this.ordine_del_giorno = ordine_del_giorno;
+	}
+	public String getLuogo() {
+		return luogo;
+	}
+	public void setLuogo(String luogo) {
+		this.luogo = luogo;
+	}
+	public List<RigaPresenza> getListaProprietari() {
+		return listaProprietari;
+	}
+	public void setListaProprietari(List<RigaPresenza> listaProprietari) {
+		this.listaProprietari = listaProprietari;
+	}
+	public List<RigaArgomento> getListaArgomenti() {
+		return listaArgomenti;
+	}
+	public void setListaArgomenti(List<RigaArgomento> listaArgomenti) {
+		this.listaArgomenti = listaArgomenti;
+	}
+	
+	
+	
 }
