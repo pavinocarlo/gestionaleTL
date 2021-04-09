@@ -1,5 +1,5 @@
 package it.exolab.gestionaleTL.mapper;
 
-public interface LavoroMapper {
+public interface DocumentazioneMapper {
 
 }

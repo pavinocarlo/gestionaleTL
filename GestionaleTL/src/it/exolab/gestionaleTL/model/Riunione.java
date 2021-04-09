@@ -10,7 +10,7 @@ public class Riunione {
 	private Timestamp data_comunicazione, data_riunione, inizio_riunione, fine_riunione;
 	private String ordine_del_giorno, luogo;
 	private List<RigaPresenza> listaProprietari = new ArrayList<RigaPresenza>();
-	private List<RigaArgomento> listaArgomenti = new ArrayList<RigaArgomento>();
+	private List<Lavoro> listaLavori = new ArrayList<Lavoro>();
 	
 	
 	
@@ -21,7 +21,7 @@ public class Riunione {
 	}
 	public Riunione(int id, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
 			Timestamp fine_riunione, String ordine_del_giorno, String luogo, List<RigaPresenza> listaProprietari,
-			List<RigaArgomento> listaArgomenti) {
+			List<Lavoro> listaArgomenti) {
 
 		this.id = id;
 		this.data_comunicazione = data_comunicazione;
@@ -31,14 +31,14 @@ public class Riunione {
 		this.ordine_del_giorno = ordine_del_giorno;
 		this.luogo = luogo;
 		this.listaProprietari = listaProprietari;
-		this.listaArgomenti = listaArgomenti;
+		this.listaLavori = listaArgomenti;
 	}
 	@Override
 	public String toString() {
 		return "Riunione [id=" + id + ", data_comunicazione=" + data_comunicazione + ", data_riunione=" + data_riunione
 				+ ", inizio_riunione=" + inizio_riunione + ", fine_riunione=" + fine_riunione + ", ordine_del_giorno="
 				+ ordine_del_giorno + ", luogo=" + luogo + ", listaProprietari=" + listaProprietari
-				+ ", listaArgomenti=" + listaArgomenti + "]";
+				+ ", listaArgomenti=" + listaLavori + "]";
 	}
 	public int getId() {
 		return id;
@@ -88,11 +88,11 @@ public class Riunione {
 	public void setListaProprietari(List<RigaPresenza> listaProprietari) {
 		this.listaProprietari = listaProprietari;
 	}
-	public List<RigaArgomento> getListaArgomenti() {
-		return listaArgomenti;
+	public List<Lavoro> getListaLavori() {
+		return listaLavori;
 	}
-	public void setListaArgomenti(List<RigaArgomento> listaArgomenti) {
-		this.listaArgomenti = listaArgomenti;
+	public void setListaLavori(List<Lavoro> listaArgomenti) {
+		this.listaLavori = listaArgomenti;
 	}
 	
 	

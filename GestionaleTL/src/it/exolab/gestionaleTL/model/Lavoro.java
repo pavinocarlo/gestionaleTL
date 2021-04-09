@@ -3,55 +3,82 @@ package it.exolab.gestionaleTL.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RigaArgomento {
+public class Lavoro {
 	
-	private int id, voto_richiesto;
-	private String quesito;
+	private int id;
+	private String nome, esito_voto, stato;
+	private Documentazione documentazione;
 	private List<Votazione> listaVoti = new ArrayList<Votazione>();
 	
-	
-	
-	
-	
-	public RigaArgomento() {
+	public Lavoro() {
 
 	}
-	public RigaArgomento(int id, int voto_richiesto, String quesito, List<Votazione> listaVoti) {
-
+	
+	public Lavoro(int id, String nome, String esito_voto, String stato, Documentazione documentazione,
+			List<Votazione> listaVoti) {
+		super();
 		this.id = id;
-		this.voto_richiesto = voto_richiesto;
-		this.quesito = quesito;
+		this.nome = nome;
+		this.esito_voto = esito_voto;
+		this.stato = stato;
+		this.documentazione = documentazione;
 		this.listaVoti = listaVoti;
 	}
+
 	@Override
 	public String toString() {
-		return "RigaArgomento [id=" + id + ", voto_richiesto=" + voto_richiesto + ", quesito=" + quesito
-				+ ", listaVoti=" + listaVoti + "]";
+		return "Lavoro [id=" + id + ", nome=" + nome + ", esito_voto=" + esito_voto + ", stato=" + stato
+				+ ", documentazione=" + documentazione + ", listaVoti=" + listaVoti + "]";
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getVoto_richiesto() {
-		return voto_richiesto;
+
+	public String getNome() {
+		return nome;
 	}
-	public void setVoto_richiesto(int voto_richiesto) {
-		this.voto_richiesto = voto_richiesto;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	public String getQuesito() {
-		return quesito;
+
+	public String getEsito_voto() {
+		return esito_voto;
 	}
-	public void setQuesito(String quesito) {
-		this.quesito = quesito;
+
+	public void setEsito_voto(String esito_voto) {
+		this.esito_voto = esito_voto;
 	}
+
+	public String getStato() {
+		return stato;
+	}
+
+	public void setStato(String stato) {
+		this.stato = stato;
+	}
+
+	public Documentazione getDocumentazione() {
+		return documentazione;
+	}
+
+	public void setDocumentazione(Documentazione documentazione) {
+		this.documentazione = documentazione;
+	}
+
 	public List<Votazione> getListaVoti() {
 		return listaVoti;
 	}
+
 	public void setListaVoti(List<Votazione> listaVoti) {
 		this.listaVoti = listaVoti;
 	}
+	
 	
 	
 	

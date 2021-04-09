@@ -1,5 +1,5 @@
 package it.exolab.gestionaleTL.controller;
 
-public class LavoroController {
+public class DocumentazioneController {
 
 }

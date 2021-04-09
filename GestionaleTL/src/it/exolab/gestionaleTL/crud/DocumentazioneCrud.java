@@ -1,5 +1,5 @@
 package it.exolab.gestionaleTL.crud;
 
-public class LavoroCrud {
+public class DocumentazioneCrud {
 
 }
