@@ -7,28 +7,35 @@ public class Lavoro {
 	
 	private int id;
 	private String nome, esito_voto, stato;
-	private Documentazione documentazione;
+	private List<Documentazione> listaDocumenti = new ArrayList<Documentazione>();
 	private List<Votazione> listaVoti = new ArrayList<Votazione>();
 	
 	public Lavoro() {
 
 	}
 	
-	public Lavoro(int id, String nome, String esito_voto, String stato, Documentazione documentazione,
+	
+
+	public Lavoro(int id, String nome, String esito_voto, String stato, List<Documentazione> listaDocumenti,
 			List<Votazione> listaVoti) {
+		super();
 		this.id = id;
 		this.nome = nome;
 		this.esito_voto = esito_voto;
 		this.stato = stato;
-		this.documentazione = documentazione;
+		this.listaDocumenti = listaDocumenti;
 		this.listaVoti = listaVoti;
 	}
+
+	
 
 	@Override
 	public String toString() {
 		return "Lavoro [id=" + id + ", nome=" + nome + ", esito_voto=" + esito_voto + ", stato=" + stato
-				+ ", documentazione=" + documentazione + ", listaVoti=" + listaVoti + "]";
+				+ ", listaDocumenti=" + listaDocumenti + ", listaVoti=" + listaVoti + "]";
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -62,13 +69,6 @@ public class Lavoro {
 		this.stato = stato;
 	}
 
-	public Documentazione getDocumentazione() {
-		return documentazione;
-	}
-
-	public void setDocumentazione(Documentazione documentazione) {
-		this.documentazione = documentazione;
-	}
 
 	public List<Votazione> getListaVoti() {
 		return listaVoti;
@@ -76,6 +76,18 @@ public class Lavoro {
 
 	public void setListaVoti(List<Votazione> listaVoti) {
 		this.listaVoti = listaVoti;
+	}
+
+
+
+	public List<Documentazione> getListaDocumenti() {
+		return listaDocumenti;
+	}
+
+
+
+	public void setListaDocumenti(List<Documentazione> listaDocumenti) {
+		this.listaDocumenti = listaDocumenti;
 	}
 	
 	

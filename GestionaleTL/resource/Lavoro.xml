@@ -13,6 +13,7 @@
 		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
 		d.id AS documentazione_id, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
+		v.id AS votazione_id, v.voto AS votazione_voto
 		FROM lavoro AS l
 		INNER JOIN documentazione AS d on l.id = d.id_lavoro
 		inner join votazione AS v on l.id = v.id_lavoro
@@ -27,7 +28,7 @@
 	    <result property="esito_voto" column="lavoro_esito_voto" />
 	    <result property="stato" column="lavoro_stato"/>
 	  
-	  <association property="documentazione" javaType="it.exolab.gestionaleTL.model.Documentazione">
+	  <association property="listaDocumenti" javaType="it.exolab.gestionaleTL.model.Documentazione">
 	  
 	    <result property="id" column="documentazione_id"/>
 	    <result property="costo" column="documentazione_costo"/>
