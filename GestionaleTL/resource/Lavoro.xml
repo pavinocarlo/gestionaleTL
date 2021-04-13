@@ -39,7 +39,7 @@
 	    
 	    <association property="listaVoti" javaType="it.exolab.gestionaleTL.model.Votazione">
 	  
-	    <result property="id" column="abitazione_id"/>
+	    <result property="id" column="votazione_id"/>
 	    <result property="voto" column="votazione_voto"/>
 	    
 	 	</association>

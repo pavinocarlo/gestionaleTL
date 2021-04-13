@@ -13,8 +13,6 @@ public class Lavoro {
 
 	}
 	
-	
-
 	public Lavoro(int id, String nome, String esito_voto, String stato, List<Documentazione> listaDocumenti) {
 		super();
 		this.id = id;
@@ -24,8 +22,6 @@ public class Lavoro {
 		this.listaDocumenti = listaDocumenti;
 
 	}
-
-	
 
 	@Override
 	public String toString() {
