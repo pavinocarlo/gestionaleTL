@@ -2,3 +2,42 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="it.exolab.mapper.RuoloMapper">
+
+	<insert id = "insert"
+	parameterType="it.exolab.model.Ruolo" 
+	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	   insert into ruolo (ruolo) values (
+	   	 #{ruolo}
+	   )
+	   
+	</insert>
+	
+		
+	<update id = "update"
+	parameterType="it.exolab.model.Ruolo">
+	   update riga_presenza set 
+	     ruolo=#{ruolo}
+	   where
+	   id = #{id}
+	 
+	</update>
+	
+	
+	<delete id = "delete" parameterType="Integer" >
+	   delete from ruolo where id = #{id}
+	</delete>	
+	
+	
+	<select id = "find" resultType = "it.exolab.model.Ruolo" parameterType="Integer">
+	   SELECT * FROM ruolo  where id = #{id}
+	</select>
+	
+	
+  	<select id = "findAll" resultType = "it.exolab.model.Ruolo">
+	   SELECT * FROM ruolo
+	</select>
+
+
+ </mapper>
