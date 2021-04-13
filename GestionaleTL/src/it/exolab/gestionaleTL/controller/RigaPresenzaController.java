@@ -1,5 +1,14 @@
 package it.exolab.gestionaleTL.controller;
 
-public class RigaPresenzaController {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class RigaPresenzaController extends BaseController {
+	
+public RigaPresenzaController(HttpServletRequest request, HttpServletResponse response) {
+		
+		super(request, response);
+		
+	}
 
 }

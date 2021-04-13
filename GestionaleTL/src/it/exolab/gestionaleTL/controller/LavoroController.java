@@ -1,5 +1,14 @@
 package it.exolab.gestionaleTL.controller;
 
-public class LavoroController {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class LavoroController extends BaseController {
+	
+public LavoroController(HttpServletRequest request, HttpServletResponse response) {
+		
+		super(request, response);
+		
+	}
 
 }

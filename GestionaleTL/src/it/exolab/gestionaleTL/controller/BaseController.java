@@ -2,7 +2,7 @@ package it.exolab.gestionaleTL.controller;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,34 +12,29 @@ public class BaseController {
 	protected  HttpServletResponse response;
 	
 	
-protected BaseController() {
-		
+	protected BaseController() {
 		
 	}
 	
 	public BaseController(HttpServletRequest request, HttpServletResponse response) {
 		this.request=request;
 		this.response=response;
-		session_id = Utils.createOrGetCookie(request, response);
-		user = null;
-		if(request.getSession().getAttribute("user")!=null) {
-			user = (Proprietario)request.getSession().getAttribute("user");
-		}
-			
-			
-		
-		
 	}
-	protected void view() throws ServletException, IOException {
-		
-		
-		if(includeCart && session_id!=null) {
-			request.setAttribute("cart", userService.getCart(session_id, user) );
-		}
-		request.getRequestDispatcher(baseView+ view).include(request, response);
-		
-		
-	}
+//			
+//			
+//		
+//		
+//	
+//	protected void view() throws ServletException, IOException {
+//		
+//		
+//		if(includeCart && session_id!=null) {
+//			request.setAttribute("cart", userService.getCart(session_id, user) );
+//		}
+//		request.getRequestDispatcher(baseView+ view).include(request, response);
+//		
+//		
+//	}
 	protected Object flash(String attribute) {
 		
 		Object ret = request.getSession().getAttribute(attribute);

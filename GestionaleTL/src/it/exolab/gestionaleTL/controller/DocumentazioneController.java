@@ -1,5 +1,14 @@
 package it.exolab.gestionaleTL.controller;
 
-public class DocumentazioneController {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class DocumentazioneController extends BaseController {
+	
+	public DocumentazioneController(HttpServletRequest request, HttpServletResponse response) {
+		
+		super(request, response);
+		
+	}
 
 }

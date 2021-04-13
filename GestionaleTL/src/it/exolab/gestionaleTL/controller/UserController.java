@@ -1,5 +1,14 @@
 package it.exolab.gestionaleTL.controller;
 
-public class UserController {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class UserController extends BaseController {
+	
+public UserController(HttpServletRequest request, HttpServletResponse response) {
+		
+		super(request, response);
+		
+	}
 
 }
