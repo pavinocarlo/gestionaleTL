@@ -2,3 +2,57 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+ <mapper namespace="mapper.ProdottoMapper">
+
+<insert id = "insert"
+parameterType="model.RigaPresenza" 
+useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	   insert into riga_presenza (id_riunione, id_abitazione, id_user, adesione, presenza) values (
+	   	 #{id_riunione}
+	   , #{id_abitazione}
+	   , #{id_user}
+	   , #{adesione}
+	   , #{presenza}
+	   )
+	   
+	</insert>
+	
+		
+	<update id = "update"
+	parameterType="model.RigaPresenza">
+	   update riga_presenza set 
+	     id_riunione=#{id_riunione}
+	   , id_abitazione=#{id_abitazione}
+	   , id_user=#{id_user}
+	   , adesione=#{adesione}
+	   , presenza=#{presenza}
+	   where
+	   id = #{id}
+	 
+	</update>
+	
+	
+	<delete id = "delete" parameterType="Integer" >
+	   delete from riga_presenza where id = #{id}
+	</delete>	
+	
+	
+	<select id = "find" resultType = "model.RigaPresenza" parameterType="Integer">
+	   SELECT * FROM riga_presenza  where id = #{id}
+	</select>
+	
+	
+  	<select id = "findAll" resultType = "model.RigaPresenza">
+	   SELECT * FROM riga_presenza
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+ </mapper>
