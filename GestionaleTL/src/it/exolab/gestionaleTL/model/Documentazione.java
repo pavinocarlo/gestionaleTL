@@ -1,10 +1,14 @@
 package it.exolab.gestionaleTL.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Documentazione {
 	
 	private int id;
 	private double costo;
 	private String nome, societa;
+	private List<Votazione> listaVoti= new ArrayList<Votazione>();
 	
 	public Documentazione() {
 

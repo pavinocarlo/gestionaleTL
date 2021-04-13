@@ -8,7 +8,6 @@ public class Lavoro {
 	private int id;
 	private String nome, esito_voto, stato;
 	private List<Documentazione> listaDocumenti = new ArrayList<Documentazione>();
-	private List<Votazione> listaVoti = new ArrayList<Votazione>();
 	
 	public Lavoro() {
 
@@ -16,15 +15,14 @@ public class Lavoro {
 	
 	
 
-	public Lavoro(int id, String nome, String esito_voto, String stato, List<Documentazione> listaDocumenti,
-			List<Votazione> listaVoti) {
+	public Lavoro(int id, String nome, String esito_voto, String stato, List<Documentazione> listaDocumenti) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.esito_voto = esito_voto;
 		this.stato = stato;
 		this.listaDocumenti = listaDocumenti;
-		this.listaVoti = listaVoti;
+
 	}
 
 	
@@ -32,7 +30,7 @@ public class Lavoro {
 	@Override
 	public String toString() {
 		return "Lavoro [id=" + id + ", nome=" + nome + ", esito_voto=" + esito_voto + ", stato=" + stato
-				+ ", listaDocumenti=" + listaDocumenti + ", listaVoti=" + listaVoti + "]";
+				+ ", listaDocumenti=" + listaDocumenti + "]";
 	}
 
 
@@ -70,20 +68,9 @@ public class Lavoro {
 	}
 
 
-	public List<Votazione> getListaVoti() {
-		return listaVoti;
-	}
-
-	public void setListaVoti(List<Votazione> listaVoti) {
-		this.listaVoti = listaVoti;
-	}
-
-
-
 	public List<Documentazione> getListaDocumenti() {
 		return listaDocumenti;
 	}
-
 
 
 	public void setListaDocumenti(List<Documentazione> listaDocumenti) {
