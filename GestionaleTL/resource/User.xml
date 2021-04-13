@@ -2,3 +2,60 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="mapper.UserMapper">
+
+	<insert id = "insert"
+	parameterType="it.exolab.model.User" 
+	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	   insert into user (cf, nome, cognome, email, password, telefono, data_in, data_out, id_ruolo, id_abitazione) values (
+	   	 #{cf}
+	   	 , #{nome}
+	   	 , #{cognome}
+	   	 , #{email}
+	   	 , #{password}
+	   	 , #{telefono}
+	   	 , #{data_in}
+	   	 , #{data_out}
+	   	 , #{id_ruolo}
+	   	 , #{id_abitazione}
+	   )
+	   
+	</insert>
+	
+		
+	<update id = "update"
+	parameterType="it.exolab.model.User">
+	   update user set 
+	     cf=#{cf}
+	     , nome=#{nome}
+	   	 , cognome=#{cognome}
+	   	 , email=#{email}
+	   	 , password=#{password}
+	   	 , telefono=#{telefono}
+	   	 , data_in=#{data_in}
+	   	 , data_out=#{data_out}
+	   	 , id_ruolo=#{id_ruolo}
+	   	 , id_abitazione=#{id_abitazione}
+	   where
+	   id = #{id}
+	 
+	</update>
+	
+	
+	<delete id = "delete" parameterType="Integer" >
+	   delete from user where id = #{id}
+	</delete>	
+	
+	
+	<select id = "find" resultType = "it.exolab.model.User" parameterType="Integer">
+	   SELECT * FROM user  where id = #{id}
+	</select>
+	
+	
+  	<select id = "findAll" resultType = "it.exolab.model.User">
+	   SELECT * FROM user
+	</select>
+
+
+ </mapper>
