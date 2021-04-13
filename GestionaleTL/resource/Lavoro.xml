@@ -12,13 +12,13 @@
 		l.id AS lavoro_id, l.nome AS lavoro_nome, 
 		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
 		d.id AS documentazione_id, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
 		v.id AS votazione_id, v.voto AS votazione_voto
 		FROM lavoro AS l
 		INNER JOIN documentazione AS d on l.id = d.id_lavoro
-		inner join votazione AS v on l.id = v.id_lavoro
+		inner join votazione AS v on d.id = v.id_documentazione
 		WHERE l.id = ${id};
-		group by 
+	 
 	</select>
 
 		
@@ -36,14 +36,17 @@
 	    <result property="nome" column="documentazione_nome"/>
 	    <result property="societa" column="documentazione_societa"/>
 	    
-	  </association>
-	  
-	  <association property="listaVoti" javaType="it.exolab.gestionaleTL.model.Votazione">
+	    
+	    <association property="listaVoti" javaType="it.exolab.gestionaleTL.model.Votazione">
 	  
 	    <result property="id" column="abitazione_id"/>
 	    <result property="voto" column="votazione_voto"/>
 	    
+	 	</association>
+	    
 	  </association>
+	  
+	  
 
 	</resultMap>
 </mapper>
