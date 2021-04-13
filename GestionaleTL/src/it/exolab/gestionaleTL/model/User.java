@@ -6,7 +6,7 @@ import java.util.List;
 
 public class User {
 	
-	private int id;
+	private int id, id_ruolo, id_abitazione;
 	private String cf, nome, cognome, email, password, telefono;
 	private Timestamp data_in, data_out;
 	private Ruolo ruolo;
@@ -34,14 +34,39 @@ public class User {
 		this.listapresenze = listapresenze;
 	}
 
+	
 
-
+	
+	public User(int id, int id_ruolo, int id_abitazione, String cf, String nome, String cognome, String email,
+			String password, String telefono, Timestamp data_in, Timestamp data_out, Ruolo ruolo,
+			List<RigaPresenza> listapresenze) {
+		super();
+		this.id = id;
+		this.id_ruolo = id_ruolo;
+		this.id_abitazione = id_abitazione;
+		this.cf = cf;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.password = password;
+		this.telefono = telefono;
+		this.data_in = data_in;
+		this.data_out = data_out;
+		this.ruolo = ruolo;
+		this.listapresenze = listapresenze;
+	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", cf=" + cf + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email
-				+ ", password=" + password + ", telefono=" + telefono + ", data_in=" + data_in + ", data_out="
-				+ data_out + ", ruolo=" + ruolo + ", listapresenze=" + listapresenze + "]";
+		return "User [id=" + id + ", id_ruolo=" + id_ruolo + ", id_abitazione=" + id_abitazione + ", cf=" + cf
+				+ ", nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", password=" + password
+				+ ", telefono=" + telefono + ", data_in=" + data_in + ", data_out=" + data_out + ", ruolo=" + ruolo
+				+ ", listapresenze=" + listapresenze + "]";
 	}
+
 
 	public int getId() {
 		return id;
@@ -112,6 +137,26 @@ public class User {
 
 	public void setListapresenze(List<RigaPresenza> listapresenze) {
 		this.listapresenze = listapresenze;
+	}
+
+
+	public int getId_ruolo() {
+		return id_ruolo;
+	}
+
+
+	public void setId_ruolo(int id_ruolo) {
+		this.id_ruolo = id_ruolo;
+	}
+
+
+	public int getId_abitazione() {
+		return id_abitazione;
+	}
+
+
+	public void setId_abitazione(int id_abitazione) {
+		this.id_abitazione = id_abitazione;
 	}
 	
 	

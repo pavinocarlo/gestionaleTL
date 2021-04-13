@@ -17,7 +17,7 @@
 		
 	<update id = "update"
 	parameterType="it.exolab.model.Ruolo">
-	   update riga_presenza set 
+	   update ruolo set 
 	     ruolo=#{ruolo}
 	   where
 	   id = #{id}
