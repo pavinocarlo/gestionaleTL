@@ -53,6 +53,14 @@
 		    <result property="ruolo" column="ruolo_ruolo"/>
 		    
 		  </association>
+		  
+		  <association property="listaProprietari" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
+	
+			<result property="id" column="rigapresenza_id"/>
+		    <result property="adesione" column="rigapresenza_adesione"/>
+		    <result property="presenza" column="rigapresenza_presenza"/>
+	
+		</association>  
 	  
 	  </association>
 

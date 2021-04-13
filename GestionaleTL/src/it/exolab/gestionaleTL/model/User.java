@@ -1,6 +1,8 @@
 package it.exolab.gestionaleTL.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 	
@@ -8,14 +10,17 @@ public class User {
 	private String cf, nome, cognome, email, password, telefono;
 	private Timestamp data_in, data_out;
 	private Ruolo ruolo;
+	private List<User> listapresenze = new ArrayList<User>();
 
 	
 	public User() {
 
 	}
+	
+	
 	public User(int id, String cf, String nome, String cognome, String email, String password, String telefono,
-			Timestamp data_in, Timestamp data_out, Ruolo ruolo) {
-		
+			Timestamp data_in, Timestamp data_out, Ruolo ruolo, List<User> listapresenze) {
+		super();
 		this.id = id;
 		this.cf = cf;
 		this.nome = nome;
@@ -26,13 +31,18 @@ public class User {
 		this.data_in = data_in;
 		this.data_out = data_out;
 		this.ruolo = ruolo;
+		this.listapresenze = listapresenze;
 	}
+
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", cf=" + cf + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email
 				+ ", password=" + password + ", telefono=" + telefono + ", data_in=" + data_in + ", data_out="
-				+ data_out + ", ruolo=" + ruolo + "]";
+				+ data_out + ", ruolo=" + ruolo + ", listapresenze=" + listapresenze + "]";
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -92,6 +102,16 @@ public class User {
 	}
 	public void setRuolo(Ruolo ruolo) {
 		this.ruolo = ruolo;
+	}
+
+
+	public List<User> getListapresenze() {
+		return listapresenze;
+	}
+
+
+	public void setListapresenze(List<User> listapresenze) {
+		this.listapresenze = listapresenze;
 	}
 	
 	

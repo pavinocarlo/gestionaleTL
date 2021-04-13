@@ -2,3 +2,74 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="it.exolab.gestionaleTL.mapper.VotazioneMapper">
+  
+  
+  <select id="findByIdRiunione" parameterType="Integer" resultMap="votazionemap">
+		select
+		v.id AS votazione_id, v.voto AS votazione_voto, 
+		id_abitazione AS votazione_id_abitazione , id_lavoro AS votazione_id_lavoro, 
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
+		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione
+		r.id AS riunione_id, r.data_comunicazione AS riunione_data_comunicazione, 
+		r.data_riunione AS riunione_data_riunione, r.inizio_riunione AS riunione_inizio_riunione, 
+		r.fine_riunione AS riunione_fine_riunione, r.ordine_del_giorno AS riunione_ordine_del_giorno, 
+		r.luogo AS riunione_luogo
+		FROM votazione AS v
+		inner join lavoro AS l on l.id = v.id_lavoro
+		inner join riunione AS r on l.id_riunione = r.id
+		WHERE r.id = ${id};
+	</select>
+
+		
+	 <resultMap id="votazionemap" type="it.exolab.gestionaleTL.model.Riunione">
+	  
+	    <result property="id" column="riunione_id"/>
+	    <result property="data_comunicazione" column="riunione_data_comunicazione"/>
+	    <result property="data_riunione" column="riunione_data_riunione"/>
+	    <result property="data_inizio_riunione" column="riunione_inizio_riunione"/>
+	    <result property="data_fine_riunione" column="riunione_fine_riunione"/>
+	  	<result property="ordine_del_giorno" column="riunione_ordine_del_giorno"/>
+	  	<result property="luogo" column="riunione_luogo"/>
+	  	
+	<association property="listaProprietari" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
+	
+		<result property="id" column="rigapresenza_id"/>
+	    <result property="adesione" column="rigapresenza_adesione"/>
+	    <result property="presenza" column="rigapresenza_presenza"/>
+
+	</association>  	
+	  	
+	  	
+	<association property="listaLavori" javaType="it.exolab.gestionaleTL.model.Lavoro">
+	  
+	    <result property="id" column="lavoro_id"/>
+	    <result property="nome" column="lavoro_nome"/>
+	    <result property="esito_voto" column="lavoro_esito_voto"/>
+	    <result property="stato" column="lavoro_stato"/>
+	
+		<association property="listaDocumenti" javaType="it.exolab.gestionaleTL.model.Documentazione">
+		  
+		    <result property="id" column="documentazione_id"/>
+		    <result property="costo" column="documentazione_costo"/>
+		    <result property="nome" column="documentazione_nome"/>
+		    <result property="societa" column="documentazione_societa"/>
+		    
+		    
+		    <association property="listaVoti" javaType="it.exolab.gestionaleTL.model.Votazione">
+		  
+			    <result property="id" column="votazione_id"/>
+			    <result property="voto" column="votazione_voto"/>
+		    
+		 	</association>
+		    
+		</association>
+		
+	</association>
+	  
+	  
+	 
+	</resultMap>
+</mapper>
