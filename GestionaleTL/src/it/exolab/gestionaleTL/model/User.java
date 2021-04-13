@@ -10,7 +10,7 @@ public class User {
 	private String cf, nome, cognome, email, password, telefono;
 	private Timestamp data_in, data_out;
 	private Ruolo ruolo;
-	private List<User> listapresenze = new ArrayList<User>();
+	private List<RigaPresenza> listapresenze = new ArrayList<RigaPresenza>();
 
 	
 	public User() {
@@ -19,7 +19,7 @@ public class User {
 	
 	
 	public User(int id, String cf, String nome, String cognome, String email, String password, String telefono,
-			Timestamp data_in, Timestamp data_out, Ruolo ruolo, List<User> listapresenze) {
+			Timestamp data_in, Timestamp data_out, Ruolo ruolo, List<RigaPresenza> listapresenze) {
 		super();
 		this.id = id;
 		this.cf = cf;
@@ -105,12 +105,12 @@ public class User {
 	}
 
 
-	public List<User> getListapresenze() {
+	public List<RigaPresenza> getListapresenze() {
 		return listapresenze;
 	}
 
 
-	public void setListapresenze(List<User> listapresenze) {
+	public void setListapresenze(List<RigaPresenza> listapresenze) {
 		this.listapresenze = listapresenze;
 	}
 	

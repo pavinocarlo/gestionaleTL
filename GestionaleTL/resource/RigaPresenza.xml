@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
- <mapper namespace="mapper.ProdottoMapper">
+ <mapper namespace="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
 
 <insert id = "insert"
-parameterType="model.RigaPresenza" 
+parameterType="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper" 
 useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	   insert into riga_presenza (id_riunione, id_abitazione, id_user, adesione, presenza) values (
 	   	 #{id_riunione}
@@ -21,7 +21,7 @@ useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	
 		
 	<update id = "update"
-	parameterType="model.RigaPresenza">
+	parameterType="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
 	   update riga_presenza set 
 	     id_riunione=#{id_riunione}
 	   , id_abitazione=#{id_abitazione}
@@ -39,12 +39,12 @@ useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	</delete>	
 	
 	
-	<select id = "find" resultType = "model.RigaPresenza" parameterType="Integer">
+	<select id = "find" resultType = "it.exolab.gestionaleTL.mapper.RigaPresenzaMapper" parameterType="Integer">
 	   SELECT * FROM riga_presenza  where id = #{id}
 	</select>
 	
 	
-  	<select id = "findAll" resultType = "model.RigaPresenza">
+  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
 	   SELECT * FROM riga_presenza
 	</select>
 	

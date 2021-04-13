@@ -4,44 +4,46 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
-  <mapper namespace="it.exolab.gestionaleTL.mapper.VotazioneMapper">
+  <mapper namespace="it.exolab.gestionaleTL.mapper.RiunioneMapper">
   
-  
-  <select id="findByIdRiunione" parameterType="Integer" resultMap="votazionemap">
+  <select id="find" parameterType="Integer" resultMap="riunionemap">
 		select
-		v.id AS votazione_id, v.voto AS votazione_voto, 
-		id_abitazione AS votazione_id_abitazione , id_lavoro AS votazione_id_lavoro, 
+		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
+		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
+		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
+		ri.luogo AS riunione_luogo,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza,
 		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
-		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione
-		r.id AS riunione_id, r.data_comunicazione AS riunione_data_comunicazione, 
-		r.data_riunione AS riunione_data_riunione, r.inizio_riunione AS riunione_inizio_riunione, 
-		r.fine_riunione AS riunione_fine_riunione, r.ordine_del_giorno AS riunione_ordine_del_giorno, 
-		r.luogo AS riunione_luogo
-		FROM votazione AS v
-		inner join lavoro AS l on l.id = v.id_lavoro
-		inner join riunione AS r on l.id_riunione = r.id
-		WHERE r.id = ${id};
+		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
+		d.id AS documentazione_id, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
+		v.id AS votazione_id, v.voto AS votazione_voto
+		FROM riunione AS ri
+		INNER JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
+		inner join lavoro AS l ON l.id_riunione = ri.id
+		inner join documentazione AS d ON d.id_lavoro = l.id
+		INNER JOIN votazione AS v ON v.id_documentazione = d.id
+		WHERE ri.id =${id};
 	</select>
-
 		
-	 <resultMap id="votazionemap" type="it.exolab.gestionaleTL.model.Riunione">
+	 <resultMap id="riunionemap" type="it.exolab.gestionaleTL.model.Riunione">
 	  
 	    <result property="id" column="riunione_id"/>
 	    <result property="data_comunicazione" column="riunione_data_comunicazione"/>
 	    <result property="data_riunione" column="riunione_data_riunione"/>
-	    <result property="data_inizio_riunione" column="riunione_inizio_riunione"/>
-	    <result property="data_fine_riunione" column="riunione_fine_riunione"/>
+	    <result property="inizio_riunione" column="riunione_inizio_riunione"/>
+	    <result property="fine_riunione" column="riunione_fine_riunione"/>
 	  	<result property="ordine_del_giorno" column="riunione_ordine_del_giorno"/>
 	  	<result property="luogo" column="riunione_luogo"/>
 	  	
-	<association property="listaProprietari" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
+	<association property="listaPresenze" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
 	
 		<result property="id" column="rigapresenza_id"/>
 	    <result property="adesione" column="rigapresenza_adesione"/>
 	    <result property="presenza" column="rigapresenza_presenza"/>
 
 	</association>  	
-	  	
 	  	
 	<association property="listaLavori" javaType="it.exolab.gestionaleTL.model.Lavoro">
 	  
@@ -57,7 +59,6 @@
 		    <result property="nome" column="documentazione_nome"/>
 		    <result property="societa" column="documentazione_societa"/>
 		    
-		    
 		    <association property="listaVoti" javaType="it.exolab.gestionaleTL.model.Votazione">
 		  
 			    <result property="id" column="votazione_id"/>
@@ -68,8 +69,7 @@
 		</association>
 		
 	</association>
-	  
-	  
+
 	 
 	</resultMap>
 </mapper>

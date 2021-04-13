@@ -8,17 +8,20 @@
   
   
   <select id="find" parameterType="Integer" resultMap="abitazionemap">
-		select
+	select
 		a.id AS abitazione_id, a.interno AS abitazione_interno, a.indirizzo AS abitazione_indirizzo,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		u.id AS user_id, u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
 		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
 		u.data_in AS user_data_in, u.data_out AS user_data_out,
-		r.id AS ruolo_id, r.ruolo AS ruolo_ruolo 
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza
 		FROM abitazione AS a
 		inner join votazione AS v on a.id = v.id_abitazione
 		inner join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
-		inner join ruolo AS r on u.id_ruolo = r.id
+		inner join ruolo AS ru on u.id_ruolo = ru.id
+		inner join riga_presenza as rp on rp.id_user = u.id
 		WHERE a.id = ${id};
 	</select>
 
@@ -54,7 +57,7 @@
 		    
 		  </association>
 		  
-		  <association property="listaProprietari" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
+		  <association property="listaPresenze" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
 	
 			<result property="id" column="rigapresenza_id"/>
 		    <result property="adesione" column="rigapresenza_adesione"/>

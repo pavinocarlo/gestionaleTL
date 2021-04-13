@@ -9,18 +9,15 @@ public class Riunione {
 	private int id;
 	private Timestamp data_comunicazione, data_riunione, inizio_riunione, fine_riunione;
 	private String ordine_del_giorno, luogo;
-	private List<RigaPresenza> listaProprietari = new ArrayList<RigaPresenza>();
+	private List<RigaPresenza> listaPresenze = new ArrayList<RigaPresenza>();
 	private List<Lavoro> listaLavori = new ArrayList<Lavoro>();
-	
-	
-	
-	
+
 	
 	public Riunione() {
 
 	}
 	public Riunione(int id, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
-			Timestamp fine_riunione, String ordine_del_giorno, String luogo, List<RigaPresenza> listaProprietari,
+			Timestamp fine_riunione, String ordine_del_giorno, String luogo, List<RigaPresenza> listaPresenze,
 			List<Lavoro> listaArgomenti) {
 
 		this.id = id;
@@ -30,14 +27,14 @@ public class Riunione {
 		this.fine_riunione = fine_riunione;
 		this.ordine_del_giorno = ordine_del_giorno;
 		this.luogo = luogo;
-		this.listaProprietari = listaProprietari;
+		this.listaPresenze = listaPresenze;
 		this.listaLavori = listaArgomenti;
 	}
 	@Override
 	public String toString() {
 		return "Riunione [id=" + id + ", data_comunicazione=" + data_comunicazione + ", data_riunione=" + data_riunione
 				+ ", inizio_riunione=" + inizio_riunione + ", fine_riunione=" + fine_riunione + ", ordine_del_giorno="
-				+ ordine_del_giorno + ", luogo=" + luogo + ", listaProprietari=" + listaProprietari
+				+ ordine_del_giorno + ", luogo=" + luogo + ", listaPresenze=" + listaPresenze
 				+ ", listaArgomenti=" + listaLavori + "]";
 	}
 	public int getId() {
@@ -82,11 +79,11 @@ public class Riunione {
 	public void setLuogo(String luogo) {
 		this.luogo = luogo;
 	}
-	public List<RigaPresenza> getListaProprietari() {
-		return listaProprietari;
+	public List<RigaPresenza> getListaPresenze() {
+		return listaPresenze;
 	}
-	public void setListaProprietari(List<RigaPresenza> listaProprietari) {
-		this.listaProprietari = listaProprietari;
+	public void setListaPresenze(List<RigaPresenza> listaPresenze) {
+		this.listaPresenze = listaPresenze;
 	}
 	public List<Lavoro> getListaLavori() {
 		return listaLavori;
