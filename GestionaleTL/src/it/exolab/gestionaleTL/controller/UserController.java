@@ -28,11 +28,11 @@ public class UserController extends BaseController {
 	
 	
 	
-	public boolean validate(User user) {
-		boolean ret=false;
-		ret=validate(user.getEmail(), user.getPassword(),user.getNome(),user.getCognome(),user.getIndirizzo());
-		return ret;
-	}
+//	public boolean validate(User user) {
+//		boolean ret=false;
+//		ret=validate(user.getEmail(), user.getPassword(),user.getNome(),user.getCognome(),user.getIndirizzo());
+//		return ret;
+//	}
 	
 	protected boolean validate(String email,String password) {
 		boolean ret=false;
@@ -108,7 +108,7 @@ public class UserController extends BaseController {
 							request.getParameter("password"), 
 							request.getParameter("telefono"),
 							(Timestamp.valueOf("" + request.getParameter("dataIn") + "00:00:00")),
-							(Timestamp.valueOf("" + (String)request.getParameter("dataOut") + "00:00:00")),
+							(Timestamp.valueOf("" + request.getParameter("dataOut") + "00:00:00")),
 							Integer.parseInt(request.getParameter("id_ruolo")), 
 							Integer.parseInt(request.getParameter("id_abitazione")));
 							
