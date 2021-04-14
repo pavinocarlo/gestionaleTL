@@ -9,10 +9,10 @@ public class Ruolo {
 	public Ruolo() {
 		
 	}
-	public Ruolo(int id, String ruolo) {
+	public Ruolo(int id) {
 	
 		this.id = id;
-		this.ruolo = ruolo;
+		this.ruolo = setRuonoName(id);
 	}
 	@Override
 	public String toString() {
@@ -30,6 +30,21 @@ public class Ruolo {
 	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
 	}
+	private String setRuonoName(int id) {
+		
+		String ruolo;
+		if(id==1)
+			ruolo = "Amministratore";
+		if(id==2) 
+			ruolo = "Proprietario";
+		else
+			ruolo = "Delegato";
+		
+		return ruolo;
+	}
+		
+		
+		
 	
 	
 }

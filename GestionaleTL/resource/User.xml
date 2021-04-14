@@ -3,10 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="mapper.UserMapper">
+  <mapper namespace="it.exolab.gestionaleTL.mapper.UserMapper">
 
 	<insert id = "insert"
-	parameterType="it.exolab.model.User" 
+	parameterType="it.exolab.gestionaleTL.model.User" 
 	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	   insert into user (cf, nome, cognome, email, password, telefono, data_in, data_out, id_ruolo, id_abitazione) values (
 	   	 #{cf}
@@ -23,9 +23,23 @@
 	   
 	</insert>
 	
+<!-- 	<insert id = "insert" -->
+<!-- 	parameterType="it.exolab.gestionaleTL.model.User"  -->
+<!-- 	useGeneratedKeys="true" keyProperty="id" keyColumn="id"> -->
+<!-- 	   insert into user (cf, nome, cognome, email, password, telefono) values ( -->
+<!-- 	   	 #{cf} -->
+<!-- 	   	 , #{nome} -->
+<!-- 	   	 , #{cognome} -->
+<!-- 	   	 , #{email} -->
+<!-- 	   	 , #{password} -->
+<!-- 	   	 , #{telefono} -->
+<!-- 	   ) -->
+	   
+<!-- 	</insert> -->
+	
 		
 	<update id = "update"
-	parameterType="it.exolab.model.User">
+	parameterType="it.exolab.gestionaleTL.model.User">
 	   update user set 
 	     cf=#{cf}
 	     , nome=#{nome}
@@ -48,20 +62,19 @@
 	</delete>	
 	
 	
-	<select id = "find" resultType = "it.exolab.model.User" parameterType="Integer">
+	<select id = "find" resultType = "it.exolab.gestionaleTL.model.User" parameterType="Integer">
 	   SELECT * FROM user  where id = #{id}
 	</select>
 	
-	<select id = "findByEmail" resultType = "model.User" parameterType="String">
+	<select id = "findByEmail" resultType = "it.exolab.gestionaleTL.model.User" parameterType="String">
 	   SELECT * FROM user  where email = #{email}
 	</select>
 	
-	<select id = "findByEmailAndPassword" resultType = "it.exolab.model.User" 
-		parameterType="it.exolab.model.User">
+	<select id = "findByEmailAndPassword" resultType = "it.exolab.gestionaleTL.model.User">
 	   SELECT * FROM user  where email = #{email} AND PASSWORD = #{password}
 	</select>
 	
-  	<select id = "findAll" resultType = "it.exolab.model.User">
+  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.model.User">
 	   SELECT * FROM user
 	</select>
 

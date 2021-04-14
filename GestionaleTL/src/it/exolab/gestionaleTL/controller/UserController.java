@@ -1,12 +1,17 @@
 package it.exolab.gestionaleTL.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import it.exolab.gestionaleTL.crud.UserCrud;
+import it.exolab.gestionaleTL.exception.AlreadyExistException;
+import it.exolab.gestionaleTL.exception.GenericException;
+import it.exolab.gestionaleTL.exception.InvalidFieldException;
 import it.exolab.gestionaleTL.model.User;
 
 
@@ -19,8 +24,14 @@ public class UserController extends BaseController {
 	public UserController(HttpServletRequest request, HttpServletResponse response) {
 		
 		super(request, response);
-		
-		
+	}
+	
+	
+	
+	public boolean validate(User user) {
+		boolean ret=false;
+		ret=validate(user.getEmail(), user.getPassword(),user.getNome(),user.getCognome(),user.getIndirizzo());
+		return ret;
 	}
 	
 	protected boolean validate(String email,String password) {
@@ -32,6 +43,33 @@ public class UserController extends BaseController {
 		}
 		return ret;
 	}
+	
+	public boolean validate(String email,String password,String nome,String cognome, String indirizzo) {
+		UserCrud uc=new UserCrud();
+		boolean ret=false;
+		if (!(uc.findByEmail(email)!=null)){
+			if (
+				    !(!email.contains("@") || !email.contains(".") || email.length()<4 && email.length()>70)
+				 && !(password.length()<8 || password.length()>70 || hasDigits(password)<2)
+				 && !(nome.length()<2 || nome.length()>70 || hasDigits(nome)>0)
+				 && !(cognome.length()<2 || cognome.length()>70 || hasDigits(cognome)>0)
+				 && !(indirizzo.length()<5 || indirizzo.length()>70)	 
+			 ) {
+				ret=true;
+			} 
+		}
+		return ret;
+	}
+	
+	public int hasDigits(String s) {
+		int ret=0;
+		for(int i=0;i<s.length();i++) {
+			if ((s.charAt(i) >= '0') && (s.charAt(i) <= '9')) {
+				ret++;
+			}
+		}
+		return ret;
+	}
 
 	protected void doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -39,9 +77,7 @@ public class UserController extends BaseController {
 		String email = request.getParameter("email");
 		
 		if(validate(email,password)) {
-			user.setEmail(email);
-			user.setPassword(password);
-			user = userCrud.findByEmailAndPassword(user);
+			user = userCrud.findByEmailAndPassword(email, password);
 			doRuolo(user);
 			return;
 		}
@@ -60,6 +96,30 @@ public class UserController extends BaseController {
 		request.getRequestDispatcher(
 				user.getRuolo().getRuolo().equals("Amministratore") ? "adminhome.jsp" : "homeuser.jsp");
 	}
+	
+	
+	protected void doInsert(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException {
+		
+	
+		User user = new User(request.getParameter("cf"),
+							request.getParameter("nome"), 
+							request.getParameter("cognome"), 
+							request.getParameter("email"), 
+							request.getParameter("password"), 
+							request.getParameter("telefono"),
+							(Timestamp.valueOf("" + request.getParameter("dataIn") + "00:00:00")),
+							(Timestamp.valueOf("" + (String)request.getParameter("dataOut") + "00:00:00")),
+							Integer.parseInt(request.getParameter("id_ruolo")), 
+							Integer.parseInt(request.getParameter("id_abitazione")));
+							
+		if(validate(user)) {
+			
+			userCrud.insert(user);
+		}
+	}
+	
+		
+	
 		
 	
 

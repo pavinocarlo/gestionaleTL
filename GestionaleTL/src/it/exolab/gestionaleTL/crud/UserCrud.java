@@ -30,6 +30,16 @@ public class UserCrud {
 			throw new InvalidFieldException();
 		}
 	}
+	
+	
+	public void insert(User user) throws GenericException, AlreadyExistException, InvalidFieldException{
+		validate(user);
+		SqlMapFactory.instance().openSession();
+		UserMapper mapper =  SqlMapFactory.instance().getMapper(UserMapper.class);
+		mapper.insert(user);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+	}
 
 	public User findByEmail(String email) {
 		SqlMapFactory.instance().openSession();
@@ -40,10 +50,10 @@ public class UserCrud {
 		return ret;
 	}
 
-	public User findByEmailAndPassword(User user) {
+	public User findByEmailAndPassword(String email, String password) {
 		SqlMapFactory.instance().openSession();
 		UserMapper mapper =  SqlMapFactory.instance().getMapper(UserMapper.class);
-		User ret=mapper.findByEmailAndPassword(user);
+		User ret=mapper.findByEmailAndPassword(email, password);
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 		return ret;

@@ -3,10 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="it.exolab.mapper.RuoloMapper">
+  <mapper namespace="it.exolab.gestionaleTL.model.RuoloMapper">
 
 	<insert id = "insert"
-	parameterType="it.exolab.model.Ruolo" 
+	parameterType="it.exolab.gestionaleTL.model.Ruolo" 
 	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	   insert into ruolo (ruolo) values (
 	   	 #{ruolo}
@@ -16,7 +16,7 @@
 	
 		
 	<update id = "update"
-	parameterType="it.exolab.model.Ruolo">
+	parameterType="it.exolab.gestionaleTL.model.Ruolo">
 	   update ruolo set 
 	     ruolo=#{ruolo}
 	   where
@@ -30,12 +30,12 @@
 	</delete>	
 	
 	
-	<select id = "find" resultType = "it.exolab.model.Ruolo" parameterType="Integer">
+	<select id = "find" resultType = "it.exolab.gestionaleTL.model.Ruolo" parameterType="Integer">
 	   SELECT * FROM ruolo  where id = #{id}
 	</select>
 	
 	
-  	<select id = "findAll" resultType = "it.exolab.model.Ruolo">
+  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.model.Ruolo">
 	   SELECT * FROM ruolo
 	</select>
 
