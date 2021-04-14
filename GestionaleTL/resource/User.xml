@@ -52,6 +52,14 @@
 	   SELECT * FROM user  where id = #{id}
 	</select>
 	
+	<select id = "findByEmail" resultType = "model.User" parameterType="String">
+	   SELECT * FROM user  where email = #{email}
+	</select>
+	
+	<select id = "findByEmailAndPassword" resultType = "it.exolab.model.User" 
+		parameterType="it.exolab.model.User">
+	   SELECT * FROM user  where email = #{email} AND PASSWORD = #{password}
+	</select>
 	
   	<select id = "findAll" resultType = "it.exolab.model.User">
 	   SELECT * FROM user
