@@ -5,14 +5,15 @@
   
   <mapper namespace="it.exolab.gestionaleTL.mapper.DocumentazioneMapper">
   
-  
-  <insert id = "insert"
-		parameterType="it.exolab.gestionaleTL.model.Documentazione" 
-		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		   insert into user (nome, costo, societa, id_lavoro) values ( 
-		   #{nome}, 
-		   #{costo}, 
-		   #{societa}, 
-		   #{id_lavoro} )
-		   
-	</insert>
+	  
+	  <insert id = "insert"
+			parameterType="it.exolab.gestionaleTL.model.Documentazione" 
+			useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+			   insert into user (nome, costo, societa, id_lavoro) values ( 
+			   #{nome}, 
+			   #{costo}, 
+			   #{societa}, 
+			   #{id_lavoro} )
+			   
+		</insert>
+</mapper>

@@ -6,6 +6,33 @@
   
   <mapper namespace="it.exolab.gestionaleTL.mapper.RiunioneMapper">
   
+  <insert id = "insert"
+		parameterType="it.exolab.gestionaleTL.model.Riunione" 
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		   insert into user (data_comunicazione, data_riunione, ordine_del_giorno, luogo) values ( 
+		   #{data_comunicazione}, 
+		   #{data_riunione}, 
+		   #{ordine_del_giorno}, 
+		   #{luogo} )
+		   
+	</insert>
+	
+	
+	<update id = "update"
+		parameterType="it.exolab.gestionaleTL.model.Riunione">
+		   update prodotto set 
+		     data_comunicazione=#{data_comunicazione}
+		   , data_riunione=#{data_riunione}
+		   , inizio_riunione=#{inizio_riunione}
+		   , fine_riunione=#{fine_riunione}
+		   , ordine_del_giorno=#{ordine_del_giorno}
+		   , luogo=#{luogo}
+		   where
+		   id = #{id}
+			 
+	</update>
+
+  
   <select id="find" parameterType="Integer" resultMap="riunionemap">
 		select
 		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
