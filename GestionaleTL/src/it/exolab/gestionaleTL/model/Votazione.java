@@ -16,9 +16,8 @@ public class Votazione {
 	}
 
 
-	public Votazione(int id, int voto, int id_abitazione, int id_documentazione) {
-		super();
-		this.id = id;
+	public Votazione(int voto, int id_abitazione, int id_documentazione) {
+
 		this.voto = voto;
 		this.id_abitazione = id_abitazione;
 		this.id_documentazione = id_documentazione;

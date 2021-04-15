@@ -9,7 +9,7 @@
 	  <insert id = "insert"
 			parameterType="it.exolab.gestionaleTL.model.Documentazione" 
 			useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-			   insert into user (nome, costo, societa, id_lavoro) values ( 
+			   insert into documentazione (nome, costo, societa, id_lavoro) values ( 
 			   #{nome}, 
 			   #{costo}, 
 			   #{societa}, 

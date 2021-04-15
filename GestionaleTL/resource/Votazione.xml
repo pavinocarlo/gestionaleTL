@@ -3,3 +3,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
+  <mapper namespace="it.exolab.gestionaleTL.mapper.VotazioneMapper">
+
+	<insert id = "insert"
+	parameterType="it.exolab.gestionaleTL.mapper.Votazione" 
+	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		   insert into votazione (voto, id_abitazione, id_documentazione) values (
+		   	 #{voto}
+		   , #{id_abitazione}
+		   , #{id_documentazione}
+		   )
+		   
+		</insert>
+		
+			
+		<update id = "update"
+		parameterType="it.exolab.gestionaleTL.mapper.Votazione">
+		   update votazione set 
+		     voto=#{voto}
+		   , id_abitazione=#{id_abitazione}
+		   , id_documentazione=#{id_documentazione}
+		   where
+		   id = #{id}
+		 
+		</update>
+	
+	
+	<delete id = "delete" parameterType="Integer" >
+	   delete from votazione where id = #{id}
+	</delete>	
+	
+	
+	<select id = "find" resultType = "it.exolab.gestionaleTL.mapper.Votazione" parameterType="Integer">
+	   SELECT * FROM votazione  where id = #{id}
+	</select>
+	
+	
+  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.mapper.Votazione">
+	   SELECT * FROM votazione
+	</select>
+
+	
+ </mapper>
+  
+  

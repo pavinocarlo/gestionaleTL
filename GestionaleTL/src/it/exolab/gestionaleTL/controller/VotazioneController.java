@@ -5,10 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class VotazioneController extends BaseController {
 	
-public VotazioneController(HttpServletRequest request, HttpServletResponse response) {
-		
-		super(request, response);
-		
+	public VotazioneController(HttpServletRequest request, HttpServletResponse response) {
+			
+		super(request, response);	
 	}
 
 }

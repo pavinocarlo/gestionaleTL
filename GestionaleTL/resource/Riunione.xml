@@ -9,7 +9,7 @@
   <insert id = "insert"
 		parameterType="it.exolab.gestionaleTL.model.Riunione" 
 		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		   insert into user (data_comunicazione, data_riunione, ordine_del_giorno, luogo) values ( 
+		   insert into riunione (data_comunicazione, data_riunione, ordine_del_giorno, luogo) values ( 
 		   #{data_comunicazione}, 
 		   #{data_riunione}, 
 		   #{ordine_del_giorno}, 
@@ -20,7 +20,7 @@
 	
 	<update id = "update"
 		parameterType="it.exolab.gestionaleTL.model.Riunione">
-		   update prodotto set 
+		   update riunione set 
 		     data_comunicazione=#{data_comunicazione}
 		   , data_riunione=#{data_riunione}
 		   , inizio_riunione=#{inizio_riunione}

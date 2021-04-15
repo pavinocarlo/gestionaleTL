@@ -10,7 +10,7 @@
   	<insert id = "insert"
 		parameterType="it.exolab.gestionaleTL.model.Lavoro" 
 		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		   insert into user (nome, esito_voto, stato, id_riunione) values ( 
+		   insert into lavoro (nome, esito_voto, stato, id_riunione) values ( 
 		   #{nome}, 
 		   #{esito_voto}, 
 		   #{stato}, 
