@@ -7,6 +7,14 @@
  <mapper namespace="it.exolab.gestionaleTL.mapper.AbitazioneMapper">
   
   
+  <insert id = "insert"
+	parameterType="it.exolab.gestionaleTL.model.Abitazione" 
+	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	   insert into user (interno, indirizzo) values ( #{interno}, #{indirizzo} )
+	   
+	</insert>
+  
+  
   <select id="find" parameterType="Integer" resultMap="abitazionemap">
 	select
 		a.id AS abitazione_id, a.interno AS abitazione_interno, a.indirizzo AS abitazione_indirizzo,
