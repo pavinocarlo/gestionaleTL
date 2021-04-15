@@ -6,32 +6,32 @@
   
  <mapper namespace="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
 
-<insert id = "insert"
-parameterType="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper" 
-useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-	   insert into riga_presenza (id_riunione, id_abitazione, id_user, adesione, presenza) values (
-	   	 #{id_riunione}
-	   , #{id_abitazione}
-	   , #{id_user}
-	   , #{adesione}
-	   , #{presenza}
-	   )
-	   
-	</insert>
-	
+	<insert id = "insert"
+	parameterType="it.exolab.gestionaleTL.mapper.RigaPresenza" 
+	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		   insert into riga_presenza (id_riunione, id_abitazione, id_user, adesione, presenza) values (
+		   	 #{id_riunione}
+		   , #{id_abitazione}
+		   , #{id_user}
+		   , #{adesione}
+		   , #{presenza}
+		   )
+		   
+		</insert>
 		
-	<update id = "update"
-	parameterType="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
-	   update riga_presenza set 
-	     id_riunione=#{id_riunione}
-	   , id_abitazione=#{id_abitazione}
-	   , id_user=#{id_user}
-	   , adesione=#{adesione}
-	   , presenza=#{presenza}
-	   where
-	   id = #{id}
-	 
-	</update>
+			
+		<update id = "update"
+		parameterType="it.exolab.gestionaleTL.mapper.RigaPresenza">
+		   update riga_presenza set 
+		     id_riunione=#{id_riunione}
+		   , id_abitazione=#{id_abitazione}
+		   , id_user=#{id_user}
+		   , adesione=#{adesione}
+		   , presenza=#{presenza}
+		   where
+		   id = #{id}
+		 
+		</update>
 	
 	
 	<delete id = "delete" parameterType="Integer" >
@@ -39,12 +39,12 @@ useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	</delete>	
 	
 	
-	<select id = "find" resultType = "it.exolab.gestionaleTL.mapper.RigaPresenzaMapper" parameterType="Integer">
+	<select id = "find" resultType = "it.exolab.gestionaleTL.mapper.RigaPresenza" parameterType="Integer">
 	   SELECT * FROM riga_presenza  where id = #{id}
 	</select>
 	
 	
-  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
+  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.mapper.RigaPresenza">
 	   SELECT * FROM riga_presenza
 	</select>
 	

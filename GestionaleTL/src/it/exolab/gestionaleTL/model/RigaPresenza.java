@@ -16,11 +16,8 @@ public class RigaPresenza {
 		this.presenza = presenza;
 	}
 
-	
+	public RigaPresenza(int adesione, int presenza, int id_riunione, int id_abitazione, int id_user) {
 
-	public RigaPresenza(int id, int adesione, int presenza, int id_riunione, int id_abitazione, int id_user) {
-		super();
-		this.id = id;
 		this.adesione = adesione;
 		this.presenza = presenza;
 		this.id_riunione = id_riunione;

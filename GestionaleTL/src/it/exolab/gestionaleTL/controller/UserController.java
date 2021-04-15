@@ -28,11 +28,11 @@ public class UserController extends BaseController {
 	
 	
 	
-//	public boolean validate(User user) {
-//		boolean ret=false;
-//		ret=validate(user.getEmail(), user.getPassword(),user.getNome(),user.getCognome(),user.getIndirizzo());
-//		return ret;
-//	}
+	public boolean validate(User user) {
+		boolean ret=false;
+		ret=validate(user.getCf(), user.getNome(), user.getCognome(), user.getEmail(), user.getPassword(),user.getTelefono());
+		return ret;
+	}
 	
 	protected boolean validate(String email,String password) {
 		boolean ret=false;
@@ -44,7 +44,7 @@ public class UserController extends BaseController {
 		return ret;
 	}
 	
-	public boolean validate(String email,String password,String nome,String cognome, String indirizzo) {
+	public boolean validate(String cf, String nome, String cognome, String email,String password, String telefono) {
 		UserCrud uc=new UserCrud();
 		boolean ret=false;
 		if (!(uc.findByEmail(email)!=null)){
@@ -53,7 +53,7 @@ public class UserController extends BaseController {
 				 && !(password.length()<8 || password.length()>70 || hasDigits(password)<2)
 				 && !(nome.length()<2 || nome.length()>70 || hasDigits(nome)>0)
 				 && !(cognome.length()<2 || cognome.length()>70 || hasDigits(cognome)>0)
-				 && !(indirizzo.length()<5 || indirizzo.length()>70)	 
+				 && !(telefono.length()<5 || telefono.length()>70)	 
 			 ) {
 				ret=true;
 			} 
@@ -100,7 +100,6 @@ public class UserController extends BaseController {
 	
 	protected void doInsert(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException {
 		
-	
 		User user = new User(request.getParameter("cf"),
 							request.getParameter("nome"), 
 							request.getParameter("cognome"), 

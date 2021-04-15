@@ -16,6 +16,28 @@ public class Riunione {
 	public Riunione() {
 
 	}
+	
+	public Riunione(Timestamp data_comunicazione, Timestamp data_riunione, String ordine_del_giorno, String luogo) {
+
+		this.data_comunicazione = data_comunicazione;
+		this.data_riunione = data_riunione;
+		this.ordine_del_giorno = ordine_del_giorno;
+		this.luogo = luogo;
+
+	}
+	
+	public Riunione(Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
+						Timestamp fine_riunione, String ordine_del_giorno, String luogo) {
+
+		this.data_comunicazione = data_comunicazione;
+		this.data_riunione = data_riunione;
+		this.inizio_riunione = inizio_riunione;
+		this.fine_riunione = fine_riunione;
+		this.ordine_del_giorno = ordine_del_giorno;
+		this.luogo = luogo;
+
+	}
+	
 	public Riunione(int id, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
 			Timestamp fine_riunione, String ordine_del_giorno, String luogo, List<RigaPresenza> listaPresenze,
 			List<Lavoro> listaArgomenti) {

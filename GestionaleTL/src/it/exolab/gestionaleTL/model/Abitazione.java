@@ -10,11 +10,15 @@ public class Abitazione {
 	private List<User> listaUser= new ArrayList<User>();
 	private List<Votazione> listaVoti= new ArrayList<Votazione>();
 	
-	
-	
-	
+
 	public Abitazione() {
 		
+	}
+	
+	public Abitazione(String interno, String indirizzo) {
+		
+		this.interno = interno;
+		this.indirizzo = indirizzo;
 	}
 	
 	public Abitazione(int id, String interno, String indirizzo, List<User> listaUser, List<Votazione> listaVoti) {

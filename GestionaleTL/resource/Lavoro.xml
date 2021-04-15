@@ -7,7 +7,18 @@
  <mapper namespace="it.exolab.gestionaleTL.mapper.LavoroMapper">
   
   
-  <select id="find" parameterType="Integer" resultMap="lavoromap">
+  	<insert id = "insert"
+		parameterType="it.exolab.gestionaleTL.model.Lavoro" 
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		   insert into lavoro (nome, esito_voto, stato, id_riunione) values ( 
+		   #{nome}, 
+		   #{esito_voto}, 
+		   #{stato}, 
+		   #{id_riunione} )
+		   
+	</insert>
+  
+  	<select id="find" parameterType="Integer" resultMap="lavoromap">
 		SELECT
 		l.id AS lavoro_id, l.nome AS lavoro_nome, 
 		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
