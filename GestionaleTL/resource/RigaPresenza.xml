@@ -6,32 +6,32 @@
   
  <mapper namespace="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
 
-<insert id = "insert"
-parameterType="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper" 
-useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-	   insert into riga_presenza (id_riunione, id_abitazione, id_user, adesione, presenza) values (
-	   	 #{id_riunione}
-	   , #{id_abitazione}
-	   , #{id_user}
-	   , #{adesione}
-	   , #{presenza}
-	   )
-	   
-	</insert>
-	
+	<insert id = "insert"
+	parameterType="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper" 
+	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		   insert into riga_presenza (id_riunione, id_abitazione, id_user, adesione, presenza) values (
+		   	 #{id_riunione}
+		   , #{id_abitazione}
+		   , #{id_user}
+		   , #{adesione}
+		   , #{presenza}
+		   )
+		   
+		</insert>
 		
-	<update id = "update"
-	parameterType="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
-	   update riga_presenza set 
-	     id_riunione=#{id_riunione}
-	   , id_abitazione=#{id_abitazione}
-	   , id_user=#{id_user}
-	   , adesione=#{adesione}
-	   , presenza=#{presenza}
-	   where
-	   id = #{id}
-	 
-	</update>
+			
+		<update id = "update"
+		parameterType="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
+		   update riga_presenza set 
+		     id_riunione=#{id_riunione}
+		   , id_abitazione=#{id_abitazione}
+		   , id_user=#{id_user}
+		   , adesione=#{adesione}
+		   , presenza=#{presenza}
+		   where
+		   id = #{id}
+		 
+		</update>
 	
 	
 	<delete id = "delete" parameterType="Integer" >
