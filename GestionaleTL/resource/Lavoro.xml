@@ -36,11 +36,27 @@
 		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
 		d.id AS documentazione_id, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
-		v.id AS votazione_id, v.voto AS votazione_voto
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM lavoro AS l
 		INNER JOIN documentazione AS d on l.id = d.id_lavoro
 		inner join votazione AS v on d.id = v.id_documentazione
 		WHERE l.id = ${id};
+	 
+	</select>
+	
+	<select id="findAll" resultMap="lavoromap">
+		SELECT
+		l.id AS lavoro_id, l.nome AS lavoro_nome, 
+		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
+		d.id AS documentazione_id, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM lavoro AS l
+		INNER JOIN documentazione AS d on l.id = d.id_lavoro
+		inner join votazione AS v on d.id = v.id_documentazione
+		
 	 
 	</select>
 
@@ -64,6 +80,8 @@
 	  
 	    <result property="id" column="votazione_id"/>
 	    <result property="voto" column="votazione_voto"/>
+	    <result property="id_abitazione" column="votazione_id_abitazione"/>
+	    <result property="id_documentazione" column="votazione_id_documentazione"/>
 	    
 	 	</association>
 	    

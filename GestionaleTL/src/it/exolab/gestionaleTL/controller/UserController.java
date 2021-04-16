@@ -163,6 +163,13 @@ public class UserController extends BaseController {
 //		}
 	}
 	
+	public void doFind(HttpServletRequest request, HttpServletResponse response, int id) {
+		
+		userCrud.find(id);
+		
+		
+	}
+	
 		
 	
 		

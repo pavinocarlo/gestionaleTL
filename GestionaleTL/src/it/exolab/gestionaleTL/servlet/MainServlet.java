@@ -46,7 +46,9 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+			/*
+			 * user
+			 */
 			if(request.getParameter("login") != null) {
 				UserController userController = new UserController(request, response);
 				userController.doLogin(request, response);
@@ -59,6 +61,9 @@ public class MainServlet extends HttpServlet {
 				UserController userController = new UserController(request, response);
 				userController.doUpdate(request, response);
 			}
+			/*
+			 * abitazione
+			 */
 			if(request.getParameter("insertAbitazione") != null) {
 				AbitazioneController abitazioneController = new AbitazioneController(request, response);
 				abitazioneController.doInsert(request, response);
@@ -67,6 +72,9 @@ public class MainServlet extends HttpServlet {
 				AbitazioneController abitazioneController = new AbitazioneController(request, response);
 				abitazioneController.doUpdate(request, response);
 			}
+			/*
+			 * riunione
+			 */
 			if(request.getParameter("insertRiunione") != null) {
 				RiunioneController riunioneController = new RiunioneController(request, response);
 				riunioneController.doInsert(request, response);
@@ -75,6 +83,13 @@ public class MainServlet extends HttpServlet {
 				RiunioneController riunioneController = new RiunioneController(request, response);
 				riunioneController.doUpdate(request, response);
 			}
+			if(request.getParameter("findRiunione") != null) {
+				RiunioneController riunioneController = new RiunioneController(request, response);
+				riunioneController.doFind(request, response);
+			}
+			/*
+			 * lavoro
+			 */
 			if(request.getParameter("insertLavoro") != null) {
 				LavoroController lavoroController = new LavoroController(request, response);
 				lavoroController.doInsert(request, response);
@@ -83,13 +98,24 @@ public class MainServlet extends HttpServlet {
 				LavoroController lavoroController = new LavoroController(request, response);
 				lavoroController.doUpdate(request, response);
 			}
+			if(request.getParameter("findLavoro") != null) {
+				LavoroController lavoroController = new LavoroController(request, response);
+				lavoroController.doFind(request, response);
+			}
+			/*
+			 * documentazione
+			 */
 			if(request.getParameter("insertDocumentazione") != null) {
 				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 				documentazioneController.doInsert(request, response);
 			}
-			if(request.getParameter("insertDocumentazione") != null) {
+			if(request.getParameter("updateDocumentazione") != null) {
 				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 				documentazioneController.doUpdate(request, response);
+			}
+			if(request.getParameter("findDocumentazione") != null) {
+				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
+				documentazioneController.doFind(request, response);
 			}
 		
 		

@@ -2,6 +2,7 @@ package it.exolab.gestionaleTL.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
 import it.exolab.gestionaleTL.model.Abitazione;
+import it.exolab.gestionaleTL.model.Documentazione;
 import it.exolab.gestionaleTL.model.Riunione;
 
 public class RiunioneController extends BaseController {
@@ -45,6 +47,7 @@ public class RiunioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		request.setAttribute("successo", "successo");
 		request.getRequestDispatcher("home.jsp").include(request, response);
 //		}
 	}
@@ -72,7 +75,25 @@ public class RiunioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		request.setAttribute("successo", "successo");
 		request.getRequestDispatcher("home.jsp").include(request, response);
 //		}
+	}
+	
+	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String id = (String) request.getAttribute("id");
+		if(!id.equals("")) {
+			Riunione riunione = riunioneCrud.find(Integer.valueOf(id));
+			request.setAttribute("riunione", riunione);
+			request.getRequestDispatcher("home.jsp").include(request, response);
+		}
+		else {
+			List<Riunione> listaRiunioni = riunioneCrud.findAll();
+			request.setAttribute("listaRiunioni", listaRiunioni);
+			request.getRequestDispatcher("home.jsp").include(request, response);
+		}
+		
+		
 	}
 }

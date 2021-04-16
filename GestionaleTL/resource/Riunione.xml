@@ -53,6 +53,30 @@
 		INNER JOIN votazione AS v ON v.id_documentazione = d.id
 		WHERE ri.id =${id};
 	</select>
+	
+	<select id="findAll" resultMap="riunionemap">
+	
+		select
+		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
+		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
+		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
+		ri.luogo AS riunione_luogo,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza,
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
+		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
+		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM riunione AS ri
+		INNER JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
+		inner join lavoro AS l ON l.id_riunione = ri.id
+		inner join documentazione AS d ON d.id_lavoro = l.id
+		INNER JOIN votazione AS v ON v.id_documentazione = d.id
+	
+	
+	</select>
 		
 	 <resultMap id="riunionemap" type="it.exolab.gestionaleTL.model.Riunione">
 	  
@@ -82,6 +106,7 @@
 		<association property="listaDocumenti" javaType="it.exolab.gestionaleTL.model.Documentazione">
 		  
 		    <result property="id" column="documentazione_id"/>
+		    <result property="id_lavoro" column="documentazione_id_lavoro"/>
 		    <result property="costo" column="documentazione_costo"/>
 		    <result property="nome" column="documentazione_nome"/>
 		    <result property="societa" column="documentazione_societa"/>
@@ -90,6 +115,9 @@
 		  
 			    <result property="id" column="votazione_id"/>
 			    <result property="voto" column="votazione_voto"/>
+			    <result property="id_abitazione" column="votazione_id_abitazione"/>
+	   			<result property="id_documentazione" column="votazione_id_documentazione"/>
+	    
 		    
 		 	</association>
 		    

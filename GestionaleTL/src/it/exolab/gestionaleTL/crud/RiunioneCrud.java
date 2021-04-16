@@ -1,6 +1,8 @@
 package it.exolab.gestionaleTL.crud;
 
 
+import java.util.List;
+
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
@@ -34,6 +36,16 @@ public class RiunioneCrud {
 		SqlMapFactory.instance().openSession();
 		RiunioneMapper mapper =  SqlMapFactory.instance().getMapper(RiunioneMapper.class);
 		Riunione ret = mapper.find(id);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
+	public List<Riunione> findAll(){
+		
+		SqlMapFactory.instance().openSession();
+		RiunioneMapper mapper =  SqlMapFactory.instance().getMapper(RiunioneMapper.class);
+		List<Riunione> ret = mapper.findAll();
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 		return ret;
