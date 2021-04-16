@@ -7,20 +7,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 import it.exolab.gestionaleTL.controller.AbitazioneController;
 import it.exolab.gestionaleTL.controller.DocumentazioneController;
 import it.exolab.gestionaleTL.controller.LavoroController;
 import it.exolab.gestionaleTL.controller.RiunioneController;
 import it.exolab.gestionaleTL.controller.UserController;
-import it.exolab.gestionaleTL.exception.AlreadyExistException;
-import it.exolab.gestionaleTL.exception.GenericException;
-import it.exolab.gestionaleTL.exception.InvalidFieldException;
+import it.exolab.gestionaleTL.util.Util;;
 
 /**
  * Servlet implementation class BaseServlet
  */
 @WebServlet("/MainServlet")
 public class MainServlet extends HttpServlet {
+	
+	
+	private static final String INSERT="insert";
+	private static final String UPDATE="update";
+	private static final String FIND="find";
+	private static final String USER="User";
+	private static final String ABITAZIONE="Abitazione";
+	private static final String RIUNIONE="Riunione";
+	private static final String LAVORO="Lavoro";
+	private static final String DOCUMENTAZIONE="Documentazione";
+	private static final String LOGIN="login";
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -49,76 +60,75 @@ public class MainServlet extends HttpServlet {
 			/*
 			 * user
 			 */
-			if(request.getParameter("login") != null) {
+			if(request.getParameter(LOGIN) != null) {
 				UserController userController = new UserController(request, response);
 				userController.doLogin(request, response);
 			}
-			if(request.getParameter("insertUser") != null) {
+			if(request.getParameter(UPDATE + USER) != null) {
 				UserController userController = new UserController(request, response);
 				userController.doInsert(request, response);
 			}
-			if(request.getParameter("updateUser") != null) {
+			if(request.getParameter(INSERT + USER) != null) {
 				UserController userController = new UserController(request, response);
 				userController.doUpdate(request, response);
 			}
 			/*
 			 * abitazione
 			 */
-			if(request.getParameter("insertAbitazione") != null) {
+			if(request.getParameter(INSERT + ABITAZIONE) != null) {
 				AbitazioneController abitazioneController = new AbitazioneController(request, response);
 				abitazioneController.doInsert(request, response);
 			}
-			if(request.getParameter("updateAbitazione") != null) {
+			if(request.getParameter(UPDATE + ABITAZIONE) != null) {
 				AbitazioneController abitazioneController = new AbitazioneController(request, response);
 				abitazioneController.doUpdate(request, response);
 			}
 			/*
 			 * riunione
 			 */
-			if(request.getParameter("insertRiunione") != null) {
+			if(request.getParameter(INSERT + RIUNIONE) != null) {
 				RiunioneController riunioneController = new RiunioneController(request, response);
 				riunioneController.doInsert(request, response);
 			}
-			if(request.getParameter("updateRiunione") != null) {
+			if(request.getParameter(UPDATE + RIUNIONE) != null) {
 				RiunioneController riunioneController = new RiunioneController(request, response);
 				riunioneController.doUpdate(request, response);
 			}
-			if(request.getParameter("findRiunione") != null) {
+			if(request.getParameter(FIND + RIUNIONE) != null) {
 				RiunioneController riunioneController = new RiunioneController(request, response);
 				riunioneController.doFind(request, response);
 			}
 			/*
 			 * lavoro
 			 */
-			if(request.getParameter("insertLavoro") != null) {
+			if(request.getParameter(INSERT + LAVORO) != null) {
 				LavoroController lavoroController = new LavoroController(request, response);
 				lavoroController.doInsert(request, response);
 			}
-			if(request.getParameter("updateLavoro") != null) {
+			if(request.getParameter(UPDATE + LAVORO) != null) {
 				LavoroController lavoroController = new LavoroController(request, response);
 				lavoroController.doUpdate(request, response);
 			}
-			if(request.getParameter("findLavoro") != null) {
+			if(request.getParameter(FIND + LAVORO) != null) {
 				LavoroController lavoroController = new LavoroController(request, response);
 				lavoroController.doFind(request, response);
 			}
 			/*
 			 * documentazione
 			 */
-			if(request.getParameter("insertDocumentazione") != null) {
+			if(request.getParameter(INSERT + DOCUMENTAZIONE) != null) {
 				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 				documentazioneController.doInsert(request, response);
 			}
-			if(request.getParameter("updateDocumentazione") != null) {
+			if(request.getParameter(UPDATE + DOCUMENTAZIONE) != null) {
 				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 				documentazioneController.doUpdate(request, response);
 			}
-			if(request.getParameter("findDocumentazione") != null) {
+			if(request.getParameter(FIND + DOCUMENTAZIONE) != null) {
 				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 				documentazioneController.doFind(request, response);
 			}
-		
-		
+
 	}
 
 }

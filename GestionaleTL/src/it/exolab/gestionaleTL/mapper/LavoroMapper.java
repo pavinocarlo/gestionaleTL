@@ -11,5 +11,6 @@ public interface LavoroMapper {
 	public void update(Lavoro lavoro);
 	public Lavoro find(Integer id);
 	public List<Lavoro> findAll();
+	public List<Lavoro> findByNome(String nome);
 
 }

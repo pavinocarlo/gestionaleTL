@@ -41,6 +41,15 @@ public class LavoroCrud {
 		return ret;
 	}
 	
+	public List<Lavoro> findByNome(String nome){
+		SqlMapFactory.instance().openSession();
+		LavoroMapper mapper =  SqlMapFactory.instance().getMapper(LavoroMapper.class);
+		List<Lavoro> ret = mapper.findByNome(nome);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
 	public List<Lavoro> findAll(){
 		SqlMapFactory.instance().openSession();
 		LavoroMapper mapper =  SqlMapFactory.instance().getMapper(LavoroMapper.class);

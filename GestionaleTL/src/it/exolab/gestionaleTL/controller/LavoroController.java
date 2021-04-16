@@ -11,7 +11,7 @@ import it.exolab.gestionaleTL.crud.LavoroCrud;
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
-import it.exolab.gestionaleTL.model.Documentazione;
+
 import it.exolab.gestionaleTL.model.Lavoro;
 
 public class LavoroController extends BaseController {
@@ -78,17 +78,38 @@ public class LavoroController extends BaseController {
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id = (String) request.getAttribute("id");
-		if(!id.equals("")) {
-			Lavoro lavoro = lavoroCrud.find(Integer.valueOf(id));
-			request.setAttribute("lavoro", lavoro);
-			request.getRequestDispatcher("home.jsp").include(request, response);
+		String search = (String) request.getAttribute("search");
+		
+		if(!search.equals("")) {
+			try {
+				if(Integer.parseInt(search) != 0) {
+					Lavoro lavoro = lavoroCrud.find(Integer.valueOf(search));
+					request.setAttribute("lavoro", lavoro);
+					request.getRequestDispatcher("home.jsp").include(request, response);
+				}
+				else {
+					request.setAttribute("notFound", "notFound");
+					request.getRequestDispatcher("home.jsp").include(request, response);
+				}
+				
+			} catch (NumberFormatException e) {
+		    	
+	    		List<Lavoro> listaLavori = lavoroCrud.findByNome(search);
+	    		if(listaLavori.size() == 0) {
+					request.setAttribute("listaLavori", listaLavori);
+					request.getRequestDispatcher("home.jsp").include(request, response);
+	    		}
+	    		else {
+	    			request.setAttribute("notFound", "notFound");
+					request.getRequestDispatcher("home.jsp").include(request, response);
+	    		}
+		    }
 		}
 		else {
 			List<Lavoro> listaLavori = lavoroCrud.findAll();
 			request.setAttribute("listaLavori", listaLavori);
 			request.getRequestDispatcher("home.jsp").include(request, response);
-		}
+		}	
 	}
 
 }
