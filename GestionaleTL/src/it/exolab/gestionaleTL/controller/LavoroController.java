@@ -20,7 +20,7 @@ public class LavoroController extends BaseController {
 			
 		}
 
-	protected void doInsert(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException {
+	public void doInsert(HttpServletRequest request, HttpServletResponse response) {
 		
 		Lavoro lavoro = new Lavoro(Integer.parseInt(request.getParameter("Id_riunione")),
 									request.getParameter("nome"),
@@ -29,8 +29,43 @@ public class LavoroController extends BaseController {
 							
 //		if(validate(user)) {
 			
-			lavoroCrud.insert(lavoro);
+			try {
+				lavoroCrud.insert(lavoro);
+			} catch (GenericException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AlreadyExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 //		}
-}
+	}
+	
+	public void doUpdate(HttpServletRequest request, HttpServletResponse response) {
+		
+		Lavoro lavoro = new Lavoro(Integer.parseInt(request.getParameter("Id_riunione")),
+									request.getParameter("nome"),
+									request.getParameter("esito_voto"),
+									request.getParameter("stato"));
+							
+//		if(validate(user)) {
+			
+			try {
+				lavoroCrud.update(lavoro);
+			} catch (GenericException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AlreadyExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//		}
+	}
 
 }

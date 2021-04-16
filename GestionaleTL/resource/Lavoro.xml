@@ -17,6 +17,18 @@
 		   #{id_riunione} )
 		   
 	</insert>
+	
+	<update id="update" parameterType="it.exolab.gestionaleTL.model.Lavoro" >
+		
+		update lavoro set 
+		
+		nome=#{nome}, 
+		esito_voto=#{esito_voto}, 
+		stato=#{stato}, 
+		id_riunione=#{id_riunione}
+		where id = #{id}
+	
+	</update>
   
   	<select id="find" parameterType="Integer" resultMap="lavoromap">
 		SELECT

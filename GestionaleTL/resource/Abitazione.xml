@@ -6,13 +6,20 @@
   
  <mapper namespace="it.exolab.gestionaleTL.mapper.AbitazioneMapper">
   
-  
-  <insert id = "insert"
-	parameterType="it.exolab.gestionaleTL.model.Abitazione" 
-	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-	   insert into user (interno, indirizzo) values ( #{interno}, #{indirizzo} )
-	   
+	<insert id = "insert"
+		parameterType="it.exolab.gestionaleTL.model.Abitazione" 
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		   insert into user (interno, indirizzo) values ( #{interno}, #{indirizzo} )
 	</insert>
+	
+	<update id="update" parameterType="it.exolab.gestionaleTL.model.Abitazione" >
+		
+		update abitazione set 
+		interno=#{interno}, 
+		indirizzo=#{indirizzo}
+		where id = #{id}
+
+	</update>
   
   
   <select id="find" parameterType="Integer" resultMap="abitazionemap">

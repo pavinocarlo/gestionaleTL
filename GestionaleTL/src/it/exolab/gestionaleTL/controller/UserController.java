@@ -28,13 +28,13 @@ public class UserController extends BaseController {
 	
 	
 	
-	public boolean validate(User user) {
+	private boolean validate(User user) {
 		boolean ret=false;
 		ret=validate(user.getCf(), user.getNome(), user.getCognome(), user.getEmail(), user.getPassword(),user.getTelefono());
 		return ret;
 	}
 	
-	protected boolean validate(String email,String password) {
+	private boolean validate(String email,String password) {
 		boolean ret=false;
 		if (	!(email.length()<1 && email.length()>70)
 			 && !(password.length()<1 || password.length()>70 )
@@ -44,7 +44,7 @@ public class UserController extends BaseController {
 		return ret;
 	}
 	
-	public boolean validate(String cf, String nome, String cognome, String email,String password, String telefono) {
+	private boolean validate(String cf, String nome, String cognome, String email,String password, String telefono) {
 		UserCrud uc=new UserCrud();
 		boolean ret=false;
 		if (!(uc.findByEmail(email)!=null)){
@@ -61,7 +61,7 @@ public class UserController extends BaseController {
 		return ret;
 	}
 	
-	public int hasDigits(String s) {
+	private int hasDigits(String s) {
 		int ret=0;
 		for(int i=0;i<s.length();i++) {
 			if ((s.charAt(i) >= '0') && (s.charAt(i) <= '9')) {
@@ -71,7 +71,7 @@ public class UserController extends BaseController {
 		return ret;
 	}
 
-	protected void doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
@@ -85,7 +85,7 @@ public class UserController extends BaseController {
 		request.getRequestDispatcher("home.jsp").include(request, response);
 	}
 
-	protected void doRuolo(User user) throws ServletException, IOException {
+	private void doRuolo(User user) throws ServletException, IOException {
 		
 		if(user==null) {
 			request.setAttribute("notFoundLogin", "notFoundLogin");
@@ -93,12 +93,13 @@ public class UserController extends BaseController {
 			return;
 		}
 		request.getSession().setAttribute("user", user);
-		request.getRequestDispatcher(
-				user.getRuolo().getRuolo().equals("Amministratore") ? "adminhome.jsp" : "homeuser.jsp");
+//		request.getRequestDispatcher(
+//				user.getRuolo().getRuolo().equals("Amministratore") ? "adminhome.jsp" : "homeuser.jsp");
+		request.getRequestDispatcher("home.jsp").include(request, response);
 	}
 	
 	
-	protected void doInsert(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException {
+	public void doInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		User user = new User(request.getParameter("cf"),
 							request.getParameter("nome"), 
@@ -113,8 +114,53 @@ public class UserController extends BaseController {
 							
 		if(validate(user)) {
 			
-			userCrud.insert(user);
+			try {
+				userCrud.insert(user);
+			} catch (GenericException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AlreadyExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("successo", "successo");
+			request.getRequestDispatcher("home.jsp").include(request, response);
 		}
+	}
+	
+	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		User user = new User(request.getParameter("cf"),
+							request.getParameter("nome"), 
+							request.getParameter("cognome"), 
+							request.getParameter("email"), 
+							request.getParameter("password"), 
+							request.getParameter("telefono"),
+							(Timestamp.valueOf("" + request.getParameter("dataIn") + "00:00:00")),
+							(Timestamp.valueOf("" + request.getParameter("dataOut") + "00:00:00")),
+							Integer.parseInt(request.getParameter("id_ruolo")), 
+							Integer.parseInt(request.getParameter("id_abitazione")));
+								
+//		if(validate(user)) {
+			
+			try {
+				userCrud.update(user);
+			} catch (GenericException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AlreadyExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("successo", "successo");
+			request.getRequestDispatcher("home.jsp").include(request, response);
+//		}
 	}
 	
 		

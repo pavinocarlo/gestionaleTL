@@ -17,5 +17,14 @@ public class DocumentazioneCrud {
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 	}
+	
+	public void update(Documentazione documentazione) throws GenericException, AlreadyExistException, InvalidFieldException{
+
+		SqlMapFactory.instance().openSession();
+		DocumentazioneMapper mapper =  SqlMapFactory.instance().getMapper(DocumentazioneMapper.class);
+		mapper.update(documentazione);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+	}
 
 }

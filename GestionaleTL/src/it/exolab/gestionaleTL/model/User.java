@@ -142,12 +142,12 @@ public class User {
 	}
 
 
-	public List<RigaPresenza> getListapresenze() {
+	public List<RigaPresenza> getListaPresenze() {
 		return listapresenze;
 	}
 
 
-	public void setListapresenze(List<RigaPresenza> listapresenze) {
+	public void setListaPresenze(List<RigaPresenza> listapresenze) {
 		this.listapresenze = listapresenze;
 	}
 

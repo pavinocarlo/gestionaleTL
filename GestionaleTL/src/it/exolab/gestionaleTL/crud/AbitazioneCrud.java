@@ -18,6 +18,15 @@ public class AbitazioneCrud {
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 	}
+	
+	public void update(Abitazione abitazione) throws GenericException, AlreadyExistException, InvalidFieldException{
+
+		SqlMapFactory.instance().openSession();
+		AbitazioneMapper mapper =  SqlMapFactory.instance().getMapper(AbitazioneMapper.class);
+		mapper.update(abitazione);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+	}
 
 	public Abitazione find(Integer id){
 		SqlMapFactory.instance().openSession();

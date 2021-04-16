@@ -40,6 +40,24 @@ public class UserCrud {
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 	}
+	
+	public void update(User user) throws GenericException, AlreadyExistException, InvalidFieldException{
+		validate(user);
+		SqlMapFactory.instance().openSession();
+		UserMapper mapper =  SqlMapFactory.instance().getMapper(UserMapper.class);
+		mapper.update(user);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+	}
+	
+	public User find(Integer id) {
+		SqlMapFactory.instance().openSession();
+		UserMapper mapper =  SqlMapFactory.instance().getMapper(UserMapper.class);
+		User ret=mapper.find(id);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
 
 	public User findByEmail(String email) {
 		SqlMapFactory.instance().openSession();

@@ -23,21 +23,7 @@
 	   
 	</insert>
 	
-<!-- 	<insert id = "insert" -->
-<!-- 	parameterType="it.exolab.gestionaleTL.model.User"  -->
-<!-- 	useGeneratedKeys="true" keyProperty="id" keyColumn="id"> -->
-<!-- 	   insert into user (cf, nome, cognome, email, password, telefono) values ( -->
-<!-- 	   	 #{cf} -->
-<!-- 	   	 , #{nome} -->
-<!-- 	   	 , #{cognome} -->
-<!-- 	   	 , #{email} -->
-<!-- 	   	 , #{password} -->
-<!-- 	   	 , #{telefono} -->
-<!-- 	   ) -->
-	   
-<!-- 	</insert> -->
 	
-		
 	<update id = "update"
 	parameterType="it.exolab.gestionaleTL.model.User">
 	   update user set 
@@ -62,21 +48,104 @@
 	</delete>	
 	
 	
-	<select id = "find" resultType = "it.exolab.gestionaleTL.model.User" parameterType="Integer">
-	   SELECT * FROM user  where id = #{id}
+	<select id = "find" parameterType="Integer" resultMap="usermap">
+	
+		select
+		u.id AS user_id, u.id_ruolo AS user_id_ruolo, u.id_abitazione AS user_id_abitazione,
+		u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
+		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
+		u.data_in AS user_data_in, u.data_out AS user_data_out,
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza, rp.id_riunione AS rigapresenza_id_riunione,
+		rp.id_abitazione AS rigapresenza_id_abitazione, rp.id_user AS rigapresenza_id_user
+		FROM user AS u
+		inner join ruolo AS ru on u.id_ruolo = ru.id
+		left join riga_presenza as rp on rp.id_user = u.id
+		WHERE u.id = ${id};
+		
+		
+	 </select>
+	 
+	 <select id = "findByEmail" parameterType="String" resultMap="usermap">
+	 	select
+		u.id AS user_id, u.id_ruolo AS user_id_ruolo, u.id_abitazione AS user_id_abitazione,
+		u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
+		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
+		u.data_in AS user_data_in, u.data_out AS user_data_out,
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza, rp.id_riunione AS rigapresenza_id_riunione,
+		rp.id_abitazione AS rigapresenza_id_abitazione, rp.id_user AS rigapresenza_id_user
+		FROM user AS u
+		inner join ruolo AS ru on u.id_ruolo = ru.id
+		left join riga_presenza as rp on rp.id_user = u.id
+	 	where u.email = #{email};
 	</select>
 	
-	<select id = "findByEmail" resultType = "it.exolab.gestionaleTL.model.User" parameterType="String">
-	   SELECT * FROM user  where email = #{email}
+	<select id = "findByEmailAndPassword" resultMap="usermap">
+	   select
+		u.id AS user_id, u.id_ruolo AS user_id_ruolo, u.id_abitazione AS user_id_abitazione,
+		u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
+		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
+		u.data_in AS user_data_in, u.data_out AS user_data_out,
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza, rp.id_riunione AS rigapresenza_id_riunione,
+		rp.id_abitazione AS rigapresenza_id_abitazione, rp.id_user AS rigapresenza_id_user
+		FROM user AS u
+		inner join ruolo AS ru on u.id_ruolo = ru.id
+		left join riga_presenza as rp on rp.id_user = u.id
+	 	where u.email = #{email} AND u.PASSWORD = #{password};
 	</select>
 	
-	<select id = "findByEmailAndPassword" resultType = "it.exolab.gestionaleTL.model.User">
-	   SELECT * FROM user  where email = #{email} AND PASSWORD = #{password}
+  	<select id = "findAll" resultMap="usermap">
+	   select
+		u.id AS user_id, u.id_ruolo AS user_id_ruolo, u.id_abitazione AS user_id_abitazione,
+		u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
+		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
+		u.data_in AS user_data_in, u.data_out AS user_data_out,
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza, rp.id_riunione AS rigapresenza_id_riunione,
+		rp.id_abitazione AS rigapresenza_id_abitazione, rp.id_user AS rigapresenza_id_user
+		FROM user AS u
+		inner join ruolo AS ru on u.id_ruolo = ru.id
+		left join riga_presenza as rp on rp.id_user = u.id
 	</select>
+	 
+		<resultMap id="usermap" type="it.exolab.gestionaleTL.model.User">
+		
+			<result property="id" column="user_id"/>
+			<result property="id_ruolo" column="user_id_ruolo"/>
+			<result property="id_abitazione" column="user_id_abitazione"/>
+		    <result property="cf" column="user_cf"/>
+		    <result property="nome" column="user_nome"/>
+		    <result property="cognome" column="user_cognome"/>
+		    <result property="email" column="user_email"/>
+		    <result property="password" column="user_password"/>
+		    <result property="telefono" column="user_telefono"/>
+		    <result property="data_in" column="user_data_in"/>
+		    <result property="data_out" column="data_out"/>
+	    
+		  <association property="ruolo" javaType="it.exolab.gestionaleTL.model.Ruolo">
+		  
+		    <result property="id" column="ruolo_id"/>
+		    <result property="ruolo" column="ruolo_ruolo"/>
+		    
+		  </association>
+		  
+		  <association property="listaPresenze" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
 	
-  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.model.User">
-	   SELECT * FROM user
-	</select>
-
+			<result property="id" column="rigapresenza_id"/>
+		    <result property="adesione" column="rigapresenza_adesione"/>
+		    <result property="presenza" column="rigapresenza_presenza"/>
+		    <result property="id_riunione" column="rigapresenza_id_riunione"/>
+		    <result property="id_abitazione" column="rigapresenza_id_abitazione"/>
+		    <result property="id_user" column="rigapresenza_id_user"/>
+	
+		</association>
+		
+		</resultMap>
 
  </mapper>

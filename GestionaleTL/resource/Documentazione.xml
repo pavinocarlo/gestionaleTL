@@ -16,4 +16,15 @@
 			   #{id_lavoro} )
 			   
 		</insert>
+		
+		<update id="update" parameterType="it.exolab.gestionaleTL.model.Documentazione">
+		
+			update documentazione set
+			nome=#{nome}, 
+			costo=#{costo}, 
+			societa=#{societa}, 
+			id_lavoro=#{id_lavoro}
+			where id = ${id}
+		
+		</update>
 </mapper>

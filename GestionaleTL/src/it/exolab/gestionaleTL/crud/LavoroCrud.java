@@ -21,6 +21,15 @@ public class LavoroCrud {
 		SqlMapFactory.instance().closeSession();
 	}
 	
+	public void update(Lavoro lavoro) throws GenericException, AlreadyExistException, InvalidFieldException{
+
+		SqlMapFactory.instance().openSession();
+		LavoroMapper mapper =  SqlMapFactory.instance().getMapper(LavoroMapper.class);
+		mapper.update(lavoro);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+	}
+	
 	public Lavoro find(Integer id){
 		SqlMapFactory.instance().openSession();
 		LavoroMapper mapper =  SqlMapFactory.instance().getMapper(LavoroMapper.class);

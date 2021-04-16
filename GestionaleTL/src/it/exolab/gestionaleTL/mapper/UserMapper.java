@@ -8,6 +8,8 @@ public interface UserMapper {
 	
 	public User findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 	public User findByEmail(String email);
+	public User find(Integer id);
 	public void insert(User user);
+	public void update(User user);
 
 }

@@ -7,7 +7,7 @@
  <mapper namespace="it.exolab.gestionaleTL.mapper.RigaPresenzaMapper">
 
 	<insert id = "insert"
-	parameterType="it.exolab.gestionaleTL.mapper.RigaPresenza" 
+	parameterType="it.exolab.gestionaleTL.model.RigaPresenza" 
 	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		   insert into riga_presenza (id_riunione, id_abitazione, id_user, adesione, presenza) values (
 		   	 #{id_riunione}
@@ -21,7 +21,7 @@
 		
 			
 		<update id = "update"
-		parameterType="it.exolab.gestionaleTL.mapper.RigaPresenza">
+		parameterType="it.exolab.gestionaleTL.model.RigaPresenza">
 		   update riga_presenza set 
 		     id_riunione=#{id_riunione}
 		   , id_abitazione=#{id_abitazione}
@@ -39,12 +39,12 @@
 	</delete>	
 	
 	
-	<select id = "find" resultType = "it.exolab.gestionaleTL.mapper.RigaPresenza" parameterType="Integer">
+	<select id = "find" resultType = "it.exolab.gestionaleTL.model.RigaPresenza" parameterType="Integer">
 	   SELECT * FROM riga_presenza  where id = #{id}
 	</select>
 	
 	
-  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.mapper.RigaPresenza">
+  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.model.RigaPresenza">
 	   SELECT * FROM riga_presenza
 	</select>
 	

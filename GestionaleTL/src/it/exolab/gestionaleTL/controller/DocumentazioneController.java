@@ -19,7 +19,7 @@ public class DocumentazioneController extends BaseController {
 		
 	}
 	
-	protected void doInsert(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException {
+	public void doInsert(HttpServletRequest request, HttpServletResponse response) {
 		
 		Documentazione documentazione = new Documentazione(Double.parseDouble(request.getParameter("costo")),
 														request.getParameter("nome"),
@@ -28,9 +28,44 @@ public class DocumentazioneController extends BaseController {
 							
 //		if(validate(user)) {
 			
-		documentazioneCrud.insert(documentazione);
+		try {
+			documentazioneCrud.insert(documentazione);
+		} catch (GenericException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AlreadyExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		}
-}
+	}
+	
+	public void doUpdate(HttpServletRequest request, HttpServletResponse response) {
+		
+		Documentazione documentazione = new Documentazione(Double.parseDouble(request.getParameter("costo")),
+														request.getParameter("nome"),
+														request.getParameter("societa"),
+														Integer.parseInt(request.getParameter("id_lavoro")));
+							
+//		if(validate(user)) {
+			
+		try {
+			documentazioneCrud.update(documentazione);
+		} catch (GenericException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AlreadyExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		}
+	}
 	
 
 }
