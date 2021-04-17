@@ -28,7 +28,8 @@ public class RiunioneController extends BaseController {
 	
 	public void doInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Riunione riunione = new Riunione((Timestamp.valueOf("" + request.getParameter("data_comunicazione") + "00:00:00")),
+		Riunione riunione = new Riunione(Integer.parseInt(request.getParameter("stato")),
+										(Timestamp.valueOf("" + request.getParameter("data_comunicazione") + "00:00:00")),
 										(Timestamp.valueOf("" + request.getParameter("data_riunione") + "00:00:00")),
 										request.getParameter("ordine_del_giorno"),
 										request.getParameter("luogo"));
@@ -54,7 +55,8 @@ public class RiunioneController extends BaseController {
 	
 	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-		Riunione riunione = new Riunione((Timestamp.valueOf("" + request.getParameter("data_comunicazione") + "00:00:00")),
+		Riunione riunione = new Riunione(Integer.parseInt(request.getParameter("stato")),
+										(Timestamp.valueOf("" + request.getParameter("data_comunicazione") + "00:00:00")),
 										(Timestamp.valueOf("" + request.getParameter("data_riunione") + "00:00:00")),
 										(Timestamp.valueOf("" + request.getParameter("inizio_riunione") + "00:00:00")),
 										(Timestamp.valueOf("" + request.getParameter("fine_riunione") + "00:00:00")),

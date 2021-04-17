@@ -69,6 +69,14 @@ public class AbitazioneController extends BaseController {
 			request.setAttribute("successo", "successo");
 			request.getRequestDispatcher("home.jsp").include(request, response);
 //		}
-}
+	}
+	
+	public void doFind(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+		
+		Integer search = Integer.valueOf((String) request.getAttribute("search"));
+		Abitazione abitazione = abitazioneCrud.findWithProprietario(search);
+		request.setAttribute("abitazione", abitazione);
+		request.getRequestDispatcher("homeadmin.jsp").include(request, response);
+	}
 
 }

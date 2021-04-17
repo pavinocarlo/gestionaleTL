@@ -6,7 +6,7 @@
   <mapper namespace="it.exolab.gestionaleTL.mapper.VotazioneMapper">
 
 	<insert id = "insert"
-	parameterType="it.exolab.gestionaleTL.mapper.Votazione" 
+	parameterType="it.exolab.gestionaleTL.model.Votazione" 
 	useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		   insert into votazione (voto, id_abitazione, id_documentazione) values (
 		   	 #{voto}
@@ -18,7 +18,7 @@
 		
 			
 		<update id = "update"
-		parameterType="it.exolab.gestionaleTL.mapper.Votazione">
+		parameterType="it.exolab.gestionaleTL.model.Votazione">
 		   update votazione set 
 		     voto=#{voto}
 		   , id_abitazione=#{id_abitazione}
@@ -29,19 +29,19 @@
 		</update>
 	
 	
-	<delete id = "delete" parameterType="Integer" >
-	   delete from votazione where id = #{id}
-	</delete>	
+<!-- 	<delete id = "delete" parameterType="Integer" > -->
+<!-- 	   delete from votazione where id = #{id} -->
+<!-- 	</delete>	 -->
 	
 	
-	<select id = "find" resultType = "it.exolab.gestionaleTL.mapper.Votazione" parameterType="Integer">
+	<select id = "find" resultType = "it.exolab.gestionaleTL.model.Votazione" parameterType="Integer">
 	   SELECT * FROM votazione  where id = #{id}
 	</select>
 	
 	
-  	<select id = "findAll" resultType = "it.exolab.gestionaleTL.mapper.Votazione">
-	   SELECT * FROM votazione
-	</select>
+<!--   	<select id = "findAll" resultType = "it.exolab.gestionaleTL.model.Votazione"> -->
+<!-- 	   SELECT * FROM votazione -->
+<!-- 	</select> -->
 
 	
  </mapper>

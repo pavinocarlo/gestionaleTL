@@ -37,4 +37,13 @@ public class AbitazioneCrud {
 		return ret;
 	}
 	
+	public Abitazione findWithProprietario(Integer id){
+		SqlMapFactory.instance().openSession();
+		AbitazioneMapper mapper =  SqlMapFactory.instance().getMapper(AbitazioneMapper.class);
+		Abitazione ret = mapper.findWithProprietario(id);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
 }

@@ -9,11 +9,12 @@
   <insert id = "insert"
 		parameterType="it.exolab.gestionaleTL.model.Riunione" 
 		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		   insert into riunione (data_comunicazione, data_riunione, ordine_del_giorno, luogo) values ( 
+		   insert into riunione (data_comunicazione, data_riunione, ordine_del_giorno, luogo, stato) values ( 
 		   #{data_comunicazione}, 
 		   #{data_riunione}, 
 		   #{ordine_del_giorno}, 
-		   #{luogo} )
+		   #{luogo},
+		   #{stato} )
 		   
 	</insert>
 	
@@ -27,6 +28,7 @@
 		   , fine_riunione=#{fine_riunione}
 		   , ordine_del_giorno=#{ordine_del_giorno}
 		   , luogo=#{luogo}
+		   , stato=#{stato}
 		   where
 		   id = #{id}
 			 
@@ -38,7 +40,7 @@
 		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
 		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
 		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
-		ri.luogo AS riunione_luogo,
+		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato,
 		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
 		rp.presenza AS rigapresenza_presenza,
 		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
@@ -60,7 +62,7 @@
 		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
 		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
 		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
-		ri.luogo AS riunione_luogo,
+		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato,
 		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
 		rp.presenza AS rigapresenza_presenza,
 		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
@@ -87,6 +89,7 @@
 	    <result property="fine_riunione" column="riunione_fine_riunione"/>
 	  	<result property="ordine_del_giorno" column="riunione_ordine_del_giorno"/>
 	  	<result property="luogo" column="riunione_luogo"/>
+	  	<result property="stato" column="riunione_stato"/>
 	  	
 	<association property="listaPresenze" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
 	

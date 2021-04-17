@@ -8,5 +8,6 @@ public interface AbitazioneMapper {
 	public Abitazione find(Integer id);
 	public void insert(Abitazione abitazione);
 	public void update(Abitazione abitazione);
+	public Abitazione findWithProprietario(Integer id);
 
 }

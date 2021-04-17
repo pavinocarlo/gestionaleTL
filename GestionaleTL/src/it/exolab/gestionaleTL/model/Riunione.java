@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Riunione {
 	
-	private int id;
+	private int id, stato;
 	private Timestamp data_comunicazione, data_riunione, inizio_riunione, fine_riunione;
 	private String ordine_del_giorno, luogo;
 	private List<RigaPresenza> listaPresenze = new ArrayList<RigaPresenza>();
@@ -17,8 +17,9 @@ public class Riunione {
 
 	}
 	
-	public Riunione(Timestamp data_comunicazione, Timestamp data_riunione, String ordine_del_giorno, String luogo) {
+	public Riunione(int stato, Timestamp data_comunicazione, Timestamp data_riunione, String ordine_del_giorno, String luogo) {
 
+		this.stato = stato;
 		this.data_comunicazione = data_comunicazione;
 		this.data_riunione = data_riunione;
 		this.ordine_del_giorno = ordine_del_giorno;
@@ -26,9 +27,10 @@ public class Riunione {
 
 	}
 	
-	public Riunione(Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
+	public Riunione(int stato, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
 						Timestamp fine_riunione, String ordine_del_giorno, String luogo) {
-
+		
+		this.stato = stato;
 		this.data_comunicazione = data_comunicazione;
 		this.data_riunione = data_riunione;
 		this.inizio_riunione = inizio_riunione;
@@ -38,11 +40,12 @@ public class Riunione {
 
 	}
 	
-	public Riunione(int id, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
+	public Riunione(int id, int stato, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
 			Timestamp fine_riunione, String ordine_del_giorno, String luogo, List<RigaPresenza> listaPresenze,
 			List<Lavoro> listaArgomenti) {
 
 		this.id = id;
+		this.stato = stato;
 		this.data_comunicazione = data_comunicazione;
 		this.data_riunione = data_riunione;
 		this.inizio_riunione = inizio_riunione;
@@ -52,12 +55,19 @@ public class Riunione {
 		this.listaPresenze = listaPresenze;
 		this.listaLavori = listaArgomenti;
 	}
+	
 	@Override
 	public String toString() {
-		return "Riunione [id=" + id + ", data_comunicazione=" + data_comunicazione + ", data_riunione=" + data_riunione
-				+ ", inizio_riunione=" + inizio_riunione + ", fine_riunione=" + fine_riunione + ", ordine_del_giorno="
-				+ ordine_del_giorno + ", luogo=" + luogo + ", listaPresenze=" + listaPresenze
-				+ ", listaArgomenti=" + listaLavori + "]";
+		return "Riunione [id=" + id + ", stato=" + stato + ", data_comunicazione=" + data_comunicazione
+				+ ", data_riunione=" + data_riunione + ", inizio_riunione=" + inizio_riunione + ", fine_riunione="
+				+ fine_riunione + ", ordine_del_giorno=" + ordine_del_giorno + ", luogo=" + luogo + ", listaPresenze="
+				+ listaPresenze + ", listaLavori=" + listaLavori + "]";
+	}
+	public int getStato() {
+		return stato;
+	}
+	public void setStato(int stato) {
+		this.stato = stato;
 	}
 	public int getId() {
 		return id;

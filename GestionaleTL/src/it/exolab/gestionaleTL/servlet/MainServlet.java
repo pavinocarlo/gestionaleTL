@@ -64,11 +64,11 @@ public class MainServlet extends HttpServlet {
 				UserController userController = new UserController(request, response);
 				userController.doLogin(request, response);
 			}
-			if(request.getParameter(UPDATE + USER) != null) {
+			if(request.getParameter(INSERT + USER) != null) {
 				UserController userController = new UserController(request, response);
 				userController.doInsert(request, response);
 			}
-			if(request.getParameter(INSERT + USER) != null) {
+			if(request.getParameter(UPDATE + USER) != null) {
 				UserController userController = new UserController(request, response);
 				userController.doUpdate(request, response);
 			}

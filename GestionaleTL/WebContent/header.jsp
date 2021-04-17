@@ -26,10 +26,10 @@
         <li><jsp:include page="loginForm.jsp"></jsp:include></li>
         <c:choose>
         	<c:when test="${0>0}">
-        		<li><jsp:include page="navbarAdmin.jsp"></jsp:include></li>
+        		<li><jsp:include page="admin/navbarAdmin.jsp"></jsp:include></li>
         	</c:when>
        		<c:when test="${1>0}">
-        	<li><jsp:include page="navbarUser.jsp"></jsp:include></li>
+        	<li><jsp:include page="user/navbarUser.jsp"></jsp:include></li>
         	</c:when>
         </c:choose>
       </ul>

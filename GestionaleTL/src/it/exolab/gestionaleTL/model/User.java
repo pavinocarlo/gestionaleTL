@@ -43,12 +43,24 @@ public class User {
 		this.id_ruolo = id_ruolo;
 		this.id_abitazione = id_abitazione;
 		this.ruolo = new Ruolo(id_ruolo);
-		
+	}
+	
+	public User(String cf, String nome, String cognome, String email, String password, String telefono,
+			Timestamp data_in, int id_ruolo, int id_abitazione) {
+
+		this.cf = cf;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.password = password;
+		this.telefono = telefono;
+		this.data_in = data_in;
+		this.id_ruolo = id_ruolo;
+		this.id_abitazione = id_abitazione;
+		this.ruolo = new Ruolo(id_ruolo);
 	}
 
-	
 
-	
 	public User(int id, int id_ruolo, int id_abitazione, String cf, String nome, String cognome, String email,
 			String password, String telefono, Timestamp data_in, Timestamp data_out, Ruolo ruolo,
 			List<RigaPresenza> listapresenze) {

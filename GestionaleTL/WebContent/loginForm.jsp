@@ -4,10 +4,16 @@
 
 <div class="divA" id="divA" name="divA">
 	<c:choose>
-		<c:when test = "${1 > 0}">
+		<c:when test="${user.id!=null}">
+			<form>
+				<c:out value="Benvenuto, ${user.nome}"/>
+				<input class="btn btn-danger" type="submit" id ="logoutButton" name="logoutButton" value="Logout"/>
+			</form>
+		</c:when>
+		<c:otherwise>
 			<c:out value="Effettua il login: "/>
 			<br/>
-			<form action="MainServlet" id="loginForm" name="loginForm" method="post">
+			<form action="MainServlet" id="login" name="login" method="post">
 				<input type="hidden" name="submitted" value="true">
 				
 			
@@ -16,10 +22,10 @@
 					<input type="text" name="email" id="email" placeholder="email">
 					<label for="password" class="div1">Password: </label>
 					<input type="password" name="password" id="password" placeholder="password">
-					<a>   </a><input class="btn btn-success" type="submit" value="Login" name="login" id="loginButton">
+					<a>   </a><input class="btn btn-success" type="submit" id="login" name="login" value="Login">
 				</div>	
-				<c:if test="${invalidLogin!=null}">
-					<c:out value="Inserisci dati validi per effettuare la registrazione." />
+				<c:if test="${notValidData!=null}">
+					<c:out value="Inserisci dati validi per effettuare il login." />
 				</c:if>
 				<c:if test="${notFoundLogin!=null}">
 					<c:out value="email non presente o password errata." />
@@ -31,13 +37,6 @@
 				<c:out value="Non ricordi la password? Clicca qui per ottenerne una nuova sulla tua mail:  "/>
 				<input class="btn btn-info" type="submit" id ="resetPasswordButton" name="resetPasswordButton" value="Reset Password"/>
 			</form>	
-		</c:when>
-		
-		<c:when test="${1 > 0}">
-			<form>
-				<c:out value="Benvenuto, ${User.nome}"/>
-				<input class="btn btn-danger" type="submit" id ="logoutButton" name="logoutButton" value="Logout"/>
-			</form>
-		</c:when>
+		</c:otherwise>
 	</c:choose>
 </div>

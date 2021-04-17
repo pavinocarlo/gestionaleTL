@@ -20,12 +20,28 @@ body{
 	padding-top:2px;
 	padding:2px;	
 }
-.navbar-custom {
-  height: 140px;
+.alert{
+	font-family: Georgia;
+	font-weight: bolder;
+	color:#D00909;
+	font-size:32px;
+	padding:8px;
+	margin:8px;	
+}
+.advice{
+	font-family: Georgia;
+	font-weight: bolder;
+	color:#5F2F2F;
+	font-size:28px;
+	padding:8px;
+	margin:8px;	
 }
 .divA{
 	padding:8px;
 	margin:8px;
+}
+.divAlert{
+	margin-top:2px;
 }
 .divB{
 	font-family: Georgia;
@@ -34,12 +50,54 @@ body{
 	padding:8px;
 	margin:8px;	
 }
-.alert{
+.divBigButton{
+	padding:2px;
+	margin:2px;
+}
+.divC{
 	font-family: Georgia;
-	font-weight: bolder;
-	color:#E70303;
-	font-size:28px;
-	padding:8px;
-	margin:8px;	
+	font-size:16px;
+	padding:2px;
+	margin:8px;
+}
+.formA{
+	background-color:rgba(233,233,233,0.2);
+	margin-top:2px;
+	margin:8px;
+	font-family: Georgia;
+	font-size:16px;
+	font-weight: normal;
+}
+.formFailure{
+	color:darkred;
+	font-family: Georgia;
+	font-size:16px;
+	padding:2px;
+	margin:8px;
+}
+.formSuccess{
+	color:darkgreen;
+	font-family: Georgia;
+	font-size:16px;
+	padding:2px;
+	margin:8px;
+}
+.homeadmin{
+	margin-top:2px;
+	margin:8px;
+	font-family: Georgia;
+	font-size:16px;
+}
+.homeuser{
+	margin-top:2px;
+	margin:8px;
+	font-family: Georgia;
+	font-size:16px;
+}
+.labelA{
+	width:148px;
+}
+.labelLong{
+	width:380px;
 }
 </style>
