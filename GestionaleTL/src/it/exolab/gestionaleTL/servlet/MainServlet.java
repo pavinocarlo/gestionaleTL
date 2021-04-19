@@ -14,7 +14,7 @@ import it.exolab.gestionaleTL.controller.DocumentazioneController;
 import it.exolab.gestionaleTL.controller.LavoroController;
 import it.exolab.gestionaleTL.controller.RiunioneController;
 import it.exolab.gestionaleTL.controller.UserController;
-import it.exolab.gestionaleTL.util.Util;;
+
 
 /**
  * Servlet implementation class BaseServlet
@@ -26,12 +26,16 @@ public class MainServlet extends HttpServlet {
 	private static final String INSERT="insert";
 	private static final String UPDATE="update";
 	private static final String FIND="find";
-	private static final String USER="User";
-	private static final String ABITAZIONE="Abitazione";
-	private static final String RIUNIONE="Riunione";
-	private static final String LAVORO="Lavoro";
-	private static final String DOCUMENTAZIONE="Documentazione";
+	private static final String USER="user";
+	private static final String ABITAZIONE="abitazione";
+	private static final String RIUNIONE="riunione";
+	private static final String LAVORO="lavoro";
+	private static final String DOCUMENTAZIONE="documentazione";
 	private static final String LOGIN="login";
+	private static final String BUTTON="button";
+	private static final String SHOW="show";
+	private static final String GESTIONE="gestione";
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -46,9 +50,13 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+
+		doActionRiunione(request, response);
+		doActionUser(request, response);
+		doActionAbitazione(request, response);
+		doActionLavoro(request, response);
+		doActionDocumentazione(request, response);
+
 		request.getRequestDispatcher("home.jsp").include(request, response);
 	}
 
@@ -57,78 +65,157 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			/*
-			 * user
-			 */
-			if(request.getParameter(LOGIN) != null) {
-				UserController userController = new UserController(request, response);
-				userController.doLogin(request, response);
-			}
-			if(request.getParameter(INSERT + USER) != null) {
-				UserController userController = new UserController(request, response);
-				userController.doInsert(request, response);
-			}
-			if(request.getParameter(UPDATE + USER) != null) {
-				UserController userController = new UserController(request, response);
-				userController.doUpdate(request, response);
-			}
-			/*
-			 * abitazione
-			 */
-			if(request.getParameter(INSERT + ABITAZIONE) != null) {
-				AbitazioneController abitazioneController = new AbitazioneController(request, response);
-				abitazioneController.doInsert(request, response);
-			}
-			if(request.getParameter(UPDATE + ABITAZIONE) != null) {
-				AbitazioneController abitazioneController = new AbitazioneController(request, response);
-				abitazioneController.doUpdate(request, response);
-			}
-			/*
-			 * riunione
-			 */
-			if(request.getParameter(INSERT + RIUNIONE) != null) {
-				RiunioneController riunioneController = new RiunioneController(request, response);
-				riunioneController.doInsert(request, response);
-			}
-			if(request.getParameter(UPDATE + RIUNIONE) != null) {
-				RiunioneController riunioneController = new RiunioneController(request, response);
-				riunioneController.doUpdate(request, response);
-			}
-			if(request.getParameter(FIND + RIUNIONE) != null) {
-				RiunioneController riunioneController = new RiunioneController(request, response);
-				riunioneController.doFind(request, response);
-			}
-			/*
-			 * lavoro
-			 */
-			if(request.getParameter(INSERT + LAVORO) != null) {
-				LavoroController lavoroController = new LavoroController(request, response);
-				lavoroController.doInsert(request, response);
-			}
-			if(request.getParameter(UPDATE + LAVORO) != null) {
-				LavoroController lavoroController = new LavoroController(request, response);
-				lavoroController.doUpdate(request, response);
-			}
-			if(request.getParameter(FIND + LAVORO) != null) {
-				LavoroController lavoroController = new LavoroController(request, response);
-				lavoroController.doFind(request, response);
-			}
-			/*
-			 * documentazione
-			 */
-			if(request.getParameter(INSERT + DOCUMENTAZIONE) != null) {
-				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
-				documentazioneController.doInsert(request, response);
-			}
-			if(request.getParameter(UPDATE + DOCUMENTAZIONE) != null) {
-				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
-				documentazioneController.doUpdate(request, response);
-			}
-			if(request.getParameter(FIND + DOCUMENTAZIONE) != null) {
-				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
-				documentazioneController.doFind(request, response);
-			}
+		doActionRiunione(request, response);
+		doActionUser(request, response);
+		doActionAbitazione(request, response);
+		doActionLavoro(request, response);
+		doActionDocumentazione(request, response);
 
+	}
+	
+	
+	protected void doActionRiunione(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter(SHOW + GESTIONE + RIUNIONE + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			return;
+		}
+		if(request.getParameter(SHOW + INSERT + RIUNIONE + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute(SHOW + INSERT + RIUNIONE, SHOW + INSERT + RIUNIONE);
+			return;
+		}
+		RiunioneController riunioneController = new RiunioneController(request, response);
+		
+		if(request.getParameter(INSERT + RIUNIONE) != null) {
+
+			return;
+		}
+		if(request.getParameter(UPDATE + RIUNIONE) != null) {
+			riunioneController.doUpdate(request, response);
+			return;
+		}
+		if(request.getParameter(FIND + RIUNIONE) != null) {
+			riunioneController.doFind(request, response);
+			return;
+		}
+	}
+	
+	protected void doActionUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter(SHOW + GESTIONE + USER + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + USER, SHOW + GESTIONE + USER);
+			return;
+		}
+		if(request.getParameter(SHOW + INSERT + USER + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + USER, SHOW + GESTIONE + USER);
+			request.setAttribute(SHOW + INSERT + USER, SHOW + INSERT + USER);
+			return;
+		}
+		
+		UserController userController = new UserController(request, response);
+		
+		if(request.getParameter(LOGIN) != null) {
+			userController.doLogin(request, response);
+			return;
+		}
+		if(request.getParameter(INSERT + USER) != null) {
+			userController.doInsert(request, response);
+			return;
+		}
+		if(request.getParameter(UPDATE + USER) != null) {
+			userController.doUpdate(request, response);
+			return;
+		}
+		if(request.getParameter(FIND + USER) != null) {
+			userController.doFind(request, response);
+			return;
+		}
+	}
+	
+	private void doActionAbitazione(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter(SHOW + GESTIONE + ABITAZIONE + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + ABITAZIONE, SHOW + GESTIONE + ABITAZIONE);
+			return;
+		}
+		if(request.getParameter(SHOW + INSERT + ABITAZIONE + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + ABITAZIONE, SHOW + GESTIONE + ABITAZIONE);
+			request.setAttribute(SHOW + INSERT + ABITAZIONE, SHOW + INSERT + ABITAZIONE);
+			return;
+		}
+		
+		AbitazioneController abitazioneController = new AbitazioneController(request, response);
+		
+		if(request.getParameter(INSERT + ABITAZIONE) != null) {
+			abitazioneController.doInsert(request, response);
+			return;
+		}
+		if(request.getParameter(UPDATE + ABITAZIONE) != null) {
+			abitazioneController.doUpdate(request, response);
+			return;
+		}
+		if(request.getParameter(FIND + ABITAZIONE) != null) {
+			abitazioneController.doFind(request, response);
+			return;
+		}
+		
+	}
+	
+	private void doActionLavoro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter(SHOW + GESTIONE + LAVORO + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
+			return;
+		}
+		if(request.getParameter(SHOW + INSERT + LAVORO + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
+			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
+			return;
+		}
+		
+		LavoroController lavoroController = new LavoroController(request, response);
+		
+		if(request.getParameter(INSERT + LAVORO) != null) {
+			lavoroController.doInsert(request, response);
+			return;
+		}
+		if(request.getParameter(UPDATE + LAVORO) != null) {
+			lavoroController.doUpdate(request, response);
+			return;
+		}
+		if(request.getParameter(FIND + LAVORO) != null) {
+			lavoroController.doFind(request, response);
+			return;
+		}
+	}
+	
+	private void doActionDocumentazione(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter(SHOW + GESTIONE + DOCUMENTAZIONE + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + DOCUMENTAZIONE, SHOW + GESTIONE + DOCUMENTAZIONE);
+			return;
+		}
+		if(request.getParameter(SHOW + INSERT + DOCUMENTAZIONE + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + DOCUMENTAZIONE, SHOW + GESTIONE + DOCUMENTAZIONE);
+			request.setAttribute(SHOW + INSERT + DOCUMENTAZIONE, SHOW + INSERT + DOCUMENTAZIONE);
+			return;
+		}
+		
+		DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
+		
+		if(request.getParameter(INSERT + DOCUMENTAZIONE) != null) {
+			documentazioneController.doInsert(request, response);
+			return;
+		}
+		if(request.getParameter(UPDATE + DOCUMENTAZIONE) != null) {
+			documentazioneController.doUpdate(request, response);
+			return;
+		}
+		if(request.getParameter(FIND + DOCUMENTAZIONE) != null) {
+			documentazioneController.doFind(request, response);
+			return;
+		}
 	}
 
 }

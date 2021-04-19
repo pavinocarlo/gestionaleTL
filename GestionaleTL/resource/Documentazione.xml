@@ -9,7 +9,7 @@
 	  <insert id = "insert"
 			parameterType="it.exolab.gestionaleTL.model.Documentazione" 
 			useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-			   insert into documentazione (nome, costo, societa, id_lavoro) values ( 
+			   insert into documentazione (nome, costo, società, id_lavoro) values ( 
 			   #{nome}, 
 			   #{costo}, 
 			   #{societa}, 
@@ -22,7 +22,7 @@
 			update documentazione set
 			nome=#{nome}, 
 			costo=#{costo}, 
-			societa=#{societa}, 
+			società=#{societa}, 
 			id_lavoro=#{id_lavoro}
 			where id = ${id}
 		
@@ -37,7 +37,7 @@
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM documentazione AS d
 		inner join votazione AS v on d.id = v.id_documentazione
-		WHERE l.id = ${id};
+		WHERE d.id = ${id};
 	
 	</select>
 	

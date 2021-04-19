@@ -25,10 +25,10 @@
       <ul class="nav navbar-nav">
         <li><jsp:include page="loginForm.jsp"></jsp:include></li>
         <c:choose>
-        	<c:when test="${0>0}">
+        	<c:when test="${user.ruolo.id == 1}">
         		<li><jsp:include page="admin/navbarAdmin.jsp"></jsp:include></li>
         	</c:when>
-       		<c:when test="${1>0}">
+       		<c:when test="${user.ruolo.id == 2}">
         	<li><jsp:include page="user/navbarUser.jsp"></jsp:include></li>
         	</c:when>
         </c:choose>

@@ -2,6 +2,7 @@ package it.exolab.gestionaleTL.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,9 +29,12 @@ public class RiunioneController extends BaseController {
 	
 	public void doInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String data = request.getParameter("data_riunione").toString();
+		data = data.replace('T', ' ');
+
 		Riunione riunione = new Riunione(Integer.parseInt(request.getParameter("stato")),
-										(Timestamp.valueOf("" + request.getParameter("data_comunicazione") + "00:00:00")),
-										(Timestamp.valueOf("" + request.getParameter("data_riunione") + "00:00:00")),
+										null,
+										(Timestamp.valueOf("" + data + ":00")),
 										request.getParameter("ordine_del_giorno"),
 										request.getParameter("luogo"));
 							
@@ -48,8 +52,8 @@ public class RiunioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("successo", "successo");
-		request.getRequestDispatcher("home.jsp").include(request, response);
+		request.setAttribute("riunioneinsertsuccess", "riunioneinsertsuccess");
+		request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
@@ -77,25 +81,26 @@ public class RiunioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("successo", "successo");
-		request.getRequestDispatcher("home.jsp").include(request, response);
+		request.setAttribute("riunioneupdatesuccess", "riunioneupdatesuccess");
+		request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String id = (String) request.getAttribute("id");
-		if(!id.equals("")) {
-			Riunione riunione = riunioneCrud.find(Integer.valueOf(id));
-			request.setAttribute("riunione", riunione);
-			request.getRequestDispatcher("home.jsp").include(request, response);
+		String search = request.getParameter("searchriunione");
+		List<Riunione> listaRiunioni = new ArrayList<Riunione>();
+		
+		if(search.equals("") || search == null) {
+			listaRiunioni = riunioneCrud.findAll();
+			request.setAttribute("listariunioni", listaRiunioni);
+			request.getRequestDispatcher(HOME).include(request, response);
 		}
 		else {
-			List<Riunione> listaRiunioni = riunioneCrud.findAll();
-			request.setAttribute("listaRiunioni", listaRiunioni);
-			request.getRequestDispatcher("home.jsp").include(request, response);
+			listaRiunioni.add(riunioneCrud.find(Integer.valueOf(search)));
+			request.setAttribute("listariunioni", listaRiunioni);
+			request.getRequestDispatcher(HOME).include(request, response);
+			
 		}
-		
-		
 	}
 }

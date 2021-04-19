@@ -7,7 +7,7 @@
 		<c:when test="${user.id!=null}">
 			<form>
 				<c:out value="Benvenuto, ${user.nome}"/>
-				<input class="btn btn-danger" type="submit" id ="logoutButton" name="logoutButton" value="Logout"/>
+				<input class="btn btn-danger" type="submit" id ="logoutbutton" name="logoutbutton" value="Logout"/>
 			</form>
 		</c:when>
 		<c:otherwise>
@@ -35,7 +35,7 @@
 			<form action="MainServlet">
 				<br/>
 				<c:out value="Non ricordi la password? Clicca qui per ottenerne una nuova sulla tua mail:  "/>
-				<input class="btn btn-info" type="submit" id ="resetPasswordButton" name="resetPasswordButton" value="Reset Password"/>
+				<input class="btn btn-info" type="submit" id ="resetpasswordbutton" name="resetpasswordbutton" value="Reset Password"/>
 			</form>	
 		</c:otherwise>
 	</c:choose>

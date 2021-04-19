@@ -2,6 +2,8 @@ package it.exolab.gestionaleTL.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +52,6 @@ public class UserController extends BaseController {
 		if (!(uc.findByEmail(email)!=null)){
 			if (
 				    !(!email.contains("@") || !email.contains(".") || email.length()<4 && email.length()>70)
-				 && !(password.length()<8 || password.length()>70 || hasDigits(password)<2)
 				 && !(nome.length()<2 || nome.length()>70 || hasDigits(nome)>0)
 				 && !(cognome.length()<2 || cognome.length()>70 || hasDigits(cognome)>0)
 				 && !(telefono.length()<5 || telefono.length()>70)	 
@@ -81,34 +82,34 @@ public class UserController extends BaseController {
 			doRuolo(user);
 			return;
 		}
-		request.setAttribute("notValidData", "notValidData");
-		request.getRequestDispatcher("home.jsp").include(request, response);
+		request.setAttribute("notvaliddata", "notvaliddata");
+		request.getRequestDispatcher(HOME).include(request, response);
 	}
 
 	private void doRuolo(User user) throws ServletException, IOException {
 		
 		if(user==null) {
-			request.setAttribute("notFoundLogin", "notFoundLogin");
-			request.getRequestDispatcher("home.jsp").include(request, response);
+			request.setAttribute("notfoundlogin", "notfoundlogin");
+			request.getRequestDispatcher(HOME).include(request, response);
 			return;
 		}
 		request.getSession().setAttribute("user", user);
 //		request.getRequestDispatcher(
 //				user.getRuolo().getRuolo().equals("Amministratore") ? "adminhome.jsp" : "homeuser.jsp");
-		request.getRequestDispatcher("home.jsp").include(request, response);
+		request.getRequestDispatcher(HOME).include(request, response);
 	}
 	
 	
 	public void doInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+				
 		User user = new User(request.getParameter("cf"),
 							request.getParameter("nome"), 
 							request.getParameter("cognome"), 
 							request.getParameter("email"), 
 							request.getParameter("password"), 
 							request.getParameter("telefono"),
-							(Timestamp.valueOf("" + request.getParameter("dataIn") + "00:00:00")),
-							(Timestamp.valueOf("" + request.getParameter("dataOut") + "00:00:00")),
+							(Timestamp.valueOf("" + request.getParameter("data_in") + " 00:00:00")),
+							null,
 							Integer.parseInt(request.getParameter("id_ruolo")), 
 							Integer.parseInt(request.getParameter("id_abitazione")));
 							
@@ -126,8 +127,8 @@ public class UserController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("successo", "successo");
-			request.getRequestDispatcher("home.jsp").include(request, response);
+			request.setAttribute("userinsertsuccess", "userinsertsuccess");
+			request.getRequestDispatcher(HOME).include(request, response);
 		}
 	}
 	
@@ -158,21 +159,29 @@ public class UserController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("successo", "successo");
-			request.getRequestDispatcher("home.jsp").include(request, response);
+			request.setAttribute("userupdatesuccess", "userupdatesuccess");
+			request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
-	public void doFind(HttpServletRequest request, HttpServletResponse response, int id) {
+	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		userCrud.find(id);
+		String search = request.getParameter("searchuser");
 		
+		List<User> listaUser = new ArrayList<>();
 		
+		if(search.equals("") || search == null) {
+			
+			listaUser = userCrud.findAll();
+			request.setAttribute("listaUser", listaUser);
+			request.getRequestDispatcher(HOME).include(request, response);
+		}
+		else {
+			listaUser.add(userCrud.find(Integer.valueOf(search)));
+			request.setAttribute("listaUser", listaUser);
+			request.getRequestDispatcher(HOME).include(request, response);
+		}		
 	}
-	
-		
-	
-		
-	
+
 
 }

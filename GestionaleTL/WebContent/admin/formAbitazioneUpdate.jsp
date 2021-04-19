@@ -5,7 +5,7 @@
 
 
 <div class="formA" id="formA" name="formA">
-	<form action="MainServlet" id="updateAbitazione" name="updateAbitazione" method="post">
+	<form action="MainServlet" id="updateabitazione" name="updateabitazione" method="post">
 	<ul>
 		<label>Modifica i dati dell'unità abitativa:</label>
 		<li><tr>
@@ -22,25 +22,25 @@
 		<c:if test="${successo!=null}">
 			<jsp:include page="/formSuccess.jsp"></jsp:include>
 		</c:if>
-		<c:if test="${formAbitazioneUpdateFailed!=null}">
+		<c:if test="${formabitazioneapdateFailed!=null}">
 			<jsp:include page="/formFailedUpdate.jsp"></jsp:include>
 		</c:if>
-		<c:if test="${AlreadyExistException!=null}">
+		<c:if test="${alreadyexistexception!=null}">
 			<jsp:include page="/formAlreadyExists.jsp"></jsp:include>
 		</c:if>
 	</ul>
 	<ul>
-		<input class="btn btn-warning" type="submit" id="updateAbitazione" name="updateAbitazione" value="Modifica" >
+		<input class="btn btn-warning" type="submit" id="updateabitazione" name="updateabitazione" value="Modifica" >
 	</ul>
 	</form>	
 	
-	<form action="MainServlet" id="abitazioneChiamaUser" name="abitazioneChiamaUser" method="post">
+	<form action="MainServlet" id="abitazionechiamauser" name="abitazionechiamauser">
 	<ul>
-		<th><input class="btn btn-info" type="submit" id="abitazioneChiamaUserButton" name="abitazioneChiamaUserButton" value="Mostra Dati" ></th>
+		<th><input class="btn btn-info" type="submit" id="showabitazioneincludeuserbutton" name="showabitazioneincludeuserbutton" value="Mostra Dati" ></th>
 		<th><label>Mostra i dati del proprietario dell'abitazione.</label></th>
 	</ul>
 	</form>
-	<c:if test="${1>0}">
+	<c:if test="${showabitazioneincludeuser!=null}">
 		<jsp:include page="formAbitazione_includeUser.jsp"></jsp:include>
 	</c:if>
 </div>

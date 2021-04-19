@@ -1,6 +1,7 @@
 package it.exolab.gestionaleTL.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -44,8 +45,8 @@ public class DocumentazioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("successo", "successo");
-		request.getRequestDispatcher("home.jsp").include(request, response);
+		request.setAttribute("documentazioneinsertsuccess", "documentazioneinsertsuccess");
+		request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
@@ -69,23 +70,25 @@ public class DocumentazioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("successo", "successo");
-		request.getRequestDispatcher("home.jsp").include(request, response);
+		request.setAttribute("documentazioneupdatesuccess", "documentazioneupdatesuccess");
+		request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id = (String) request.getAttribute("id");
-		if(!id.equals("")) {
-			Documentazione documentazione = documentazioneCrud.find(Integer.valueOf(id));
-			request.setAttribute("documentazione", documentazione);
-			request.getRequestDispatcher("home.jsp").include(request, response);
+		String search = request.getParameter("searchdocumentazione");
+		List<Documentazione> listaDocumentazione = new ArrayList<Documentazione>();
+		
+		if(search.equals("") || search == null) {
+			listaDocumentazione = documentazioneCrud.findAll();
+			request.setAttribute("listaDocumentazione", listaDocumentazione);
+			request.getRequestDispatcher(HOME).include(request, response);
 		}
 		else {
-			List<Documentazione> listaDocumentazione = documentazioneCrud.findAll();
+			listaDocumentazione.add(documentazioneCrud.find(Integer.valueOf(search)));
 			request.setAttribute("listaDocumentazione", listaDocumentazione);
-			request.getRequestDispatcher("home.jsp").include(request, response);
+			request.getRequestDispatcher(HOME).include(request, response);
 		}
 	}
 

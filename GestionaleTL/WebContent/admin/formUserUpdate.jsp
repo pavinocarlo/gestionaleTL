@@ -5,7 +5,7 @@
 
 
 <div class="formA" id="formA" name="formA">
-	<form action="MainServlet" id="updateUser" name="updateUser" method="post">
+	<form action="MainServlet" id="updateuser" name="updateuser" method="post">
 	<ul>
 		<!-- 
 		la logica di questo if è: mostralo solo quando modifico lo User nel caso in cui dallo User voglio cambiargli casa
@@ -60,15 +60,15 @@
 		<c:if test="${successo!=null}">
 			<jsp:include page="/formSuccess.jsp"></jsp:include>
 		</c:if>
-		<c:if test="${formUserUpdateFailed!=null}">
+		<c:if test="${formuserupdatefailed!=null}">
 			<jsp:include page="/formFailedUpdate.jsp"></jsp:include>
 		</c:if>
-		<c:if test="${AlreadyExistException!=null}">
+		<c:if test="${alreadyexistexception!=null}">
 			<jsp:include page="/formAlreadyExists.jsp"></jsp:include>
 		</c:if>
 	</ul>
 	<ul>
-		<input class="btn btn-warning" type="submit" id="updateUser" name="updateUser" value="Modifica" >
+		<input class="btn btn-warning" type="submit" id="updateuser" name="updateuser" value="Modifica" >
 	</ul>
 	</form>
 </div>	

@@ -97,6 +97,11 @@ body{
 .labelA{
 	width:148px;
 }
+.labelG{
+	margin:2px;
+	font-family:Georgia;
+	font-size:16px;
+}
 .labelLong{
 	width:380px;
 }

@@ -1,5 +1,7 @@
 package it.exolab.gestionaleTL.crud;
 
+import java.util.List;
+
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
@@ -22,11 +24,7 @@ public class UserCrud {
 		if(user.getCognome().length()>70 || user.getCognome().equals("")) {
 			throw new InvalidFieldException();
 		}
-	
 		if(!user.getEmail().contains("@") || !user.getEmail().contains(".") || user.getEmail().length()>70 || user.getEmail().equals("")) {
-			throw new InvalidFieldException();
-		}
-		if(user.getPassword().length()>70 || user.getPassword().equals("")) {
 			throw new InvalidFieldException();
 		}
 	}
@@ -72,6 +70,15 @@ public class UserCrud {
 		SqlMapFactory.instance().openSession();
 		UserMapper mapper =  SqlMapFactory.instance().getMapper(UserMapper.class);
 		User ret=mapper.findByEmailAndPassword(email, password);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
+	public List<User> findAll() {
+		SqlMapFactory.instance().openSession();
+		UserMapper mapper =  SqlMapFactory.instance().getMapper(UserMapper.class);
+		List<User> ret=mapper.findAll();
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 		return ret;

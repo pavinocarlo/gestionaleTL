@@ -1,6 +1,8 @@
 package it.exolab.gestionaleTL.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,8 +45,8 @@ public class AbitazioneController extends BaseController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				request.setAttribute("successo", "successo");
-				request.getRequestDispatcher("home.jsp").include(request, response);
+				request.setAttribute("abitazioneinsertsuccess", "abitazioneinsertsuccess");
+				request.getRequestDispatcher(HOME).include(request, response);
 //			}
 	}
 	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,17 +68,26 @@ public class AbitazioneController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("successo", "successo");
-			request.getRequestDispatcher("home.jsp").include(request, response);
+			request.setAttribute("abitazioneupdatesuccess", "abitazioneupdatesuccess");
+			request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		
-		Integer search = Integer.valueOf((String) request.getAttribute("search"));
-		Abitazione abitazione = abitazioneCrud.findWithProprietario(search);
-		request.setAttribute("abitazione", abitazione);
-		request.getRequestDispatcher("homeadmin.jsp").include(request, response);
+		String search = request.getParameter("searchabitazione");
+		List<Abitazione> listaAbitazioni = new ArrayList<Abitazione>();
+		
+		if(search.equals("") || search == null) {
+			abitazioneCrud.findAll();
+			request.setAttribute("listaabitazioni", listaAbitazioni);
+			request.getRequestDispatcher(HOME).include(request, response);
+		}
+		else {
+			listaAbitazioni.add(abitazioneCrud.findWithProprietario(Integer.valueOf(search)));
+			request.setAttribute("listaabitazioni", listaAbitazioni);
+			request.getRequestDispatcher(HOME).include(request, response);
+		}
 	}
 
 }

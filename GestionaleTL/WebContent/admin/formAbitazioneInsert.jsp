@@ -5,7 +5,7 @@
 
 
 <div class="formA" id="formA" name="formA">
-	<form action="MainServlet" id="insertAbitazione" name="insertAbitazione" method="post">
+	<form action="MainServlet" id="insertabitazione" name="insertabitazione" method="post">
 	<ul>
 		<label>Inserisci i dati di una nuova unità abitativa:</label>
 		<li><tr>
@@ -21,15 +21,15 @@
 		<c:if test="${successo!=null}">
 			<jsp:include page="/formSuccess.jsp"></jsp:include>
 		</c:if>
-		<c:if test="${formAbitazioneInsertFailed!=null}">
+		<c:if test="${formabitazioneansertaailed!=null}">
 			<jsp:include page="/formFailedInsert.jsp"></jsp:include>
 		</c:if>
-		<c:if test="${AlreadyExistException!=null}">
+		<c:if test="${alreadyexistexception!=null}">
 			<jsp:include page="/formAlreadyExists.jsp"></jsp:include>
 		</c:if>
 	</ul>
 	<ul>
-		<input class="btn btn-success" type="submit" id="insertAbitazione" name="insertAbitazione" value="Inserisci" >
+		<input class="btn btn-success" type="submit" id="insertabitazione" name="insertabitazione" value="Inserisci" >
 	</ul>
 	</form>
 </div>

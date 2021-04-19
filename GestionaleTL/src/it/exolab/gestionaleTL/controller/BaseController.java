@@ -10,6 +10,7 @@ public class BaseController {
 	
 	protected HttpServletRequest request;
 	protected  HttpServletResponse response;
+	protected static final String HOME="home.jsp";
 	
 	
 	protected BaseController() {

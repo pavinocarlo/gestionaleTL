@@ -9,10 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="style.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 
-<c:if test="${user == null}">
-		<jsp:include page="header.jsp"></jsp:include>
-	</c:if>
 
 
 
@@ -26,11 +25,7 @@
 
 	</c:choose>
 
-<!--  test -->
-<jsp:include page="admin/homeadmin.jsp"></jsp:include>
-<hr>
-<hr>
-<jsp:include page="user/homeuser.jsp"></jsp:include>
+
 
 </body>
 </html>
