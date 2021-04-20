@@ -45,7 +45,7 @@ public class AbitazioneController extends BaseController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				request.setAttribute("abitazioneinsertsuccess", "abitazioneinsertsuccess");
+				request.setAttribute(ABITAZIONE+INSERT+SUCCESS, ABITAZIONE+INSERT+SUCCESS);
 				request.getRequestDispatcher(HOME).include(request, response);
 //			}
 	}
@@ -68,24 +68,24 @@ public class AbitazioneController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("abitazioneupdatesuccess", "abitazioneupdatesuccess");
+			request.setAttribute(ABITAZIONE+UPDATE+SUCCESS, ABITAZIONE+UPDATE+SUCCESS);
 			request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		
-		String search = request.getParameter("searchabitazione");
+		String search = request.getParameter(SEARCH+ABITAZIONE);
 		List<Abitazione> listaAbitazioni = new ArrayList<Abitazione>();
 		
 		if(search.equals("") || search == null) {
-			abitazioneCrud.findAll();
-			request.setAttribute("listaabitazioni", listaAbitazioni);
+			listaAbitazioni = abitazioneCrud.findAll();
+			request.setAttribute(LISTA+"abitazioni", listaAbitazioni);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 		else {
 			listaAbitazioni.add(abitazioneCrud.findWithProprietario(Integer.valueOf(search)));
-			request.setAttribute("listaabitazioni", listaAbitazioni);
+			request.setAttribute(LISTA+"abitazioni", listaAbitazioni);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 	}

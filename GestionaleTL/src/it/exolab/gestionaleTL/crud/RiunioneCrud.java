@@ -1,6 +1,7 @@
 package it.exolab.gestionaleTL.crud;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
@@ -50,5 +51,15 @@ public class RiunioneCrud {
 		SqlMapFactory.instance().closeSession();
 		return ret;
 	}
-
+	
+	public List<Riunione> findForRiunione(Timestamp data_riunione, int stato) {
+		
+		SqlMapFactory.instance().openSession();
+		RiunioneMapper mapper =  SqlMapFactory.instance().getMapper(RiunioneMapper.class);
+		List<Riunione> ret = mapper.findForRiunione(data_riunione, stato);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
 }

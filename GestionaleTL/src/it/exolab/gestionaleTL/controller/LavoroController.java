@@ -46,7 +46,7 @@ public class LavoroController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("lavoroinsertsuccess", "lavoroinsertsuccess");
+			request.setAttribute(LAVORO+INSERT+SUCCESS, LAVORO+INSERT+SUCCESS);
 			request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
@@ -72,26 +72,26 @@ public class LavoroController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("lavoroupdatesuccess", "lavoroupdatesuccess");
+			request.setAttribute(LAVORO+UPDATE+SUCCESS, LAVORO+UPDATE+SUCCESS);
 			request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String search = request.getParameter("searchlavoro");
+		String search = request.getParameter(SEARCH+LAVORO);
 		List<Lavoro> listaLavori = new ArrayList<Lavoro>();
 		
 		if(search.equals("") || search == null) {
 			listaLavori = lavoroCrud.findAll();
-			request.setAttribute("listalavori", listaLavori);
+			request.setAttribute(LISTA+"lavori", listaLavori);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 		else {
 			try {
 				if(Integer.parseInt(search) != 0) {
 					listaLavori.add(lavoroCrud.find(Integer.valueOf(search)));
-					request.setAttribute("listalavori", listaLavori);
+					request.setAttribute(LISTA+"lavori", listaLavori);
 					request.getRequestDispatcher(HOME).include(request, response);
 				}
 				else {
@@ -103,7 +103,7 @@ public class LavoroController extends BaseController {
 		    	
 	    		listaLavori = lavoroCrud.findByNome(search);
 	    		if(listaLavori.size() == 0) {
-					request.setAttribute("listalavori", listaLavori);
+					request.setAttribute(LISTA+"lavori", listaLavori);
 					request.getRequestDispatcher(HOME).include(request, response);
 	    		}
 	    		else {

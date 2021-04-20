@@ -29,7 +29,6 @@ public class UserController extends BaseController {
 	}
 	
 	
-	
 	private boolean validate(User user) {
 		boolean ret=false;
 		ret=validate(user.getCf(), user.getNome(), user.getCognome(), user.getEmail(), user.getPassword(),user.getTelefono());
@@ -79,26 +78,34 @@ public class UserController extends BaseController {
 		
 		if(validate(email,password)) {
 			user = userCrud.findByEmailAndPassword(email, password);
-			doRuolo(user);
+//			if(user.getId_ruolo()!=1) {
+//				
+//			}
+			request.getSession().setAttribute(USER, user);
+			request.getRequestDispatcher(HOME).include(request, response);
 			return;
 		}
 		request.setAttribute("notvaliddata", "notvaliddata");
 		request.getRequestDispatcher(HOME).include(request, response);
 	}
-
-	private void doRuolo(User user) throws ServletException, IOException {
-		
-		if(user==null) {
-			request.setAttribute("notfoundlogin", "notfoundlogin");
-			request.getRequestDispatcher(HOME).include(request, response);
-			return;
-		}
-		request.getSession().setAttribute("user", user);
-//		request.getRequestDispatcher(
-//				user.getRuolo().getRuolo().equals("Amministratore") ? "adminhome.jsp" : "homeuser.jsp");
-		request.getRequestDispatcher(HOME).include(request, response);
-	}
 	
+	public void doCheckRiunine(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		
+	}
+
+//	private void doRuolo(User user) throws ServletException, IOException {
+//		
+//		if(user==null) {
+//			request.setAttribute("notfoundlogin", "notfoundlogin");
+//			request.getRequestDispatcher(HOME).include(request, response);
+//			return;
+//		}
+//		request.getSession().setAttribute(USER, user);
+//		request.getRequestDispatcher(HOME).include(request, response);
+//	}
+//	
 	
 	public void doInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
@@ -127,7 +134,7 @@ public class UserController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("userinsertsuccess", "userinsertsuccess");
+			request.setAttribute(USER+INSERT+SUCCESS, USER+INSERT+SUCCESS);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 	}
@@ -140,8 +147,8 @@ public class UserController extends BaseController {
 							request.getParameter("email"), 
 							request.getParameter("password"), 
 							request.getParameter("telefono"),
-							(Timestamp.valueOf("" + request.getParameter("dataIn") + "00:00:00")),
-							(Timestamp.valueOf("" + request.getParameter("dataOut") + "00:00:00")),
+							(Timestamp.valueOf("" + request.getParameter("dataIn") + " 00:00:00")),
+							(Timestamp.valueOf("" + request.getParameter("dataOut") + " 00:00:00")),
 							Integer.parseInt(request.getParameter("id_ruolo")), 
 							Integer.parseInt(request.getParameter("id_abitazione")));
 								
@@ -159,26 +166,26 @@ public class UserController extends BaseController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("userupdatesuccess", "userupdatesuccess");
+			request.setAttribute(USER+UPDATE+SUCCESS, USER+UPDATE+SUCCESS);
 			request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String search = request.getParameter("searchuser");
+		String search = request.getParameter(SEARCH+USER);
 		
 		List<User> listaUser = new ArrayList<>();
 		
 		if(search.equals("") || search == null) {
 			
 			listaUser = userCrud.findAll();
-			request.setAttribute("listaUser", listaUser);
+			request.setAttribute(LISTA+USER, listaUser);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 		else {
 			listaUser.add(userCrud.find(Integer.valueOf(search)));
-			request.setAttribute("listaUser", listaUser);
+			request.setAttribute(LISTA+USER, listaUser);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}		
 	}

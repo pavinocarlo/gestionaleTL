@@ -45,7 +45,7 @@ public class DocumentazioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("documentazioneinsertsuccess", "documentazioneinsertsuccess");
+		request.setAttribute(DOCUMENTAZIONE+INSERT+SUCCESS, DOCUMENTAZIONE+INSERT+SUCCESS);
 		request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
@@ -70,24 +70,24 @@ public class DocumentazioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("documentazioneupdatesuccess", "documentazioneupdatesuccess");
+		request.setAttribute(DOCUMENTAZIONE+UPDATE+SUCCESS, DOCUMENTAZIONE+UPDATE+SUCCESS);
 		request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String search = request.getParameter("searchdocumentazione");
+		String search = request.getParameter(SEARCH+DOCUMENTAZIONE);
 		List<Documentazione> listaDocumentazione = new ArrayList<Documentazione>();
 		
 		if(search.equals("") || search == null) {
 			listaDocumentazione = documentazioneCrud.findAll();
-			request.setAttribute("listaDocumentazione", listaDocumentazione);
+			request.setAttribute(LISTA+DOCUMENTAZIONE, listaDocumentazione);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 		else {
 			listaDocumentazione.add(documentazioneCrud.find(Integer.valueOf(search)));
-			request.setAttribute("listaDocumentazione", listaDocumentazione);
+			request.setAttribute(LISTA+DOCUMENTAZIONE, listaDocumentazione);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 	}

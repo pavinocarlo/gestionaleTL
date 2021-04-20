@@ -40,7 +40,7 @@
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM lavoro AS l
 		INNER JOIN documentazione AS d on l.id = d.id_lavoro
-		inner join votazione AS v on d.id = v.id_documentazione
+		left join votazione AS v on d.id = v.id_documentazione
 		WHERE l.id = ${id};
 	 
 	</select>
@@ -55,7 +55,7 @@
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM lavoro AS l
 		INNER JOIN documentazione AS d on l.id = d.id_lavoro
-		inner join votazione AS v on d.id = v.id_documentazione
+		left join votazione AS v on d.id = v.id_documentazione
 		WHERE l.nome like '%${nome}%';
 	 
 	</select>
@@ -70,7 +70,7 @@
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM lavoro AS l
 		INNER JOIN documentazione AS d on l.id = d.id_lavoro
-		inner join votazione AS v on d.id = v.id_documentazione
+		left join votazione AS v on d.id = v.id_documentazione
 		
 	 
 	</select>

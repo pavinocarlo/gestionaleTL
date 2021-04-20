@@ -88,7 +88,7 @@ public class MainServlet extends HttpServlet {
 		RiunioneController riunioneController = new RiunioneController(request, response);
 		
 		if(request.getParameter(INSERT + RIUNIONE) != null) {
-
+			riunioneController.doInsert(request, response);
 			return;
 		}
 		if(request.getParameter(UPDATE + RIUNIONE) != null) {

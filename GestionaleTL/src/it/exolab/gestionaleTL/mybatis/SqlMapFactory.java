@@ -20,7 +20,7 @@ public class SqlMapFactory {
 	     }
 	};
 
-	
+	//SqlSessionFactory.getConfiguration().addMapper(ItemMapper.class);
 	
 	//private final String resource = "it/sogei/npad/model/mybatis/sql-map-config.xml";
 	private final String resource = "datasource.xml";

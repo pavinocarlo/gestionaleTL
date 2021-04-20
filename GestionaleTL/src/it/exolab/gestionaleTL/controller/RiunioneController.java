@@ -36,7 +36,8 @@ public class RiunioneController extends BaseController {
 										null,
 										(Timestamp.valueOf("" + data + ":00")),
 										request.getParameter("ordine_del_giorno"),
-										request.getParameter("luogo"));
+										request.getParameter("luogo"),
+										request.getParameter("indirizzo_abitazione"));
 							
 //		if(validate(user)) {
 			
@@ -52,7 +53,7 @@ public class RiunioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("riunioneinsertsuccess", "riunioneinsertsuccess");
+		request.setAttribute(RIUNIONE+INSERT+SUCCESS, RIUNIONE+INSERT+SUCCESS);
 		request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
@@ -65,7 +66,8 @@ public class RiunioneController extends BaseController {
 										(Timestamp.valueOf("" + request.getParameter("inizio_riunione") + "00:00:00")),
 										(Timestamp.valueOf("" + request.getParameter("fine_riunione") + "00:00:00")),
 										request.getParameter("ordine_del_giorno"),
-										request.getParameter("luogo"));
+										request.getParameter("luogo"),
+										request.getParameter("indirizzo_abitazione"));
 							
 //		if(validate(user)) {
 			
@@ -81,24 +83,24 @@ public class RiunioneController extends BaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("riunioneupdatesuccess", "riunioneupdatesuccess");
+		request.setAttribute(RIUNIONE+UPDATE+SUCCESS, RIUNIONE+UPDATE+SUCCESS);
 		request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String search = request.getParameter("searchriunione");
+		String search = request.getParameter(SEARCH+RIUNIONE);
 		List<Riunione> listaRiunioni = new ArrayList<Riunione>();
 		
 		if(search.equals("") || search == null) {
 			listaRiunioni = riunioneCrud.findAll();
-			request.setAttribute("listariunioni", listaRiunioni);
+			request.setAttribute(LISTA+"riunioni", listaRiunioni);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 		else {
 			listaRiunioni.add(riunioneCrud.find(Integer.valueOf(search)));
-			request.setAttribute("listariunioni", listaRiunioni);
+			request.setAttribute(LISTA+"riunioni", listaRiunioni);
 			request.getRequestDispatcher(HOME).include(request, response);
 			
 		}

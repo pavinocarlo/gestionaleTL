@@ -34,10 +34,10 @@
 		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
 		rp.presenza AS rigapresenza_presenza
 		FROM abitazione AS a
-		inner join votazione AS v on a.id = v.id_abitazione
+		left join votazione AS v on a.id = v.id_abitazione
 		inner join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
 		inner join ruolo AS ru on u.id_ruolo = ru.id
-		inner join riga_presenza as rp on rp.id_user = u.id
+		left join riga_presenza as rp on rp.id_user = u.id
 		WHERE a.id = ${id};
 	</select>
 	
@@ -73,10 +73,10 @@
 		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
 		rp.presenza AS rigapresenza_presenza
 		FROM abitazione AS a
-		inner join votazione AS v on a.id = v.id_abitazione
+		left join votazione AS v on a.id = v.id_abitazione
 		inner join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
 		inner join ruolo AS ru on u.id_ruolo = ru.id
-		inner join riga_presenza as rp on rp.id_user = u.id
+		left join riga_presenza as rp on rp.id_user = u.id
 	</select>
 
 	 <resultMap id="abitazionemap" type="it.exolab.gestionaleTL.model.Abitazione">

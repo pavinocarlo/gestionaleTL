@@ -8,7 +8,7 @@ public class Riunione {
 	
 	private int id, stato;
 	private Timestamp data_comunicazione, data_riunione, inizio_riunione, fine_riunione;
-	private String ordine_del_giorno, luogo;
+	private String ordine_del_giorno, luogo, indirizzo_abitazione;
 	private List<RigaPresenza> listaPresenze = new ArrayList<RigaPresenza>();
 	private List<Lavoro> listaLavori = new ArrayList<Lavoro>();
 
@@ -17,18 +17,20 @@ public class Riunione {
 
 	}
 	
-	public Riunione(int stato, Timestamp data_comunicazione, Timestamp data_riunione, String ordine_del_giorno, String luogo) {
+	public Riunione(int stato, Timestamp data_comunicazione, Timestamp data_riunione, String ordine_del_giorno, 
+					String luogo, String indirizzo_abitazione) {
 
 		this.stato = stato;
 		this.data_comunicazione = data_comunicazione;
 		this.data_riunione = data_riunione;
 		this.ordine_del_giorno = ordine_del_giorno;
 		this.luogo = luogo;
+		this.indirizzo_abitazione = indirizzo_abitazione;
 
 	}
 	
 	public Riunione(int stato, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
-						Timestamp fine_riunione, String ordine_del_giorno, String luogo) {
+						Timestamp fine_riunione, String ordine_del_giorno, String luogo, String indirizzo_abitazione) {
 		
 		this.stato = stato;
 		this.data_comunicazione = data_comunicazione;
@@ -37,12 +39,13 @@ public class Riunione {
 		this.fine_riunione = fine_riunione;
 		this.ordine_del_giorno = ordine_del_giorno;
 		this.luogo = luogo;
+		this.indirizzo_abitazione = indirizzo_abitazione;
 
 	}
 	
 	public Riunione(int id, int stato, Timestamp data_comunicazione, Timestamp data_riunione, Timestamp inizio_riunione,
-			Timestamp fine_riunione, String ordine_del_giorno, String luogo, List<RigaPresenza> listaPresenze,
-			List<Lavoro> listaArgomenti) {
+			Timestamp fine_riunione, String ordine_del_giorno, String luogo, String indirizzo_abitazione, 
+			List<RigaPresenza> listaPresenze, List<Lavoro> listaArgomenti) {
 
 		this.id = id;
 		this.stato = stato;
@@ -52,17 +55,21 @@ public class Riunione {
 		this.fine_riunione = fine_riunione;
 		this.ordine_del_giorno = ordine_del_giorno;
 		this.luogo = luogo;
+		this.indirizzo_abitazione = indirizzo_abitazione;
 		this.listaPresenze = listaPresenze;
 		this.listaLavori = listaArgomenti;
 	}
+	
 	
 	@Override
 	public String toString() {
 		return "Riunione [id=" + id + ", stato=" + stato + ", data_comunicazione=" + data_comunicazione
 				+ ", data_riunione=" + data_riunione + ", inizio_riunione=" + inizio_riunione + ", fine_riunione="
-				+ fine_riunione + ", ordine_del_giorno=" + ordine_del_giorno + ", luogo=" + luogo + ", listaPresenze="
-				+ listaPresenze + ", listaLavori=" + listaLavori + "]";
+				+ fine_riunione + ", ordine_del_giorno=" + ordine_del_giorno + ", luogo=" + luogo
+				+ ", indirizzo_abitazione=" + indirizzo_abitazione + ", listaPresenze=" + listaPresenze
+				+ ", listaLavori=" + listaLavori + "]";
 	}
+
 	public int getStato() {
 		return stato;
 	}
@@ -122,6 +129,14 @@ public class Riunione {
 	}
 	public void setListaLavori(List<Lavoro> listaArgomenti) {
 		this.listaLavori = listaArgomenti;
+	}
+
+	public String getIndirizzo_abitazione() {
+		return indirizzo_abitazione;
+	}
+
+	public void setIndirizzo_abitazione(String indirizzo_abitazione) {
+		this.indirizzo_abitazione = indirizzo_abitazione;
 	}
 	
 	

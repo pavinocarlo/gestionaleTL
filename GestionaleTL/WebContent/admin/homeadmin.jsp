@@ -32,7 +32,7 @@
 
 <div class="homeadmin" id="homeadmin" name="homeadmin">
 <c:choose>
-	<c:when test="${showgestioneriunione!=null or listariunioni!=null}">
+	<c:when test="${showgestioneriunione!=null or listariunioni!=null or showupdateriunione!=null or showlistalavori!=null}">
 		<!-- Riunione - condizioni e template -->
 		<jsp:include page="formGestioneRiunione.jsp"></jsp:include>
 		<hr>
@@ -43,7 +43,7 @@
 			<jsp:include page="formRiunioneFindAll.jsp"></jsp:include>
 		</c:if>
 	</c:when>
-	<c:when test="${showgestionelavoro!=null or listalavori!=null}">
+	<c:when test="${showgestionelavoro!=null or listalavori!=null or showupdatedocumentazione!=null or showlistadocumentazione!=null}">
 		<!-- Lavori - condizioni e template -->
 		<jsp:include page="formGestioneLavoro.jsp"></jsp:include>
 		<hr>
@@ -54,7 +54,7 @@
 			<jsp:include page="formLavoroFindAll.jsp"></jsp:include>
 		</c:if>
 	</c:when>
-	<c:when test="${showgestionedocumentazione!=null or listaDocumentazione!=null}">
+	<c:when test="${showgestionedocumentazione!=null or listaDocumentazione!=null or showupdatedocumentazione!=null}">
 		<!-- Documentazione - condizioni e template -->
 		<jsp:include page="formGestioneDocumentazione.jsp"></jsp:include>
 		<hr>

@@ -9,12 +9,13 @@
   <insert id = "insert"
 		parameterType="it.exolab.gestionaleTL.model.Riunione" 
 		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		   insert into riunione (data_comunicazione, data_riunione, ordine_del_giorno, luogo, stato) values ( 
+		   insert into riunione (data_comunicazione, data_riunione, ordine_del_giorno, luogo, stato, indirizzo_abitazione) values ( 
 		   #{data_comunicazione}, 
 		   #{data_riunione}, 
 		   #{ordine_del_giorno}, 
 		   #{luogo},
-		   #{stato} )
+		   #{stato},
+		   #{indirizzo_abitazione} )
 		   
 	</insert>
 	
@@ -29,6 +30,7 @@
 		   , ordine_del_giorno=#{ordine_del_giorno}
 		   , luogo=#{luogo}
 		   , stato=#{stato}
+		   , indirizzo_abitazione=#{indirizzo_abitazione}
 		   where
 		   id = #{id}
 			 
@@ -36,33 +38,11 @@
 
   
   <select id="find" parameterType="Integer" resultMap="riunionemap">
-		select
+	select
 		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
 		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
 		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
-		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato,
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
-		rp.presenza AS rigapresenza_presenza,
-		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
-		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
-		d.id AS documentazione_id, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
-		v.id AS votazione_id, v.voto AS votazione_voto
-		FROM riunione AS ri
-		INNER JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
-		inner join lavoro AS l ON l.id_riunione = ri.id
-		inner join documentazione AS d ON d.id_lavoro = l.id
-		INNER JOIN votazione AS v ON v.id_documentazione = d.id
-		WHERE ri.id =${id};
-	</select>
-	
-	<select id="findAll" resultMap="riunionemap">
-	
-		select
-		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
-		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
-		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
-		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato,
+		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato, ri.indirizzo_abitazione AS riunione_indirizzo_abitazione,
 		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
 		rp.presenza AS rigapresenza_presenza,
 		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
@@ -72,13 +52,85 @@
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM riunione AS ri
-		INNER JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
+		left JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
 		inner join lavoro AS l ON l.id_riunione = ri.id
-		inner join documentazione AS d ON d.id_lavoro = l.id
-		INNER JOIN votazione AS v ON v.id_documentazione = d.id
+		left join documentazione AS d ON d.id_lavoro = l.id
+		left JOIN votazione AS v ON v.id_documentazione = d.id
+		WHERE ri.id =${id};
+	</select>
 	
+	<select id="findAll" resultMap="riunionemap">
+	
+	select
+		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
+		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
+		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
+		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato, ri.indirizzo_abitazione AS riunione_indirizzo_abitazione,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza,
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
+		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
+		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM riunione AS ri
+		left JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
+		inner join lavoro AS l ON l.id_riunione = ri.id
+		left join documentazione AS d ON d.id_lavoro = l.id
+		left JOIN votazione AS v ON v.id_documentazione = d.id
 	
 	</select>
+		
+	<select id="findForRiunione" resultMap="riunionemap">
+	
+	select
+		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
+		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
+		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
+		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato, ri.indirizzo_abitazione AS riunione_indirizzo_abitazione,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza,
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
+		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
+		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM riunione AS ri
+		left JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
+		inner join lavoro AS l ON l.id_riunione = ri.id
+		left join documentazione AS d ON d.id_lavoro = l.id
+		left JOIN votazione AS v ON v.id_documentazione = d.id
+		WHERE ri.data_riunione >='${data_riunione}' AND ri.stato ='${stato}';
+
+	</select>	
+	
+	<select id="findByIndirizzoStato" parameterType="String" resultMap="riunionemap">
+	
+	select
+		ri.id AS riunione_id, ri.data_comunicazione AS riunione_data_comunicazione, 
+		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
+		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
+		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato, ri.indirizzo_abitazione AS riunione_indirizzo_abitazione,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
+		rp.presenza AS rigapresenza_presenza,
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
+		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
+		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM riunione AS ri
+		left JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
+		inner join lavoro AS l ON l.id_riunione = ri.id
+		left join documentazione AS d ON d.id_lavoro = l.id
+		left JOIN votazione AS v ON v.id_documentazione = d.id
+		WHERE ri.data_riunione >='${data_riunione}' AND ri.stato ='${stato}';
+	
+	
+	</select>	
+		
 		
 	 <resultMap id="riunionemap" type="it.exolab.gestionaleTL.model.Riunione">
 	  
@@ -90,6 +142,7 @@
 	  	<result property="ordine_del_giorno" column="riunione_ordine_del_giorno"/>
 	  	<result property="luogo" column="riunione_luogo"/>
 	  	<result property="stato" column="riunione_stato"/>
+	  	<result property="indirizzo_abitazione" column="riunione_indirizzo_abitazione"/>
 	  	
 	<association property="listaPresenze" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
 	

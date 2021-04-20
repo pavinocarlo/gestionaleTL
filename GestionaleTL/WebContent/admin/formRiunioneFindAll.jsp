@@ -8,13 +8,16 @@
 	<c:out value="Storico delle riunioni:"/>
 	<br/>
 	<!--  prova  -->
-
-	<c:out value="questo + ${listaRiunioni}"/>
+	<c:if test="${listariunioni!=null}">
+		<c:out value="TEST PASSATO!!!!"/>
+	</c:if>
 	
-	
-	<c:forEach items="${listaRiunioni}" var="riunione" varStatus="loop">
+	<c:forEach items="${listariunioni}" var="riunione" varStatus="loop">
 	<table class="table table-striped">
-	<tr>	
+	<tr>
+		<td>
+			<c:out value="Riunione per il condominio:${riunione.indirizzo_abitazione}"/>
+		</td>
 		<td>
 			<c:out value="Data comunicazione: ${riunione.data_comunicazione}"/>
 		</td>
@@ -22,30 +25,43 @@
 			<c:out value="Data riunione: ${riunione.data_riunione}"/>
 		</td>
 		<td>
-			<c:out value="Inizio: ${riunione.inizio_riunione}"/>
+			<c:out value="Inizio riunione: ${riunione.inizio_riunione}"/>
 		</td>
 		<td>
-			<c:out value="Fine: ${riunione.fine_comunicazione}"/>
+			<c:out value="Fine riunione: ${riunione.fine_riunione}"/>
 		</td>
+		
 	</tr>
 	<tr>
+		<td>
+			<c:out value="Ordine del giorno: ${riunione.ordine_del_giorno}"/>
+		</td>
+		<td>
+			<c:out value="Stato: ${riunione.stato}"/>
+		</td>
 		<td>
 			<c:out value="ID Riunione:${riunione.id}"/>
 		</td>
 		<td>
-			<c:out value="Ordine del giorno: ${riunione.data_comunicazione}"/>
+			<form action="MainServlet">
+				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
+				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+				 <input class="btn btn-warning" type="submit" id="showupdateriunione" name="showupdateriunione" value="Modifica Riunione">
+			</form>
 		</td>
 		<td>
-			<c:out value="Stato: ${riunione.data_comunicazione}"/>
+			<form action="MainServlet">
+				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
+				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+				 <input class="btn btn-info" type="submit" id="showinseriscilavoro" name="showinseriscilavoro" value="Inserisci Lavoro">
+			</form>
 		</td>
 		<td>
-		<form action="MainServlet" method="post">
-			<!--  ancora da vedere questo tasto -->
-			 <input hidden="hidden" id="idRiunione" name="idRiunione" value="${riunione.id }">
-			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-			 <input class="btn btn-info" type="submit" id="viewRiunione" name="viewRiunione" value="Visualizza dettagli">
-			 <!--  ancora da vedere sopra  -->
-		</form>
+			<form action="MainServlet">
+				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
+				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+				 <input class="btn btn-info" type="submit" id="showlistalavori" name="showlistalavori" value="Visualizza Lavori">
+			</form>
 		</td>
 	</tr>
 	<tr>

@@ -11,6 +11,16 @@ public class BaseController {
 	protected HttpServletRequest request;
 	protected  HttpServletResponse response;
 	protected static final String HOME="home.jsp";
+	protected static final String INSERT="home.jsp";
+	protected static final String UPDATE="home.jsp";
+	protected static final String SUCCESS="success";
+	protected static final String LISTA="lista";
+	protected static final String SEARCH="search";
+	protected static final String USER="user";
+	protected static final String RIUNIONE="riunione";
+	protected static final String ABITAZIONE="abitazione";
+	protected static final String LAVORO="lavoro";
+	protected static final String DOCUMENTAZIONE="documentazione";
 	
 	
 	protected BaseController() {
@@ -21,21 +31,7 @@ public class BaseController {
 		this.request=request;
 		this.response=response;
 	}
-//			
-//			
-//		
-//		
-//	
-//	protected void view() throws ServletException, IOException {
-//		
-//		
-//		if(includeCart && session_id!=null) {
-//			request.setAttribute("cart", userService.getCart(session_id, user) );
-//		}
-//		request.getRequestDispatcher(baseView+ view).include(request, response);
-//		
-//		
-//	}
+
 	protected Object flash(String attribute) {
 		
 		Object ret = request.getSession().getAttribute(attribute);
@@ -45,11 +41,13 @@ public class BaseController {
 		}
 		return ret;
 	}
+	
 	protected Object flash(String attribute,Object value) {
 		
 		request.getSession().setAttribute(attribute,value);
 		return null;
 	}
+	
 	protected void sendRedirect(String url) throws IOException {
 		
 		String base_path = (String)request.getAttribute("base_path");
