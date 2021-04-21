@@ -23,7 +23,8 @@
 			nome=#{nome}, 
 			costo=#{costo}, 
 			società=#{societa}, 
-			id_lavoro=#{id_lavoro}
+			id_lavoro=#{id_lavoro},
+			stato=#{stato}
 			where id = ${id}
 		
 		</update>
@@ -52,7 +53,19 @@
 		inner join votazione AS v on d.id = v.id_documentazione		
 	
 	</select>
-		
+	
+	<select id="findForVotazione" resultMap="documentazionemap">
+	
+	select
+		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato
+		FROM riunione AS ri
+		INNER JOIN lavoro AS l ON ri.id=l.id_riunione
+		INNER JOIN documentazione AS d ON d.id_lavoro=l.id
+		WHERE ri.stato=#{riunione_stato} AND l.stato='${lavoro_stato}' AND d.stato IS NULL or d.stato='1'; 
+	
+	</select>
+	
 	<resultMap id="documentazionemap" type="it.exolab.gestionaleTL.model.Documentazione">
 	
 		<result property="id" column="documentazione_id"/>

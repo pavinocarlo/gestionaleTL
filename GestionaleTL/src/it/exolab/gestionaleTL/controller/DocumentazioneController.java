@@ -13,6 +13,7 @@ import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
 import it.exolab.gestionaleTL.model.Documentazione;
+import it.exolab.gestionaleTL.model.Lavoro;
 
 public class DocumentazioneController extends BaseController {
 	
@@ -53,15 +54,16 @@ public class DocumentazioneController extends BaseController {
 	
 	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Documentazione documentazione = new Documentazione(Double.parseDouble(request.getParameter("costo")),
+		Documentazione documentazione = new Documentazione(Integer.parseInt(request.getParameter("iddocumento")),
+														Double.parseDouble(request.getParameter("costo")),
 														request.getParameter("nome"),
 														request.getParameter("societa"),
 														Integer.parseInt(request.getParameter("id_lavoro")),
-														null);
+														Integer.valueOf(request.getParameter("stato")));
 //		if(validate(user)) {
-			
 		try {
 			documentazioneCrud.update(documentazione);
+			System.out.println("dopo l'update");
 		} catch (GenericException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,7 +75,7 @@ public class DocumentazioneController extends BaseController {
 			e.printStackTrace();
 		}
 		request.setAttribute(DOCUMENTAZIONE+UPDATE+SUCCESS, DOCUMENTAZIONE+UPDATE+SUCCESS);
-		request.getRequestDispatcher(HOME).include(request, response);
+		//request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
 	
@@ -92,6 +94,14 @@ public class DocumentazioneController extends BaseController {
 			request.setAttribute(LISTA+DOCUMENTAZIONE, listaDocumentazione);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
+	}
+	
+	public List<Documentazione> doFindForVotazione(HttpServletRequest request, HttpServletResponse response) {
+		
+		int riunione_stato = 2;
+		String lavoro_stato = "da votare";
+		List<Documentazione> listaDocumenti = documentazioneCrud.findForVotazione(riunione_stato, lavoro_stato);
+		return listaDocumenti;
 	}
 
 }

@@ -2,6 +2,8 @@ package it.exolab.gestionaleTL.crud;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
@@ -44,6 +46,16 @@ public class DocumentazioneCrud {
 		SqlMapFactory.instance().openSession();
 		DocumentazioneMapper mapper =  SqlMapFactory.instance().getMapper(DocumentazioneMapper.class);
 		List<Documentazione> ret = mapper.findAll();
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
+	public List<Documentazione> findForVotazione(int riunione_stato, String lavoro_stato) {
+
+		SqlMapFactory.instance().openSession();
+		DocumentazioneMapper mapper =  SqlMapFactory.instance().getMapper(DocumentazioneMapper.class);
+		List<Documentazione> ret = mapper.findForVotazione(riunione_stato, lavoro_stato);
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 		return ret;

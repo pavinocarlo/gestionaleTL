@@ -15,6 +15,17 @@ public class Documentazione {
 
 	}
 
+	public Documentazione(int id, double costo, String nome, String societa, int id_lavoro, Integer stato) {
+
+		this.id = id;
+		this.costo = costo;
+		this.nome = nome;
+		this.societa = societa;
+		this.id_lavoro = id_lavoro;
+		this.stato = stato;
+
+	}
+	
 	public Documentazione(double costo, String nome, String societa, int id_lavoro, Integer stato) {
 
 		this.costo = costo;
@@ -41,11 +52,12 @@ public class Documentazione {
 				+ ", nome=" + nome + ", societa=" + societa + ", listaVoti=" + listaVoti + "]";
 	}
 
-	public int getStato() {
+
+	public Integer getStato() {
 		return stato;
 	}
 
-	public void setStato(int stato) {
+	public void setStato(Integer stato) {
 		this.stato = stato;
 	}
 

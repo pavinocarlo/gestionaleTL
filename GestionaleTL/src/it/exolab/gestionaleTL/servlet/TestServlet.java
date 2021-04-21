@@ -2,7 +2,7 @@ package it.exolab.gestionaleTL.servlet;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import it.exolab.gestionaleTL.controller.DocumentazioneController;
 import it.exolab.gestionaleTL.crud.RiunioneCrud;
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
+import it.exolab.gestionaleTL.model.Lavoro;
 import it.exolab.gestionaleTL.model.Riunione;
 
 
@@ -72,6 +73,7 @@ public class TestServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		RiunioneCrud riunioneCrud = new RiunioneCrud();
+		DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 		
 		if(request.getParameter("showriunionibutton") != null) {
 		
@@ -98,8 +100,19 @@ public class TestServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("riunione", riunione);
+
+			request.getSession().setAttribute("riunione", riunione);
+			request.setAttribute("listadocumenti", documentazioneController.doFindForVotazione(request, response));
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
+			return;
+		}
+		
+		if(request.getParameter("avviavotazione") != null) {
+			
+			documentazioneController.doUpdate(request, response);
+			request.setAttribute("listadocumenti", documentazioneController.doFindForVotazione(request, response));
+			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
+			return;
 		}
 		
 		

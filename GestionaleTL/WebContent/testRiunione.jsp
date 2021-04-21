@@ -44,6 +44,23 @@
 			<input hidden="hidden" name="idriunione" value="${riunione.id}"/>
 			<input class="btn btn-info" type="submit" name="arrestariunione" id="arrestariunione" value="Arresta"/>
 		</form>
+		<c:forEach items="${listadocumenti}" var="documento" varStatus="loop">
+			<form action="TestServlet" method="post">
+				<td>Documento: ${documento.nome}</td><br/>
+				<td>Società: ${documento.societa}</td><br/>
+				<td>Costo: ${documento.costo}</td><br/>
+				<td>Stato: ${documento.stato}</td><br/>
+				<input hidden="hidden" name="iddocumento" value="${documento.id}"/>
+				<input hidden="hidden" name="costo" value="${documento.costo}"/>
+				<input hidden="hidden" name="nome" value="${documento.nome}"/>
+				<input hidden="hidden" name="societa" value="${documento.societa}"/>
+				<input hidden="hidden" name="id_lavoro" value="${documento.id_lavoro}"/>
+				<input hidden="hidden" name="stato" value="1"/>
+				<c:if test="${empty documento.stato}">
+					<input class="btn btn-info" type="submit" name="avviavotazione" id="avviavotazione" value="avvia votazione"/>
+				</c:if>
+			</form>
+		</c:forEach>
 	</div>
 </c:if>
 <c:if test="${riunione.stato == 3}">
