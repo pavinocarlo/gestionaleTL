@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+ <mapper namespace="it.exolab.gestionaleTL.mapper.LavoroMapper">
+  
+  
+  	<insert id = "insert"
+		parameterType="it.exolab.gestionaleTL.model.Lavoro" 
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		   insert into lavoro (nome, esito_voto, stato, id_riunione) values ( 
+		   #{nome}, 
+		   #{esito_voto}, 
+		   #{stato}, 
+		   #{id_riunione} )
+		   
+	</insert>
+	
+	<update id="update" parameterType="it.exolab.gestionaleTL.model.Lavoro" >
+		
+		update lavoro set 
+		
+		nome=#{nome}, 
+		esito_voto=#{esito_voto}, 
+		stato=#{stato}, 
+		id_riunione=#{id_riunione}
+		where id = #{id}
+	
+	</update>
+  
+  	<select id="find" parameterType="Integer" resultMap="lavoromap">
+		SELECT
+		l.id AS lavoro_id, l.nome AS lavoro_nome, 
+		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
+		d.id AS documentazione_id, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM lavoro AS l
+		INNER JOIN documentazione AS d on l.id = d.id_lavoro
+		left join votazione AS v on d.id = v.id_documentazione
+		WHERE l.id = ${id};
+	 
+	</select>
+	
+	<select id="findByNome" parameterType="String" resultMap="lavoromap">
+		SELECT
+		l.id AS lavoro_id, l.nome AS lavoro_nome, 
+		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
+		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM lavoro AS l
+		INNER JOIN documentazione AS d on l.id = d.id_lavoro
+		left join votazione AS v on d.id = v.id_documentazione
+		WHERE l.nome like '%${nome}%';
+	 
+	</select>
+	
+	<select id="findAll" resultMap="lavoromap">
+		SELECT
+		l.id AS lavoro_id, l.nome AS lavoro_nome, 
+		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
+		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM lavoro AS l
+		INNER JOIN documentazione AS d on l.id = d.id_lavoro
+		left join votazione AS v on d.id = v.id_documentazione
+		
+	 
+	</select>
+
+		
+	 <resultMap id="lavoromap" type="it.exolab.gestionaleTL.model.Lavoro">
+	  
+	    <result property="id" column="documentazione_id"/>
+	    <result property="nome" column="documentazione_nome" />
+	    <result property="esito_voto" column="lavoro_esito_voto" />
+	    <result property="stato" column="lavoro_stato"/>
+	  
+	  <association property="listaDocumenti" javaType="it.exolab.gestionaleTL.model.Documentazione">
+	  
+	    <result property="id" column="documentazione_id"/>
+	    <result property="id_lavoro" column="documentazione_id_lavoro"/>
+	    <result property="costo" column="documentazione_costo"/>
+	    <result property="nome" column="documentazione_nome"/>
+	    <result property="societa" column="documentazione_societa"/>
+	    <result property="stato" column="documentazione_stato"/>
+	    
+	    
+	    <association property="listaVoti" javaType="it.exolab.gestionaleTL.model.Votazione">
+	  
+	    <result property="id" column="votazione_id"/>
+	    <result property="voto" column="votazione_voto"/>
+	    <result property="id_abitazione" column="votazione_id_abitazione"/>
+	    <result property="id_documentazione" column="votazione_id_documentazione"/>
+	    
+	 	</association>
+	    
+	  </association>
+	  
+	  
+
+	</resultMap>
+</mapper>
