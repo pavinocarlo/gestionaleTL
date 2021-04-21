@@ -7,12 +7,8 @@
 <div class="formA" id="formA" name="formA">
 	<c:out value="Storico delle riunioni:"/>
 	<br/>
-	<!--  prova  -->
-	<c:if test="${listaUser!=null}">
-		<c:out value="TEST PASSATO!!!!"/>
-	</c:if>
-	
-	<c:forEach items="${listaUser}" var="user" varStatus="loop">
+	<input hidden="hidden" type="text" id="searchabitazione" name="searchabitazione" val="${searchabitazione}">
+	<c:forEach items="${listauser}" var="user" varStatus="loop">
 	<table class="table table-striped">
 	<input hidden="hidden" type="text" id="id" value="${user.id}">
 	<tr>
@@ -48,23 +44,26 @@
 	<tr>
 		<td>
 		<form action="MainServlet">
+			 <input hidden="hidden" type="text" id="searchabitazione" name="searchabitazione" val="${searchabitazione}">
 			 <input hidden="hidden" id="idabitazione" name="idabitazione" value="${abitazione.id }">
 			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-			 <input class="btn btn-warning" type="submit" id="showupdateuser" name="showupdateuser" value="Visualizza Proprietario">
+			 <input class="btn btn-warning" type="submit" id="showupdateuserbutton" name="showupdateuserbutton" value="Visualizza Proprietario">
 		</form>
 		</td>
 		<td>
 		<form action="MainServlet">
+			 <input hidden="hidden" type="text" id="searchabitazione" name="searchabitazione" val="${searchabitazione}">
 			 <input hidden="hidden" id="idabitazione" name="idabitazione" value="${abitazione.id }">
 			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-			 <input class="btn btn-info" type="submit" id="showlistauser" name="showlistauser" value="Visualizza Storico Proprietari">
+			 <input class="btn btn-info" type="submit" id="showlistauserbutton" name="showlistauserbutton" value="Visualizza Storico Proprietari">
 		</form>
 		</td>
 		<td>
 		<form action="MainServlet">
+			 <input hidden="hidden" type="text" id="searchabitazione" name="searchabitazione" val="${searchabitazione}">
 			 <input hidden="hidden" id="idabitazione" name="idabitazione" value="${abitazione.id }">
 			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-			 <input class="btn btn-info" type="submit" id="showinsertuser" name="showinsertuser" value="Inserisci Proprietario">
+			 <input class="btn btn-info" type="submit" id="showinsertuserbutton" name="showinsertuserbutton" value="Inserisci Proprietario">
 		</form>
 		</td>
 	</tr>

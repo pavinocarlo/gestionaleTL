@@ -7,11 +7,7 @@
 <div class="formA" id="formA" name="formA">
 	<c:out value="Storico delle riunioni:"/>
 	<br/>
-	<!--  prova  -->
-	<c:if test="${listariunioni!=null}">
-		<c:out value="TEST PASSATO!!!!"/>
-	</c:if>
-	
+	<input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 	<c:forEach items="${listariunioni}" var="riunione" varStatus="loop">
 	<table class="table table-striped">
 	<tr>
@@ -30,7 +26,6 @@
 		<td>
 			<c:out value="Fine riunione: ${riunione.fine_riunione}"/>
 		</td>
-		
 	</tr>
 	<tr>
 		<td>
@@ -44,33 +39,43 @@
 		</td>
 		<td>
 			<form action="MainServlet">
+				 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
 				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-				 <input class="btn btn-warning" type="submit" id="showupdateriunione" name="showupdateriunione" value="Modifica Riunione">
+				 <input class="btn btn-warning" type="submit" id="showupdateriunionebutton" name="showupdateriunionebutton" value="Modifica Riunione">
 			</form>
 		</td>
 		<td>
 			<form action="MainServlet">
+				 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
 				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-				 <input class="btn btn-info" type="submit" id="showinseriscilavoro" name="showinseriscilavoro" value="Inserisci Lavoro">
+				 <input class="btn btn-info" type="submit" id="showinseriscilavorobutton" name="showinseriscilavorobutton" value="Inserisci Lavoro">
 			</form>
 		</td>
 		<td>
 			<form action="MainServlet">
+				 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
 				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-				 <input class="btn btn-info" type="submit" id="showlistalavori" name="showlistalavori" value="Visualizza Lavori">
+				 <input class="btn btn-info" type="submit" id="showlistalavorobutton" name="showlistalavorobutton" value="Visualizza Lavori">
 			</form>
 		</td>
 	</tr>
-	<tr>
-	<td>
-	<c:if test="${loopindex==loop.index}">
-		<jsp:include page="/formSuccess.jsp"></jsp:include>
+	<c:if test="${loopindex==loop.index and showupdateriunione!=null}">
+		<tr>
+			<td>
+				<jsp:include page="formRiunioneUpdate.jsp"></jsp:include>
+			</td>
+		</tr>
 	</c:if>
-	</td>
-	</tr>
+	<c:if test="${loopindex==loop.index and updatesuccess!=null}">
+		<tr>
+			<td>
+				<jsp:include page="/formSuccess.jsp"></jsp:include>
+			</td>
+		</tr>
+	</c:if>
 	<br/>
 	</c:forEach>
 	</table>

@@ -7,11 +7,8 @@
 <div class="formA" id="formA" name="formA">
 	<c:out value="Storico delle riunioni:"/>
 	<br/>
-	<!--  prova  -->
-	<c:if test="${listalavori!=null}">
-		<c:out value="TEST PASSATO!!!!"/>
-	</c:if>
-	
+	<input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+	<input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
 	<c:forEach items="${listalavori}" var="lavoro" varStatus="loop">
 	<table class="table table-striped">
 	<input hidden="hidden" type="text" id="id_riunione" value="${lavoro.id_riunione }">
@@ -32,25 +29,29 @@
 	<tr>
 		<td>
 		<form action="MainServlet">
-			<!--  ancora da vedere questo tasto -->
+			 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+			 <input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
 			 <input hidden="hidden" id="idlavoro" name="idlavoro" value="${lavoro.id }">
 			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-			 <input class="btn btn-warning" type="submit" id="showupdatelavoro" name="showupdatelavoro" value="Modifica Lavoro">
-			 <!--  ancora da vedere sopra  -->
+			 <input class="btn btn-warning" type="submit" id="showupdatelavorobutton" name="showupdatelavorobutton" value="Modifica Lavoro">
 		</form>
 		</td>
 		<td>
 		<form action="MainServlet">
+			 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+			 <input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
 			 <input hidden="hidden" id="idlavoro" name="idlavoro" value="${lavoro.id }">
 			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-			 <input class="btn btn-info" type="submit" id="showlistadocumentazione" name="showlistadocumentazione" value="Visualizza Documentazione">
+			 <input class="btn btn-info" type="submit" id="showlistadocumentazionebutton" name="showlistadocumentazionebutton" value="Visualizza Documentazione">
 		</form>
 		</td>
 		<td>
 		<form action="MainServlet">
+			 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+			 <input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
 			 <input hidden="hidden" id="idlavoro" name="idlavoro" value="${lavoro.id }">
 			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-			 <input class="btn btn-info" type="submit" id="showinsertdocumentazione" name="showinsertdocumentazione" value="Inserisci Documentazione">
+			 <input class="btn btn-info" type="submit" id="showinsertdocumentazionebutton" name="showinsertdocumentazionebutton" value="Inserisci Documentazione">
 		</form>
 		</td>
 	</tr>

@@ -32,6 +32,7 @@ public class MainServlet extends HttpServlet {
 	private static final String LAVORO="lavoro";
 	private static final String DOCUMENTAZIONE="documentazione";
 	private static final String LOGIN="login";
+	private static final String LOGOUT="logout";
 	private static final String BUTTON="button";
 	private static final String SHOW="show";
 	private static final String GESTIONE="gestione";
@@ -85,8 +86,16 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute(SHOW + INSERT + RIUNIONE, SHOW + INSERT + RIUNIONE);
 			return;
 		}
+		
 		RiunioneController riunioneController = new RiunioneController(request, response);
 		
+		if(request.getParameter(SHOW + UPDATE + RIUNIONE + BUTTON) != null) {
+			riunioneController.doFind(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute(SHOW + UPDATE + RIUNIONE, SHOW + UPDATE + RIUNIONE);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			return;
+		}
 		if(request.getParameter(INSERT + RIUNIONE) != null) {
 			riunioneController.doInsert(request, response);
 			return;
@@ -117,6 +126,10 @@ public class MainServlet extends HttpServlet {
 		
 		if(request.getParameter(LOGIN) != null) {
 			userController.doLogin(request, response);
+			return;
+		}
+		if(request.getParameter(LOGOUT) != null) {
+			userController.doLogout(request, response);
 			return;
 		}
 		if(request.getParameter(INSERT + USER) != null) {
@@ -171,6 +184,11 @@ public class MainServlet extends HttpServlet {
 		if(request.getParameter(SHOW + INSERT + LAVORO + BUTTON) != null) {
 			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
 			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
+			return;
+		}
+		if(request.getParameter(SHOW + UPDATE + LAVORO + BUTTON) != null) {
+			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
+			request.setAttribute(SHOW + UPDATE + LAVORO, SHOW + UPDATE + LAVORO);
 			return;
 		}
 		

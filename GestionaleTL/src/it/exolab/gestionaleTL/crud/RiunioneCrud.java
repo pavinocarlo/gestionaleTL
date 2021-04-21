@@ -62,4 +62,14 @@ public class RiunioneCrud {
 		return ret;
 	}
 	
+	public Riunione findByIndirizzoStatoUser(String indirizzo_abitazione, int stato, int user_id) {
+		
+		SqlMapFactory.instance().openSession();
+		RiunioneMapper mapper =  SqlMapFactory.instance().getMapper(RiunioneMapper.class);
+		Riunione ret = mapper.findByIndirizzoStatoUser(indirizzo_abitazione, stato, user_id);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
 }

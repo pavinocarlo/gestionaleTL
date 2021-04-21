@@ -95,14 +95,22 @@ public class RiunioneController extends BaseController {
 		
 		if(search.equals("") || search == null) {
 			listaRiunioni = riunioneCrud.findAll();
+			request.setAttribute(SEARCH+RIUNIONE, search);
 			request.setAttribute(LISTA+"riunioni", listaRiunioni);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 		else {
 			listaRiunioni.add(riunioneCrud.find(Integer.valueOf(search)));
+			request.setAttribute(SEARCH+RIUNIONE, search);
 			request.setAttribute(LISTA+"riunioni", listaRiunioni);
 			request.getRequestDispatcher(HOME).include(request, response);
-			
 		}
+	}
+	
+	public Riunione doFindForLogin(String indirizzo_abitazione, int stato, int user_id) {
+		
+		Riunione Riunione = riunioneCrud.findByIndirizzoStatoUser(indirizzo_abitazione, stato, user_id);
+		return Riunione;
+		
 	}
 }

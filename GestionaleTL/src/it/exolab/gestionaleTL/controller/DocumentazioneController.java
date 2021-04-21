@@ -29,7 +29,8 @@ public class DocumentazioneController extends BaseController {
 		Documentazione documentazione = new Documentazione(Double.parseDouble(request.getParameter("costo")),
 														request.getParameter("nome"),
 														request.getParameter("societa"),
-														Integer.parseInt(request.getParameter("id_lavoro")));
+														Integer.parseInt(request.getParameter("id_lavoro")),
+														null);
 							
 //		if(validate(user)) {
 			
@@ -55,7 +56,8 @@ public class DocumentazioneController extends BaseController {
 		Documentazione documentazione = new Documentazione(Double.parseDouble(request.getParameter("costo")),
 														request.getParameter("nome"),
 														request.getParameter("societa"),
-														Integer.parseInt(request.getParameter("id_lavoro")));
+														Integer.parseInt(request.getParameter("id_lavoro")),
+														null);
 //		if(validate(user)) {
 			
 		try {

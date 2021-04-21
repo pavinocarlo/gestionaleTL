@@ -7,8 +7,7 @@
 <div class="formA" id="formA" name="formA">
 	<c:out value="Storico delle riunioni:"/>
 	<br/>
-	
-	<c:forEach items="${listaDocumentazione}" var="documento" varStatus="loop">
+	<c:forEach items="${listadocumentazione}" var="documento" varStatus="loop">
 	<table class="table table-striped">
 	<input hidden="hidden" type="text" id="id_riunione" value="${documento.id_lavoro }">
 	<tr>
@@ -30,7 +29,7 @@
 		<form action="MainServlet">
 			 <input hidden="hidden" id="iddocumento" name="iddocumento" value="${documento.id }">
 			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-			 <input class="btn btn-warning" type="submit" id="showupdatedocumentazione" name="showupdatedocumentazione" value="Modifica">
+			 <input class="btn btn-warning" type="submit" id="showupdatedocumentazionebutton" name="showupdatedocumentazionebutton" value="Modifica">
 		</form>
 		</td>
 	</tr>

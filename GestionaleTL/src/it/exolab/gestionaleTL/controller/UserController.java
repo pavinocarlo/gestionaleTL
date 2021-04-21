@@ -8,20 +8,21 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
+import it.exolab.gestionaleTL.crud.AbitazioneCrud;
 import it.exolab.gestionaleTL.crud.UserCrud;
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
+import it.exolab.gestionaleTL.model.Abitazione;
+import it.exolab.gestionaleTL.model.Riunione;
 import it.exolab.gestionaleTL.model.User;
-
 
 
 public class UserController extends BaseController {
 	
 	private UserCrud userCrud = new UserCrud();
-	private User user = new User();
 	
 	public UserController(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -75,18 +76,29 @@ public class UserController extends BaseController {
 		
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
+		User user = null;
 		
 		if(validate(email,password)) {
 			user = userCrud.findByEmailAndPassword(email, password);
-//			if(user.getId_ruolo()!=1) {
-//				
-//			}
+			if(user.getId_ruolo()!=1) {
+				UtilController utilController = new UtilController(request, response);
+				Riunione riunione = utilController.doFindRiunioneForUserLogin(user);
+				request.setAttribute("riunione", riunione);
+			}
 			request.getSession().setAttribute(USER, user);
 			request.getRequestDispatcher(HOME).include(request, response);
 			return;
 		}
 		request.setAttribute("notvaliddata", "notvaliddata");
 		request.getRequestDispatcher(HOME).include(request, response);
+	}
+	
+	
+	public void doLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
+		response.sendRedirect(HOME);
 	}
 	
 	public void doCheckRiunine(HttpServletRequest request, HttpServletResponse response) {

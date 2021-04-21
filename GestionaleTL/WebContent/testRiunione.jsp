@@ -26,7 +26,7 @@
 			    <td>Ordine del giorno: ${riunione.ordine_del_giorno}</td><br/>
 			    <td>Indirizzo riunione: ${riunione.indirizzo_abitazione}</td><br/>
 			    <td>Stato riunione: ${riunione.stato}</td><br/>
-			    <td><input class="btn btn-info" type="submit" name="avviariunione" id="avviariunione" value="avvia" onclick="checkRiunione()"/></td>
+			    <td><input class="btn btn-info" type="submit" name="avviariunione" id="avviariunione" value="avvia"/></td>
 			    <input hidden="hidden" name="indiceriunione" value="${loop.index}"/>
 			    <input hidden="hidden" name="idriunione" value="${riunione.id}"/>
 			</div>

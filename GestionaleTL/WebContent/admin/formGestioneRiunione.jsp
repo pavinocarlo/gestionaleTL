@@ -22,7 +22,7 @@
         	<form action="MainServlet" id="findriunione" name="findriunione" method="post">
     			<input class="btn btn-primary btn-lg" type="submit" style="width:220px;" id ="findriunione" name="findriunione" value="Trova Riunione"/>
 					<label class="labelG">Riunione: </label>
-					<input class="labelG" type="text" name="searchriunione" id="searchriunione" placeholder="Trova">
+					<input class="labelG" type="text" id="searchriunione" name="searchriunione" placeholder="Trova">
 					<c:if test="${formrecordnotfound!=null}">
 						<jsp:include page="/formRecordNotFound.jsp"></jsp:include>
 					</c:if>

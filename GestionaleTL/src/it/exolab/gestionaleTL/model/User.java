@@ -27,8 +27,7 @@ public class User {
 		this.telefono = telefono;
 		
 	}
-	
-	
+
 	public User(String cf, String nome, String cognome, String email, String password, String telefono,
 			Timestamp data_in, Timestamp data_out, int id_ruolo, int id_abitazione) {
 
@@ -60,7 +59,6 @@ public class User {
 		this.ruolo = new Ruolo(id_ruolo);
 	}
 
-
 	public User(int id, int id_ruolo, int id_abitazione, String cf, String nome, String cognome, String email,
 			String password, String telefono, Timestamp data_in, Timestamp data_out, Ruolo ruolo,
 			List<RigaPresenza> listapresenze) {
@@ -80,9 +78,6 @@ public class User {
 		this.listapresenze = listapresenze;
 	}
 	
-	
-	
-	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", id_ruolo=" + id_ruolo + ", id_abitazione=" + id_abitazione + ", cf=" + cf
@@ -90,7 +85,6 @@ public class User {
 				+ ", telefono=" + telefono + ", data_in=" + data_in + ", data_out=" + data_out + ", ruolo=" + ruolo
 				+ ", listapresenze=" + listapresenze + "]";
 	}
-
 
 	public int getId() {
 		return id;

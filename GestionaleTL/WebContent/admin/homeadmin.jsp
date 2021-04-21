@@ -54,14 +54,14 @@
 			<jsp:include page="formLavoroFindAll.jsp"></jsp:include>
 		</c:if>
 	</c:when>
-	<c:when test="${showgestionedocumentazione!=null or listaDocumentazione!=null or showupdatedocumentazione!=null}">
+	<c:when test="${showgestionedocumentazione!=null or listadocumentazione!=null or showupdatedocumentazione!=null}">
 		<!-- Documentazione - condizioni e template -->
 		<jsp:include page="formGestioneDocumentazione.jsp"></jsp:include>
 		<hr>
 		<c:if test="${showinsertdocumentazione!=null}">
 			<jsp:include page="formDocumentazioneInsert.jsp"></jsp:include>
 		</c:if>
-		<c:if test="${listaDocumentazione!=null}">
+		<c:if test="${listadocumentazione!=null}">
 			<jsp:include page="formDocumentazioneFindAll.jsp"></jsp:include>
 		</c:if>
 	</c:when>
@@ -76,14 +76,14 @@
 			<jsp:include page="formAbitazioneFindAll.jsp"></jsp:include>
 		</c:if>
 	</c:when>
-	<c:when test="${showgestioneuser!=null or listaUser!=null}">
+	<c:when test="${showgestioneuser!=null or listauser!=null}">
 		<!-- Inquilini - condizioni e template -->
 		<jsp:include page="formGestioneUser.jsp"></jsp:include>
 		<hr>
 		<c:if test="${showinsertuser!=null}">
 			<jsp:include page="formUserInsert.jsp"></jsp:include>
 		</c:if>
-		<c:if test="${listaUser!=null}">
+		<c:if test="${listauser!=null}">
 			<jsp:include page="formUserFindAll.jsp"></jsp:include>
 		</c:if>
 	</c:when>

@@ -15,5 +15,7 @@ public interface RiunioneMapper {
 	public List<Riunione> findAll();
 	public List<Riunione> findForRiunione(@Param("data_riunione") Timestamp data_riunione,
 										@Param("stato") int stato);
+	public Riunione findByIndirizzoStatoUser(@Param("indirizzo_abitazione") String indirizzo_abitazione,
+										@Param("stato") int stato, @Param("user_id") int user_id);
 
 }

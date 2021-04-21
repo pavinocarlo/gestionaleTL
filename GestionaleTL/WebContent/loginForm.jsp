@@ -5,9 +5,9 @@
 <div class="divA" id="divA" name="divA">
 	<c:choose>
 		<c:when test="${user.id!=null}">
-			<form>
+			<form action="MainServlet">
 				<c:out value="Benvenuto, ${user.nome}"/>
-				<input class="btn btn-danger" type="submit" id ="logoutbutton" name="logoutbutton" value="Logout"/>
+				<input class="btn btn-danger" type="submit" id ="logout" name="logout" value="Logout"/>
 			</form>
 		</c:when>
 		<c:otherwise>

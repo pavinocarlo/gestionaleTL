@@ -89,5 +89,11 @@ public class AbitazioneController extends BaseController {
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
 	}
+	
+	public Abitazione doFindForLogin(int abitazione_id) {
+		
+		Abitazione abitazione = abitazioneCrud.find(abitazione_id);
+		return abitazione;
+	}
 
 }
