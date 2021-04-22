@@ -32,20 +32,14 @@ public class RigaPresenzaController extends BaseController {
 	
 	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException, ServletException, IOException {
 		
-//		RigaPresenza rigaPresenza = rigaPresenzaCrud.findByUserRiunione(Integer.parseInt(request.getParameter("id_user")),
-//																	Integer.parseInt(request.getParameter("id_riunione")));
-//			RigaPresenza rigaPresenza = new RigaPresenza(Integer.parseInt(request.getParameter("id_riunione")
-//											Integer.parseInt(request.getParameter("adesione")),
-//											Integer.parseInt(request.getParameter("presenza")),
-//											Integer.parseInt(request.getParameter("id_riunione")),
-//											Integer.parseInt(request.getParameter("id_abitazione")),
-//											Integer.parseInt(request.getParameter("id_user")));
+		RigaPresenza rigaPresenza = rigaPresenzaCrud.findByUserRiunione(Integer.parseInt((String)request.getParameter("user_id")),
+																		Integer.parseInt((String)request.getParameter("riunione_id")));
 									
 		//		if(validate(user)) {
-//		rigaPresenza.setPresenza(1);		
-//		rigaPresenzaCrud.update(rigaPresenza);
+		rigaPresenza.setPresenza(1);		
+		rigaPresenzaCrud.update(rigaPresenza);
 		//		}
-		
+		request.getSession().setAttribute("rigapresenza", rigaPresenzaCrud.find(rigaPresenza.getId()));
 		request.setAttribute("rigapresenza"+UPDATE+SUCCESS, "rigapresenza"+UPDATE+SUCCESS);
 		request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
 		}

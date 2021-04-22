@@ -27,8 +27,8 @@
 			    <td>Indirizzo riunione: ${riunione.indirizzo_abitazione}</td><br/>
 			    <td>Stato riunione: ${riunione.stato}</td><br/>
 			    <td><input class="btn btn-info" type="submit" name="avviariunione" id="avviariunione" value="avvia"/></td>
-			    <input hidden="hidden" name="indiceriunione" value="${loop.index}"/>
-			    <input hidden="hidden" name="idriunione" value="${riunione.id}"/>
+			    <input hidden="hidden" id="indiceriunione" name="indiceriunione" value="${loop.index}"/>
+			    <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id}"/>
 			</div>
 		</tr>
 		</form>

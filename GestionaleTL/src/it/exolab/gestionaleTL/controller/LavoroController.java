@@ -27,10 +27,8 @@ public class LavoroController extends BaseController {
 
 	public void doInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Lavoro lavoro = new Lavoro(Integer.parseInt(request.getParameter("id_riunione")),
-									request.getParameter("nome"),
-									request.getParameter("esito_voto"),
-									request.getParameter("stato"));
+		Lavoro lavoro = new Lavoro(Integer.parseInt(request.getParameter("idriunione")),
+									request.getParameter("nome"));
 							
 //		if(validate(user)) {
 			
@@ -112,6 +110,14 @@ public class LavoroController extends BaseController {
 	    		}
 		    }
 		}	
+	}
+	
+	public void doFindByIdRiunione(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int id_riunione = Integer.parseInt(request.getParameter("idriunione"));
+		List<Lavoro> listalavori = lavoroCrud.findByIdRiunione(id_riunione);
+		request.setAttribute(LISTA+LAVORO, listalavori);
+		request.getRequestDispatcher(HOME).include(request, response);
 	}
 
 }

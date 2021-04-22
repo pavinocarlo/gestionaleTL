@@ -51,11 +51,11 @@ public class DocumentazioneCrud {
 		return ret;
 	}
 	
-	public List<Documentazione> findForVotazione(int riunione_stato, String lavoro_stato) {
+	public List<Documentazione> findForVotazione(int riunione_stato, int riunione_id, String lavoro_stato) {
 
 		SqlMapFactory.instance().openSession();
 		DocumentazioneMapper mapper =  SqlMapFactory.instance().getMapper(DocumentazioneMapper.class);
-		List<Documentazione> ret = mapper.findForVotazione(riunione_stato, lavoro_stato);
+		List<Documentazione> ret = mapper.findForVotazione(riunione_stato, riunione_id, lavoro_stato);
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 		return ret;

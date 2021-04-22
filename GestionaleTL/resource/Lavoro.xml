@@ -10,10 +10,8 @@
   	<insert id = "insert"
 		parameterType="it.exolab.gestionaleTL.model.Lavoro" 
 		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		   insert into lavoro (nome, esito_voto, stato, id_riunione) values ( 
-		   #{nome}, 
-		   #{esito_voto}, 
-		   #{stato}, 
+		   insert into lavoro (nome, id_riunione) values ( 
+		   #{nome},  
 		   #{id_riunione} )
 		   
 	</insert>
@@ -32,7 +30,7 @@
   
   	<select id="find" parameterType="Integer" resultMap="lavoromap">
 		SELECT
-		l.id AS lavoro_id, l.nome AS lavoro_nome, 
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.id_riunione AS lavoro_id_riunione,
 		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
 		d.id AS documentazione_id, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa,
@@ -47,7 +45,7 @@
 	
 	<select id="findByNome" parameterType="String" resultMap="lavoromap">
 		SELECT
-		l.id AS lavoro_id, l.nome AS lavoro_nome, 
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.id_riunione AS lavoro_id_riunione,
 		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
@@ -60,9 +58,24 @@
 	 
 	</select>
 	
+	<select id="findByIdRiunione" parameterType="Integer" resultMap="lavoromap">
+		SELECT
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.id_riunione AS lavoro_id_riunione, 
+		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
+		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
+		FROM lavoro AS l
+		INNER JOIN documentazione AS d on l.id = d.id_lavoro
+		left join votazione AS v on d.id = v.id_documentazione
+		WHERE l.id_riunione = #{id_riunione};
+	 
+	</select>
+	
 	<select id="findAll" resultMap="lavoromap">
 		SELECT
-		l.id AS lavoro_id, l.nome AS lavoro_nome, 
+		l.id AS lavoro_id, l.nome AS lavoro_nome, l.id_riunione AS lavoro_id_riunione,
 		l.esito_voto AS lavoro_esito_voto, l.stato AS lavoro_stato,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
@@ -78,8 +91,9 @@
 		
 	 <resultMap id="lavoromap" type="it.exolab.gestionaleTL.model.Lavoro">
 	  
-	    <result property="id" column="documentazione_id"/>
-	    <result property="nome" column="documentazione_nome" />
+	    <result property="id" column="lavoro_id"/>
+	    <result property="id_riunione" column="lavoro_id_riunione"/>
+	    <result property="nome" column="lavoro_nome" />
 	    <result property="esito_voto" column="lavoro_esito_voto" />
 	    <result property="stato" column="lavoro_stato"/>
 	  

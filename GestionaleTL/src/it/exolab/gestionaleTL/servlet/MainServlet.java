@@ -94,6 +94,7 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
 			request.setAttribute(SHOW + UPDATE + RIUNIONE, SHOW + UPDATE + RIUNIONE);
 			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("idriunione", request.getParameter("idriunione"));
 			return;
 		}
 		if(request.getParameter(INSERT + RIUNIONE) != null) {
@@ -181,11 +182,11 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
 			return;
 		}
-		if(request.getParameter(SHOW + INSERT + LAVORO + BUTTON) != null) {
-			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
-			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
-			return;
-		}
+//		if(request.getParameter(SHOW + INSERT + LAVORO + BUTTON) != null) {
+//			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
+//			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
+//			return;
+//		}
 		if(request.getParameter(SHOW + UPDATE + LAVORO + BUTTON) != null) {
 			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
 			request.setAttribute(SHOW + UPDATE + LAVORO, SHOW + UPDATE + LAVORO);
@@ -204,6 +205,28 @@ public class MainServlet extends HttpServlet {
 		}
 		if(request.getParameter(FIND + LAVORO) != null) {
 			lavoroController.doFind(request, response);
+			return;
+		}
+		
+		RiunioneController riunioneController = new RiunioneController(request, response);
+		
+		if(request.getParameter(SHOW + INSERT + LAVORO + BUTTON) != null) {
+			riunioneController.doFind(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("idriunione", request.getParameter("idriunione"));
+			
+			return;
+		}
+		if(request.getParameter(SHOW + "lista" + "lavori" + BUTTON) != null) {
+			riunioneController.doFind(request, response);
+			lavoroController.doFindByIdRiunione(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("idriunione", request.getParameter("idriunione"));
+			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
+			
 			return;
 		}
 	}

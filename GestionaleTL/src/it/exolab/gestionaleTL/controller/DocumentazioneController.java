@@ -96,11 +96,11 @@ public class DocumentazioneController extends BaseController {
 		}
 	}
 	
-	public List<Documentazione> doFindForVotazione(HttpServletRequest request, HttpServletResponse response) {
+	public List<Documentazione> doFindForVotazione(HttpServletRequest request, HttpServletResponse response, int riunione_id) {
 		
 		int riunione_stato = 2;
 		String lavoro_stato = "da votare";
-		List<Documentazione> listaDocumenti = documentazioneCrud.findForVotazione(riunione_stato, lavoro_stato);
+		List<Documentazione> listaDocumenti = documentazioneCrud.findForVotazione(riunione_stato, riunione_id, lavoro_stato);
 		return listaDocumenti;
 	}
 

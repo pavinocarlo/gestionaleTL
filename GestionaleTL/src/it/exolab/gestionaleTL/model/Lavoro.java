@@ -12,6 +12,13 @@ public class Lavoro {
 	public Lavoro() {
 
 	}
+	
+	public Lavoro(int id_riunione, String nome) {
+
+		this.id_riunione = id_riunione;
+		this.nome = nome;
+
+	}
 
 	public Lavoro(int id_riunione, String nome, String esito_voto, String stato) {
 

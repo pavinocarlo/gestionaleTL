@@ -13,11 +13,27 @@
 </div>
 <form action="TestServlet" method="post">
 	<c:if test="${riunione.stato == 2 }">
-		<input hidden="hidden" nome="id_riunione" id="id_riunione" value="${riunione.id}">
-		<input hidden="hidden" nome="id_user" id="id_user" value="${user.id}">
-		<td><input class="btn btn-info" type="submit" name="partecipariunione" id="partecipariunione" value="partecipa"/></td>
+		<input hidden="hidden" name="riunione_id" id="riunione_id" value="${riunione.id}">
+		<input hidden="hidden" name="user_id" id="user_id" value="${user.id}">
+		<c:if test="${rigapresenza.presenza != 1 }">
+			<td><input class="btn btn-info" type="submit" name="partecipariunione" id="partecipariunione" value="partecipa"/></td>
+		</c:if>
 	</c:if>
 </form>
+
+
+	
+<tr>
+	<div>
+		<td>Data riunione : ${riunione.data_riunione}</td><br/>
+	    <td>Ordine del giorno: ${riunione.ordine_del_giorno}</td><br/>
+	    <td>Indirizzo riunione: ${riunione.indirizzo_abitazione}</td><br/>
+	    <td>Stato riunione: ${riunione.stato}</td><br/>
+	    
+	</div>
+</tr>
+		
+
 <script>
 	
 	var c = setInterval('checkRiunione()',5000);

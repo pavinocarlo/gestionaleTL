@@ -88,6 +88,7 @@ public class TestServlet extends HttpServlet {
 		if(request.getParameter("avviariunione") != null) {
 			
 			Riunione riunione = riunioneCrud.find(Integer.parseInt(request.getParameter("idriunione")));
+			System.out.println(riunione);
 			riunione.setStato(2);
 			try {
 				riunioneCrud.update(riunione);
@@ -103,15 +104,17 @@ public class TestServlet extends HttpServlet {
 			}
 
 			request.getSession().setAttribute("riunione", riunione);
-			request.setAttribute("listadocumenti", documentazioneController.doFindForVotazione(request, response));
+			request.setAttribute("listadocumenti", documentazioneController.doFindForVotazione(request, response, riunione.getId()));
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
 			return;
 		}
 		
 		if(request.getParameter("avviavotazione") != null) {
 			
+			Riunione riunione = (Riunione) request.getSession().getAttribute("riunione");
 			documentazioneController.doUpdate(request, response);
-			request.setAttribute("listadocumenti", documentazioneController.doFindForVotazione(request, response));
+			System.out.println(riunione);
+			request.setAttribute("listadocumenti", documentazioneController.doFindForVotazione(request, response, riunione.getId()));
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
 			return;
 		}

@@ -62,7 +62,10 @@
 		FROM riunione AS ri
 		INNER JOIN lavoro AS l ON ri.id=l.id_riunione
 		INNER JOIN documentazione AS d ON d.id_lavoro=l.id
-		WHERE ri.stato=#{riunione_stato} AND l.stato='${lavoro_stato}' AND d.stato IS NULL or d.stato='1'; 
+		WHERE ri.stato=#{riunione_stato} 
+		AND l.stato='${lavoro_stato}' 
+		AND d.stato IS NULL or d.stato='1'
+		AND ri.id=#{riunione_id}; 
 	
 	</select>
 	

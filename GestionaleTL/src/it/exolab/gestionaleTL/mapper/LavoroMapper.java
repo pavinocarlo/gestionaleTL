@@ -12,5 +12,6 @@ public interface LavoroMapper {
 	public Lavoro find(Integer id);
 	public List<Lavoro> findAll();
 	public List<Lavoro> findByNome(String nome);
+	public List<Lavoro> findByIdRiunione(Integer id_riunione);
 
 }

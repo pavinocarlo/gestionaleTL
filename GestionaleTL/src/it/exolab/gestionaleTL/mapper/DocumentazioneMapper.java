@@ -12,7 +12,8 @@ public interface DocumentazioneMapper {
 	public void update(Documentazione documentazione);
 	public Documentazione find(Integer id);
 	public List<Documentazione> findAll();
-	public List<Documentazione> findForVotazione(@Param("riunione_stato") int riunione_stato, 
-													@Param("lavoro_stato") String lavoro_stato);
+	public List<Documentazione> findForVotazione(@Param("riunione_stato") int riunione_stato,
+												@Param("riunione_id") int riunione_id,
+												@Param("lavoro_stato") String lavoro_stato);
 
 }

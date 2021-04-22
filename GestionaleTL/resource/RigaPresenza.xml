@@ -44,17 +44,17 @@
 	   SELECT * FROM riga_presenza
 	</select>
 	
-	<select id = "findByUserRiunione" resultType = "it.exolab.gestionaleTL.model.RigaPresenza">
+	<select id = "findByUserRiunione" resultMap="rigaPresenzamap">
 	
 		SELECT
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, rp.presenza AS rigapresenza_presenza,
-		rp.id_riunione AS rigapresenza_id_riunione, rp.id_abitazione AS rigapresenza_id_abitazione,
-		rp.id_user AS rigapresenza_id_user
-		FROM riga_presenza AS rp
-		INNER JOIN riunione AS ri ON ri.id=rp.id_riunione
-		INNER JOIN user AS u ON u.id=rp.id_user
-		INNER JOIN abitazione AS a ON a.id=rp.id_abitazione
-		WHERE u.id=#{user_id} AND ri.id=#{riunione_id};
+			rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, rp.presenza AS rigapresenza_presenza,
+			rp.id_riunione AS rigapresenza_id_riunione, rp.id_abitazione AS rigapresenza_id_abitazione,
+			rp.id_user AS rigapresenza_id_user
+			FROM riga_presenza AS rp
+			INNER JOIN riunione AS ri ON ri.id=rp.id_riunione
+			INNER JOIN user AS u ON u.id=rp.id_user
+			INNER JOIN abitazione AS a ON a.id=rp.id_abitazione
+			WHERE u.id=#{user_id} AND ri.id=#{riunione_id};
 		
 	</select>
 	
@@ -63,9 +63,9 @@
 		<result property="id" column="rigapresenza_id"/>
 	    <result property="adesione" column="rigapresenza_adesione"/>
 	    <result property="presenza" column="rigapresenza_presenza"/>
-	    <result property="id_riunione" column="rigapresenza_presenza_id_riunione"/>
-	    <result property="id_abitazione" column="rigapresenza_presenza_id_abitazione"/>
-	    <result property="id_user" column="rigapresenza_presenza_id_user"/>
+	    <result property="id_riunione" column="rigapresenza_id_riunione"/>
+	    <result property="id_abitazione" column="rigapresenza_id_abitazione"/>
+	    <result property="id_user" column="rigapresenza_id_user"/>
 	
 	</resultMap>
 

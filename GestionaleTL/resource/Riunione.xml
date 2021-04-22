@@ -53,10 +53,10 @@
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM riunione AS ri
-		left JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
-		inner join lavoro AS l ON l.id_riunione = ri.id
-		left join documentazione AS d ON d.id_lavoro = l.id
-		left JOIN votazione AS v ON v.id_documentazione = d.id
+		LEFT JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
+		LEFT join lavoro AS l ON l.id_riunione = ri.id
+		LEFT join documentazione AS d ON d.id_lavoro = l.id
+		LEFT JOIN votazione AS v ON v.id_documentazione = d.id
 		WHERE ri.id =${id};
 	</select>
 	
@@ -131,11 +131,11 @@
 		u.data_in AS user_data_in, u.data_out AS user_data_out,
 		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo
 		FROM riunione AS ri
-		LEFT JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
+		inner JOIN riga_presenza AS rp ON rp.id_riunione=ri.id
 		INNER join lavoro AS l ON l.id_riunione = ri.id
 		LEFT join documentazione AS d ON d.id_lavoro = l.id
 		LEFT JOIN votazione AS v ON v.id_documentazione = d.id
-		INNER join abitazione AS a ON a.indirizzo = ri.indirizzo_abitazione
+		INNER join abitazione AS a ON a.id = rp.id_abitazione
 		INNER join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
 		INNER join ruolo AS ru on u.id_ruolo = ru.id
 		WHERE ri.indirizzo_abitazione LIKE '%${indirizzo_abitazione}%' AND u.id = '${user_id}'

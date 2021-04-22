@@ -28,6 +28,7 @@ public class UtilController extends BaseController {
 		RiunioneController riunioneController = new RiunioneController(request, response);
 		
 		Abitazione abitazione = abitazioneController.doFindForLogin(user.getId_abitazione());
+		
 		Riunione riunione = riunioneController.doFindForLogin(abitazione.getIndirizzo(), stato, user.getId());
 		return riunione;
 	}
