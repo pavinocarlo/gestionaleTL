@@ -11,8 +11,9 @@ public class BaseController {
 	protected HttpServletRequest request;
 	protected  HttpServletResponse response;
 	protected static final String HOME="home.jsp";
-	protected static final String INSERT="home.jsp";
-	protected static final String UPDATE="home.jsp";
+	protected static final String INSERT="insert";
+	protected static final String UPDATE="update";
+	protected static final String DELETE="delete";
 	protected static final String SUCCESS="success";
 	protected static final String LISTA="lista";
 	protected static final String SEARCH="search";

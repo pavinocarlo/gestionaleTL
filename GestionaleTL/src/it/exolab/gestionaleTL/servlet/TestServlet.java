@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.exolab.gestionaleTL.controller.DocumentazioneController;
+import it.exolab.gestionaleTL.controller.RigaPresenzaController;
 import it.exolab.gestionaleTL.crud.RiunioneCrud;
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
@@ -134,6 +135,26 @@ public class TestServlet extends HttpServlet {
 			}
 			request.setAttribute("riunione", riunione);
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
+		}
+		
+		if(request.getParameter("partecipariunione") != null) {
+			
+			RigaPresenzaController rigaPresenzaController = new RigaPresenzaController(request, response);
+			try {
+				rigaPresenzaController.doUpdate(request, response);
+			} catch (GenericException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AlreadyExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
 		}
 		
 //		String qs = request.getQueryString();

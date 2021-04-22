@@ -43,12 +43,13 @@
 		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
 		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
 		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato, ri.indirizzo_abitazione AS riunione_indirizzo_abitazione,
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
-		rp.presenza AS rigapresenza_presenza,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, rp.presenza AS rigapresenza_presenza,
+		rp.id_riunione AS rigapresenza_id_riunione, rp.id_abitazione AS rigapresenza_id_abitazione,
+		rp.id_user AS rigapresenza_id_user,
 		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
 		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM riunione AS ri
@@ -66,12 +67,13 @@
 		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
 		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
 		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato, ri.indirizzo_abitazione AS riunione_indirizzo_abitazione,
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
-		rp.presenza AS rigapresenza_presenza,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, rp.presenza AS rigapresenza_presenza,
+		rp.id_riunione AS rigapresenza_id_riunione, rp.id_abitazione AS rigapresenza_id_abitazione,
+		rp.id_user AS rigapresenza_id_user,
 		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
 		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM riunione AS ri
@@ -89,12 +91,13 @@
 		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
 		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
 		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato, ri.indirizzo_abitazione AS riunione_indirizzo_abitazione,
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
-		rp.presenza AS rigapresenza_presenza,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, rp.presenza AS rigapresenza_presenza,
+		rp.id_riunione AS rigapresenza_id_riunione, rp.id_abitazione AS rigapresenza_id_abitazione,
+		rp.id_user AS rigapresenza_id_user,
 		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
 		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM riunione AS ri
@@ -113,12 +116,13 @@
 		ri.data_riunione AS riunione_data_riunione, ri.inizio_riunione AS riunione_inizio_riunione, 
 		ri.fine_riunione AS riunione_fine_riunione, ri.ordine_del_giorno AS riunione_ordine_del_giorno, 
 		ri.luogo AS riunione_luogo, ri.stato AS riunione_stato, ri.indirizzo_abitazione AS riunione_indirizzo_abitazione,
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
-		rp.presenza AS rigapresenza_presenza,
+		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, rp.presenza AS rigapresenza_presenza,
+		rp.id_riunione AS rigapresenza_id_riunione, rp.id_abitazione AS rigapresenza_id_abitazione,
+		rp.id_user AS rigapresenza_id_user,
 		l.id AS lavoro_id, l.nome AS lavoro_nome, l.esito_voto AS lavoro_esito_voto, 
 		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione,
 		a.id AS abitazione_id, a.interno AS abitazione_interno, a.indirizzo AS abitazione_indirizzo,
@@ -156,7 +160,10 @@
 		<result property="id" column="rigapresenza_id"/>
 	    <result property="adesione" column="rigapresenza_adesione"/>
 	    <result property="presenza" column="rigapresenza_presenza"/>
-
+	    <result property="id_riunione" column="rigapresenza_presenza_id_riunione"/>
+	    <result property="id_abitazione" column="rigapresenza_presenza_id_abitazione"/>
+	    <result property="id_user" column="rigapresenza_presenza_id_user"/>
+	    
 	</association>  	
 	  	
 	<association property="listaLavori" javaType="it.exolab.gestionaleTL.model.Lavoro">

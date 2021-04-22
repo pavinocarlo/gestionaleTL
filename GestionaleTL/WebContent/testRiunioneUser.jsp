@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -11,26 +11,32 @@
 <body>
 <div id="div1">
 </div>
-<td><input class="btn btn-info" type="submit" name="avviariunione" id="avviariunione" value="avvia"/></td>
+<form action="TestServlet" method="post">
+	<c:if test="${riunione.stato == 2 }">
+		<input hidden="hidden" nome="id_riunione" id="id_riunione" value="${riunione.id}">
+		<input hidden="hidden" nome="id_user" id="id_user" value="${user.id}">
+		<td><input class="btn btn-info" type="submit" name="partecipariunione" id="partecipariunione" value="partecipa"/></td>
+	</c:if>
+</form>
 <script>
 	
 	var c = setInterval('checkRiunione()',5000);
 	function checkRiunione(){
-		if(${riunione.stato == null}) {
-			alert("cazzo");
-			$("#div1").html("Hello <b>world</b>!");
+		if(${riunione.stato == 2}) {
+			//alert("cazzo");
+			$("#div1").html("riunione in corso");
 		}
 	}
 		
 
 
 
-$.ajax({url: "TestServlet", success: function(result){
+// $.ajax({url: "TestServlet", success: function(result){
 
-	alert("è arrivata la chiamata dalla servlet");
-	alert(result);
-    $("#div1").html(result);
-  }});
+// 	alert("è arrivata la chiamata dalla servlet");
+// 	alert(result);
+//     $("#div1").html(result);
+//   }});
 
 
 // function invia(){

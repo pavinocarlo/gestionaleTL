@@ -29,6 +29,15 @@ public class AbitazioneCrud {
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 	}
+	
+	public void delete(Integer id) throws GenericException, AlreadyExistException, InvalidFieldException{
+
+		SqlMapFactory.instance().openSession();
+		AbitazioneMapper mapper =  SqlMapFactory.instance().getMapper(AbitazioneMapper.class);
+		mapper.delete(id);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+	}
 
 	public Abitazione find(Integer id){
 		SqlMapFactory.instance().openSession();
@@ -47,10 +56,29 @@ public class AbitazioneCrud {
 		SqlMapFactory.instance().closeSession();
 		return ret;
 	}
+	
+	public List<Abitazione> findByIndirizzo(String indirizzo){
+		SqlMapFactory.instance().openSession();
+		AbitazioneMapper mapper =  SqlMapFactory.instance().getMapper(AbitazioneMapper.class);
+		List<Abitazione> ret = mapper.findByIndirizzo(indirizzo);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
 	public List<Abitazione> findAll(){
 		SqlMapFactory.instance().openSession();
 		AbitazioneMapper mapper =  SqlMapFactory.instance().getMapper(AbitazioneMapper.class);
 		List<Abitazione> ret = mapper.findAll();
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+	}
+	
+	public List<Abitazione> findAllGrouped() {
+		SqlMapFactory.instance().openSession();
+		AbitazioneMapper mapper =  SqlMapFactory.instance().getMapper(AbitazioneMapper.class);
+		List<Abitazione> ret = mapper.findAllGrouped();
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 		return ret;

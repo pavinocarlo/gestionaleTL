@@ -81,9 +81,12 @@ public class UserController extends BaseController {
 		if(validate(email,password)) {
 			user = userCrud.findByEmailAndPassword(email, password);
 			if(user.getId_ruolo()!=1) {
+				/*
+				 * da verificare, codice brutto
+				 */
 				UtilController utilController = new UtilController(request, response);
 				Riunione riunione = utilController.doFindRiunioneForUserLogin(user);
-				request.setAttribute("riunione", riunione);
+				request.getSession().setAttribute("riunione", riunione);
 			}
 			request.getSession().setAttribute(USER, user);
 			request.getRequestDispatcher(HOME).include(request, response);

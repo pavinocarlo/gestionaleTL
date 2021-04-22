@@ -1,5 +1,7 @@
 package it.exolab.gestionaleTL.crud;
 
+import org.apache.ibatis.annotations.Param;
+
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
@@ -36,6 +38,17 @@ public class RigaPresenzaCrud {
 		SqlMapFactory.instance().commitSession();
 		SqlMapFactory.instance().closeSession();
 		return ret;
+	}
+	
+	public RigaPresenza findByUserRiunione(int user_id, int riunione_id) {
+		
+		SqlMapFactory.instance().openSession();
+		RigaPresenzaMapper mapper =  SqlMapFactory.instance().getMapper(RigaPresenzaMapper.class);
+		RigaPresenza ret = mapper.findByUserRiunione(user_id, riunione_id);
+		SqlMapFactory.instance().commitSession();
+		SqlMapFactory.instance().closeSession();
+		return ret;
+		
 	}
 
 }

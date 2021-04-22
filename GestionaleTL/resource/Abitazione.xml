@@ -20,9 +20,14 @@
 		where id = #{id}
 
 	</update>
+	
+	<delete id = "delete" parameterType="Integer" >
+	   delete from abitazione where id = #{id} AND abitazione.interno IS NULL
+	</delete>
   
   
   <select id="find" parameterType="Integer" resultMap="abitazionemap">
+	
 	select
 		a.id AS abitazione_id, a.interno AS abitazione_interno, a.indirizzo AS abitazione_indirizzo,
 		v.id AS votazione_id, v.voto AS votazione_voto,
@@ -30,15 +35,34 @@
 		u.id AS user_id, u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
 		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
 		u.data_in AS user_data_in, u.data_out AS user_data_out,
-		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo,
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
-		rp.presenza AS rigapresenza_presenza
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo
+<!-- 		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione,  -->
+<!-- 		rp.presenza AS rigapresenza_presenza -->
 		FROM abitazione AS a
 		left join votazione AS v on a.id = v.id_abitazione
-		inner join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
-		inner join ruolo AS ru on u.id_ruolo = ru.id
-		left join riga_presenza as rp on rp.id_user = u.id
+		LEFT join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
+		LEFT join ruolo AS ru on u.id_ruolo = ru.id
+<!-- 		left join riga_presenza as rp on rp.id_user = u.id -->
 		WHERE a.id = ${id};
+		
+	</select>
+	
+	<select id="findByIndirizzo" parameterType="String" resultMap="abitazionemap">
+	
+	select
+		a.id AS abitazione_id, a.interno AS abitazione_interno, a.indirizzo AS abitazione_indirizzo,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione,
+		u.id AS user_id, u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
+		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
+		u.data_in AS user_data_in, u.data_out AS user_data_out,
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo
+		FROM abitazione AS a
+		left join votazione AS v on a.id = v.id_abitazione
+		LEFT join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
+		LEFT join ruolo AS ru on u.id_ruolo = ru.id
+		WHERE a.indirizzo = #{indirizzo};
+		
 	</select>
 	
 	
@@ -49,19 +73,19 @@
 		u.id AS user_id, u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
 		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
 		u.data_in AS user_data_in, u.data_out AS user_data_out,
-		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo,
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
-		rp.presenza AS rigapresenza_presenza
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo
+<!-- 		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione,  -->
+<!-- 		rp.presenza AS rigapresenza_presenza -->
 		FROM abitazione AS a
 		left join votazione AS v on a.id = v.id_abitazione
-		inner join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
-		inner join ruolo AS ru on u.id_ruolo = ru.id
-		left join riga_presenza as rp on rp.id_user = u.id
+		LEFT join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
+		LEFT join ruolo AS ru on u.id_ruolo = ru.id
+<!-- 		left join riga_presenza as rp on rp.id_user = u.id -->
 		WHERE a.id = ${id} AND u.data_out IS null
 		ORDER by u.data_in DESC LIMIT 1; 
 	</select>
 	
-	<select id="findAll" parameterType="Integer" resultMap="abitazionemap">
+	<select id="findAll" resultMap="abitazionemap">
 	select
 		a.id AS abitazione_id, a.interno AS abitazione_interno, a.indirizzo AS abitazione_indirizzo,
 		v.id AS votazione_id, v.voto AS votazione_voto,
@@ -69,14 +93,32 @@
 		u.id AS user_id, u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
 		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
 		u.data_in AS user_data_in, u.data_out AS user_data_out,
-		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo,
-		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione, 
-		rp.presenza AS rigapresenza_presenza
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo
+<!-- 		rp.id AS rigapresenza_id, rp.adesione AS rigapresenza_adesione,  -->
+<!-- 		rp.presenza AS rigapresenza_presenza -->
 		FROM abitazione AS a
-		left join votazione AS v on a.id = v.id_abitazione
-		inner join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
-		inner join ruolo AS ru on u.id_ruolo = ru.id
-		left join riga_presenza as rp on rp.id_user = u.id
+		LEFT join votazione AS v on a.id = v.id_abitazione
+		LEFT join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
+		LEFT join ruolo AS ru on u.id_ruolo = ru.id
+<!-- 		left join riga_presenza as rp on rp.id_user = u.id -->
+	</select>
+	
+	<select id="findAllGrouped" resultMap="abitazionemap">
+	
+	select
+		a.id AS abitazione_id, a.interno AS abitazione_interno, a.indirizzo AS abitazione_indirizzo,
+		v.id AS votazione_id, v.voto AS votazione_voto,
+		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione,
+		u.id AS user_id, u.cf AS user_cf, u.nome AS user_nome, u.cognome AS user_cognome,
+		u.email AS user_email, u.password AS user_password, u.telefono AS user_telefono,
+		u.data_in AS user_data_in, u.data_out AS user_data_out,
+		ru.id AS ruolo_id, ru.ruolo AS ruolo_ruolo
+		FROM abitazione AS a
+		LEFT join votazione AS v on a.id = v.id_abitazione
+		LEFT join db_gestionale_tl.`user` AS u on a.id = u.id_abitazione
+		LEFT join ruolo AS ru on u.id_ruolo = ru.id
+		group by a.indirizzo;
+		
 	</select>
 
 	 <resultMap id="abitazionemap" type="it.exolab.gestionaleTL.model.Abitazione">
@@ -113,13 +155,13 @@
 		    
 		  </association>
 		  
-		  <association property="listaPresenze" javaType="it.exolab.gestionaleTL.model.RigaPresenza">
+<!-- 		  <association property="listaPresenze" javaType="it.exolab.gestionaleTL.model.RigaPresenza"> -->
 	
-			<result property="id" column="rigapresenza_id"/>
-		    <result property="adesione" column="rigapresenza_adesione"/>
-		    <result property="presenza" column="rigapresenza_presenza"/>
+<!-- 			<result property="id" column="rigapresenza_id"/> -->
+<!-- 		    <result property="adesione" column="rigapresenza_adesione"/> -->
+<!-- 		    <result property="presenza" column="rigapresenza_presenza"/> -->
 	
-		</association>  
+<!-- 		</association>   -->
 	  
 	  </association>
 

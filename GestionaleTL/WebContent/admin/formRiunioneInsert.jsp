@@ -13,6 +13,10 @@
 		<input hidden="hidden" type="datetime-local" name="inizio_riunione" id="inizio_riunione">
 		<input hidden="hidden" type="datetime-local" name="fine_riunione" id="fine_riunione">
 		<li><tr>
+			<th><label class="labelA">Indirizzo: </label></th>
+			<th><input type="text" name="indirizzo" id="indirizzo" placeholder="Indirizzo"></th>
+		</tr></li>
+		<li><tr>
 			<th><label class="labelA">Ordine del giorno: </label></th>
 			<th><input type="text" name="ordine_del_giorno" id="ordine_del_giorno" placeholder="Ordine del giorno"></th>
 		</tr></li>

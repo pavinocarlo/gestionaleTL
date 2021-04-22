@@ -29,6 +29,7 @@ public class RiunioneController extends BaseController {
 	
 	public void doInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		UtilController utilController = new UtilController(request, response);
 		String data = request.getParameter("data_riunione").toString();
 		data = data.replace('T', ' ');
 
@@ -37,12 +38,13 @@ public class RiunioneController extends BaseController {
 										(Timestamp.valueOf("" + data + ":00")),
 										request.getParameter("ordine_del_giorno"),
 										request.getParameter("luogo"),
-										request.getParameter("indirizzo_abitazione"));
-							
+										request.getParameter("indirizzo"));			
 //		if(validate(user)) {
 			
 		try {
 			riunioneCrud.insert(riunione);
+			System.out.println("prima della chiamata dell insert righer");
+			utilController.doInsertRighePresenza(riunione);
 		} catch (GenericException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

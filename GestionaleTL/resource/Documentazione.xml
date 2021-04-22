@@ -33,7 +33,7 @@
 		
 		select
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM documentazione AS d
@@ -46,7 +46,7 @@
 		
 		select
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazinoe_stato,
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM documentazione AS d
