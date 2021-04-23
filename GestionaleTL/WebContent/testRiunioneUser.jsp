@@ -15,33 +15,36 @@
 	<c:if test="${riunione.stato == 2 }">
 		<input hidden="hidden" name="riunione_id" id="riunione_id" value="${riunione.id}">
 		<input hidden="hidden" name="user_id" id="user_id" value="${user.id}">
-		<c:if test="${rigapresenza.presenza != 1 }">
-			<td><input class="btn btn-info" type="submit" name="partecipariunione" id="partecipariunione" value="partecipa"/></td>
-		</c:if>
+		<c:choose>
+		    <c:when test="${rigapresenza.presenza == 2 or empty rigapresenza.presenza }">
+		        <td><input class="btn btn-info" type="submit" name="partecipariunione" id="partecipariunione" value="partecipa"/></td>
+		    </c:when>
+		    <c:otherwise>
+		        <a>Stai partecipando alla riunione</a>
+		    </c:otherwise>
+		</c:choose>
 	</c:if>
 </form>
 
-
-	
 <tr>
 	<div>
 		<td>Data riunione : ${riunione.data_riunione}</td><br/>
 	    <td>Ordine del giorno: ${riunione.ordine_del_giorno}</td><br/>
 	    <td>Indirizzo riunione: ${riunione.indirizzo_abitazione}</td><br/>
-	    <td>Stato riunione: ${riunione.stato}</td><br/>
+	    <td>Stato riunione: ${riunione.stato == 2 ? 'Riunione in corso' : 'Riunione Terminata'}</td><br/>
 	    
 	</div>
 </tr>
 		
-
 <script>
 	
 	var c = setInterval('checkRiunione()',5000);
 	function checkRiunione(){
 		if(${riunione.stato == 2}) {
-			//alert("cazzo");
 			$("#div1").html("riunione in corso");
+			$.get("TestServlet");
 		}
+		
 	}
 		
 

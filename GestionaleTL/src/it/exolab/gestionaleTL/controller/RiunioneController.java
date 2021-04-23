@@ -90,6 +90,52 @@ public class RiunioneController extends BaseController {
 //		}
 	}
 	
+	public void doAvviaRiunione(HttpServletRequest request, HttpServletResponse response) {
+		
+		UtilController utilController = new UtilController(request, response);
+		Riunione riunione = riunioneCrud.find(Integer.parseInt(request.getParameter("idriunione")));
+		riunione.setStato(2);			
+			
+		try {
+			riunioneCrud.update(riunione);
+			utilController.doAvviaRiunione(riunione);
+		} catch (GenericException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AlreadyExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.getSession().setAttribute("riunione", riunione);
+		
+	}
+	
+	public void doArrestaRiunione(HttpServletRequest request, HttpServletResponse response) {
+		
+		UtilController utilController = new UtilController(request, response);
+		Riunione riunione = riunioneCrud.find(Integer.parseInt(request.getParameter("idriunione")));
+		riunione.setStato(3);
+		try {
+			riunioneCrud.update(riunione);
+			utilController.doArrestaRiunione(riunione);
+		} catch (GenericException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AlreadyExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.getSession().removeAttribute("riunione");
+		request.setAttribute("riunione", riunione);
+	}
+	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String search = request.getParameter(SEARCH+RIUNIONE);
@@ -109,10 +155,22 @@ public class RiunioneController extends BaseController {
 		}
 	}
 	
-	public Riunione doFindForLogin(String indirizzo_abitazione, int stato, int user_id) {
+	public void doFindForUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Riunione Riunione = riunioneCrud.find(Integer.valueOf(request.getParameter("idriunione")));
+		request.setAttribute("riunione", Riunione);
+	}
+	
+	public Riunione doFindForLogin(String indirizzo_abitazione, int stato, int user_id) {
+	
 		Riunione Riunione = riunioneCrud.findByIndirizzoStatoUser(indirizzo_abitazione, stato, user_id);
 		return Riunione;
-		
 	}
+	
+	public void doListaRiunioniDaFare(){
+		
+		List<Riunione> listaRiunioni = riunioneCrud.findForRiunione(Timestamp.valueOf("" + request.getParameter("data_riunione") + " 00:00:00"), 1);
+		request.setAttribute("listariunioni", listaRiunioni);
+	}
+	
 }

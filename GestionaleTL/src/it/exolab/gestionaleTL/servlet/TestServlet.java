@@ -11,14 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.exolab.gestionaleTL.controller.DatiRiunioneController;
 import it.exolab.gestionaleTL.controller.DocumentazioneController;
 import it.exolab.gestionaleTL.controller.RigaPresenzaController;
+import it.exolab.gestionaleTL.controller.RiunioneController;
 import it.exolab.gestionaleTL.crud.RiunioneCrud;
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
 import it.exolab.gestionaleTL.model.Lavoro;
 import it.exolab.gestionaleTL.model.Riunione;
+import it.exolab.gestionaleTL.model.User;
 
 
 
@@ -44,7 +47,6 @@ public class TestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
 		
 //		//indirizzo(via,civico,cap)
@@ -73,48 +75,31 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RiunioneCrud riunioneCrud = new RiunioneCrud();
-		DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
+		
+		
 		
 		if(request.getParameter("showriunionibutton") != null) {
 		
-			List<Riunione> listaRiunioni = riunioneCrud.findForRiunione(Timestamp.valueOf("" + request.getParameter("data_riunione") + " 00:00:00"), 1);
-			
-			request.setAttribute("listariunioni", listaRiunioni);
+			RiunioneController riunioneController = new RiunioneController(request, response);
+			riunioneController.doListaRiunioniDaFare();			
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
+			return;
 		
 		}
 		
 		if(request.getParameter("avviariunione") != null) {
 			
-			Riunione riunione = riunioneCrud.find(Integer.parseInt(request.getParameter("idriunione")));
-			System.out.println(riunione);
-			riunione.setStato(2);
-			try {
-				riunioneCrud.update(riunione);
-			} catch (GenericException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (AlreadyExistException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvalidFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			request.getSession().setAttribute("riunione", riunione);
-			request.setAttribute("listadocumenti", documentazioneController.doFindForVotazione(request, response, riunione.getId()));
+			RiunioneController riunioneController = new RiunioneController(request, response);
+			riunioneController.doAvviaRiunione(request, response);
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
 			return;
 		}
 		
 		if(request.getParameter("avviavotazione") != null) {
 			
+			DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 			Riunione riunione = (Riunione) request.getSession().getAttribute("riunione");
-			documentazioneController.doUpdate(request, response);
-			System.out.println(riunione);
-			request.setAttribute("listadocumenti", documentazioneController.doFindForVotazione(request, response, riunione.getId()));
+			documentazioneController.doAvviaVotazione(request, response, riunione);
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
 			return;
 		}
@@ -122,22 +107,10 @@ public class TestServlet extends HttpServlet {
 		
 		if(request.getParameter("arrestariunione") != null) {
 			
-			Riunione riunione = riunioneCrud.find(Integer.parseInt(request.getParameter("idriunione")));
-			riunione.setStato(3);
-			try {
-				riunioneCrud.update(riunione);
-			} catch (GenericException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (AlreadyExistException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvalidFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.setAttribute("riunione", riunione);
+			RiunioneController riunioneController = new RiunioneController(request, response);
+			riunioneController.doArrestaRiunione(request, response);
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
+			return;
 		}
 		
 		if(request.getParameter("partecipariunione") != null) {

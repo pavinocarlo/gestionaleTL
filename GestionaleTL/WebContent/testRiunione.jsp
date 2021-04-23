@@ -49,7 +49,7 @@
 				<td>Documento: ${documento.nome}</td><br/>
 				<td>Società: ${documento.societa}</td><br/>
 				<td>Costo: ${documento.costo}</td><br/>
-				<td>Stato: ${documento.stato}</td><br/>
+				<td>Stato: ${empty documento.stato ? 'Da votare' : documento.stato == 1 ? 'In votazione' : 'Votato'}</td><br/>
 				<input hidden="hidden" name="iddocumento" value="${documento.id}"/>
 				<input hidden="hidden" name="costo" value="${documento.costo}"/>
 				<input hidden="hidden" name="nome" value="${documento.nome}"/>

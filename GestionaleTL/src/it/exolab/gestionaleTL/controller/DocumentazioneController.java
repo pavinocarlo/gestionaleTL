@@ -14,6 +14,7 @@ import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
 import it.exolab.gestionaleTL.model.Documentazione;
 import it.exolab.gestionaleTL.model.Lavoro;
+import it.exolab.gestionaleTL.model.Riunione;
 
 public class DocumentazioneController extends BaseController {
 	
@@ -63,7 +64,6 @@ public class DocumentazioneController extends BaseController {
 //		if(validate(user)) {
 		try {
 			documentazioneCrud.update(documentazione);
-			System.out.println("dopo l'update");
 		} catch (GenericException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,6 +78,15 @@ public class DocumentazioneController extends BaseController {
 		//request.getRequestDispatcher(HOME).include(request, response);
 //		}
 	}
+	
+	public void doAvviaVotazione(HttpServletRequest request, HttpServletResponse response, Riunione riunione) throws ServletException, IOException {
+		
+		UtilController utilController = new UtilController(request, response);
+		doUpdate(request, response);
+		utilController.doAvviaVotazione(riunione);
+		request.setAttribute("listadocumenti", doFindForVotazione(request, response, riunione.getId()));
+	}
+	
 	
 	public void doFind(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -94,7 +103,7 @@ public class DocumentazioneController extends BaseController {
 			request.setAttribute(LISTA+DOCUMENTAZIONE, listaDocumentazione);
 			request.getRequestDispatcher(HOME).include(request, response);
 		}
-	}
+	}	
 	
 	public List<Documentazione> doFindForVotazione(HttpServletRequest request, HttpServletResponse response, int riunione_id) {
 		
