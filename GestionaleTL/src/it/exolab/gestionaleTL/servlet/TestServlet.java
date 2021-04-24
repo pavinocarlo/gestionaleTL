@@ -37,13 +37,10 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("nella servlet");
+
 		String op = request.getParameter("checkMap");
-		System.out.println(request.getParameterNames().toString());
 		if(op.equals("checkMap")) {
-			System.out.println("almeno nel primo if");
 			DatiRiunioneController datiRiunioneController = new DatiRiunioneController(request, response);
-			request.getSession().getAttribute("user");
 			Riunione riunione = (Riunione) request.getSession().getAttribute("riunione");
 			Entry<Integer, Integer> datiAttuali = datiRiunioneController.doCheckRiunione(riunione.getId());
 			if(datiAttuali == null) {
@@ -66,8 +63,6 @@ public class TestServlet extends HttpServlet {
 				request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
 				return;
 			}
-			
-			
 		}
 		
 		
@@ -80,7 +75,6 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("nella servlet POST");
 		if(request.getParameter("showriunionibutton") != null) {
 		
 			RiunioneController riunioneController = new RiunioneController(request, response);
@@ -120,6 +114,11 @@ public class TestServlet extends HttpServlet {
 			rigaPresenzaController.doUpdate(request, response);
 			request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
 			return;
+		}
+		
+		if(request.getParameter("votazione") != null) {
+			
+			
 		}
 
 	}
