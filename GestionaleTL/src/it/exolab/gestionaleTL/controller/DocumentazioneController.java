@@ -112,5 +112,12 @@ public class DocumentazioneController extends BaseController {
 		List<Documentazione> listaDocumenti = documentazioneCrud.findForVotazione(riunione_stato, riunione_id, lavoro_stato);
 		return listaDocumenti;
 	}
+	
+	public Documentazione doFind(int id_documentazione) {
+		
+		return documentazioneCrud.find(id_documentazione);
+		
+		
+	}
 
 }

@@ -31,63 +31,38 @@
 		<td>Data riunione : ${riunione.data_riunione}</td><br/>
 	    <td>Ordine del giorno: ${riunione.ordine_del_giorno}</td><br/>
 	    <td>Indirizzo riunione: ${riunione.indirizzo_abitazione}</td><br/>
-	    <td>Stato riunione: ${riunione.stato == 2 ? 'Riunione in corso' : 'Riunione Terminata'}</td><br/>
-	    
 	</div>
 </tr>
+<div id="div2">
+</div>
 		
+<div id="div3">
+</div>
 <script>
+ 	var c = setInterval('checkRiunione()', 5000);
 	
-	var c = setInterval('checkRiunione()',5000);
+
+	
 	function checkRiunione(){
 		if(${riunione.stato == 2}) {
-			$("#div1").html("riunione in corso");
-			$.get("TestServlet");
+			$("#div2").html("Stato riunione : Riunione in corso");
 		}
-		
-	}
-		
+		if(${riunione.stato == 1}) {
+			$("#div2").html("Stato riunione : In attesa");
+		}
+		if(${documentazione.id != 0 }) {
+			$("#div3").html("<form action='TestServlet' method='post'><input class='btn btn-info' type='submit' name='votazione' id='votazione' value='vota'/></form>");
+		}
 
-
-
-// $.ajax({url: "TestServlet", success: function(result){
-
-// 	alert("è arrivata la chiamata dalla servlet");
-// 	alert(result);
-//     $("#div1").html(result);
-//   }});
-
-
-// function invia(){
-// 	var n = $('#nome').val();
-// 	var model = {nome:n};
-// 	var json = JSON.stringify(model);
-// 	alert(json);
-
-
-
-// 		$.post("MainServlet",
-// 				model,
-// 		  function(data, status){
-// 			alert("Ok");
-// 		  });
-
-
-// }
-
-
-// function prova(){
-
-// 	$.ajax({url: "MainServlet", success: function(result){
-
-// 		alert("è arrivata la chiamata dalla servlet");
-// 		alert(result);
-// 	    $("#div1").html(result);
-// 	  }});
-
-// }
-
-
+		$.ajax({
+			url     : 'TestServlet',
+			method     : 'GET',
+			data: { checkMap: 'checkMap' }
+// 			success    : function(resultText){
+// 			$('#result').html(resultText);
+// 			}
+			});
+	};
 
 </script>
 

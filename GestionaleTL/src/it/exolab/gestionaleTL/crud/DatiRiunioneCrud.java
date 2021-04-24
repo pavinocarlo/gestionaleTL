@@ -1,5 +1,7 @@
 package it.exolab.gestionaleTL.crud;
 
+import java.util.Map.Entry;
+
 import it.exolab.gestionaleTL.model.DatiRiunione;
 
 public class DatiRiunioneCrud {
@@ -19,25 +21,37 @@ public class DatiRiunioneCrud {
 		
 	}
 	
-	public int findRiunone(int id_riunione) {
+//	public int findRiunone(int id_riunione) {
+//		
+//		int idRiunioneAttiva = 0;
+//		for(Integer riunioneId : DatiRiunione.getInstance().getMappaDati().keySet()) {
+//			if(riunioneId == id_riunione) {
+//				idRiunioneAttiva = id_riunione;
+//				break;
+//			}
+//		}
+//		return idRiunioneAttiva;
+//	}
+//	
+//	public int findDocumento(int id_riunione) {
+//		
+//		int idDocumentoVotazione = 0;
+//		if(findDocumento(id_riunione) != 0) {
+//			idDocumentoVotazione = DatiRiunione.getInstance().getMappaDati().get(id_riunione);		
+//		}
+//		return idDocumentoVotazione;
+//	}
+	
+	public Entry<Integer, Integer> find(int id_riunione) {
 		
-		int idRiunioneAttiva = 0;
-		for(Integer riunioneId : DatiRiunione.getInstance().getMappaDati().keySet()) {
-			if(riunioneId == id_riunione) {
-				idRiunioneAttiva = id_riunione;
-				break;
+		Entry<Integer, Integer> datiAttuali = null;
+		
+		for(Entry<Integer, Integer> dati : DatiRiunione.getInstance().getMappaDati().entrySet()) {
+			if(dati.getKey() == id_riunione) {
+				datiAttuali=dati;
 			}
 		}
-		return idRiunioneAttiva;
-	}
-	
-	public int findDocumento(int id_riunione) {
-		
-		int idDocumentoVotazione = 0;
-		if(findDocumento(id_riunione) != 0) {
-			idDocumentoVotazione = DatiRiunione.getInstance().getMappaDati().get(id_riunione);		
-		}
-		return idDocumentoVotazione;
+		return datiAttuali;
 	}
 	
 	

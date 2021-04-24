@@ -28,20 +28,30 @@ public class RigaPresenzaController extends BaseController {
 	//		if(validate(user)) {
 		rigaPresenzaCrud.insert(rigaPresenza);
 	//		}
-		}
+	}
 	
-	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException, ServletException, IOException {
+	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RigaPresenza rigaPresenza = rigaPresenzaCrud.findByUserRiunione(Integer.parseInt((String)request.getParameter("user_id")),
 																		Integer.parseInt((String)request.getParameter("riunione_id")));
 									
 		//		if(validate(user)) {
 		rigaPresenza.setPresenza(1);		
-		rigaPresenzaCrud.update(rigaPresenza);
+		try {
+			rigaPresenzaCrud.update(rigaPresenza);
+			request.getSession().setAttribute("rigapresenza", rigaPresenzaCrud.find(rigaPresenza.getId()));
+		} catch (GenericException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AlreadyExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//		}
-		request.getSession().setAttribute("rigapresenza", rigaPresenzaCrud.find(rigaPresenza.getId()));
 		request.setAttribute("rigapresenza"+UPDATE+SUCCESS, "rigapresenza"+UPDATE+SUCCESS);
-		request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
 		}
 
 }

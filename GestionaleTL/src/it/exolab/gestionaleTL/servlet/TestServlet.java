@@ -1,9 +1,7 @@
 package it.exolab.gestionaleTL.servlet;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,17 +13,8 @@ import it.exolab.gestionaleTL.controller.DatiRiunioneController;
 import it.exolab.gestionaleTL.controller.DocumentazioneController;
 import it.exolab.gestionaleTL.controller.RigaPresenzaController;
 import it.exolab.gestionaleTL.controller.RiunioneController;
-import it.exolab.gestionaleTL.crud.RiunioneCrud;
-import it.exolab.gestionaleTL.exception.AlreadyExistException;
-import it.exolab.gestionaleTL.exception.GenericException;
-import it.exolab.gestionaleTL.exception.InvalidFieldException;
-import it.exolab.gestionaleTL.model.Lavoro;
+import it.exolab.gestionaleTL.model.Documentazione;
 import it.exolab.gestionaleTL.model.Riunione;
-import it.exolab.gestionaleTL.model.User;
-
-
-
-
 
 
 /**
@@ -48,25 +37,41 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("nella servlet");
+		String op = request.getParameter("checkMap");
+		System.out.println(request.getParameterNames().toString());
+		if(op.equals("checkMap")) {
+			System.out.println("almeno nel primo if");
+			DatiRiunioneController datiRiunioneController = new DatiRiunioneController(request, response);
+			request.getSession().getAttribute("user");
+			Riunione riunione = (Riunione) request.getSession().getAttribute("riunione");
+			Entry<Integer, Integer> datiAttuali = datiRiunioneController.doCheckRiunione(riunione.getId());
+			if(datiAttuali == null) {
+				request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+				return;
+			}
+			
+			if(datiAttuali.getValue() == 0) {
+				riunione.setStato(2);
+				request.getSession().setAttribute("riunione", riunione);
+				request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+				return;
+			}
+			if(datiAttuali.getValue() != 0) {
+				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
+				riunione.setStato(2);
+				Documentazione documentazione = documentazioneController.doFind(datiAttuali.getValue());
+				request.setAttribute("documentazione", documentazione);
+				request.getSession().setAttribute("riunione", riunione);
+				request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+				return;
+			}
+			
+			
+		}
 		
-//		//indirizzo(via,civico,cap)
-//		// {nome:"Francesco",cognome:"Protano", indirizzo:{via:"Via delle vie",civico:9,cap:"00179" } , indirizzi:[
-//		// {via:"Via delle vie",civico:9,cap:"00179" }
-//		// ,{via:"Via nazionale",civico:19,cap:"00179" } ]    }
-//		
-//		User p = new User();
-//		p.setNome("mario");
-//		Gson gson = new Gson();
-//		String ret = gson.toJson(p);
-//		
-//		
-//		p.setNome("maria");
-//		ret = gson.toJson(p);
-//		
-//		User p1 = gson.fromJson(ret, User.class);
-//		
-//		System.out.println(p1.getNome());
-//		
+		
+		request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
 //		response.getWriter().append(ret);
 	}
 
@@ -74,17 +79,14 @@ public class TestServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
-		
-		
+		System.out.println("nella servlet POST");
 		if(request.getParameter("showriunionibutton") != null) {
 		
 			RiunioneController riunioneController = new RiunioneController(request, response);
 			riunioneController.doListaRiunioniDaFare();			
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
 			return;
-		
 		}
 		
 		if(request.getParameter("avviariunione") != null) {
@@ -104,7 +106,6 @@ public class TestServlet extends HttpServlet {
 			return;
 		}
 		
-		
 		if(request.getParameter("arrestariunione") != null) {
 			
 			RiunioneController riunioneController = new RiunioneController(request, response);
@@ -116,37 +117,11 @@ public class TestServlet extends HttpServlet {
 		if(request.getParameter("partecipariunione") != null) {
 			
 			RigaPresenzaController rigaPresenzaController = new RigaPresenzaController(request, response);
-			try {
-				rigaPresenzaController.doUpdate(request, response);
-			} catch (GenericException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (AlreadyExistException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvalidFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			
+			rigaPresenzaController.doUpdate(request, response);
+			request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+			return;
 		}
-		
-//		String qs = request.getQueryString();
-//		
-//		Enumeration<String> params = request.getParameterNames();
-//		while(params.hasMoreElements()) {
-//			String s = params.nextElement();
-//			System.out.println(s);
-//		}
-//		
-//		String nome = request.getParameter("nome");
-//		System.out.println(nome);
-//		
-		
-		
-		
+
 	}
 
 }
