@@ -13,19 +13,15 @@
 		<input hidden="hidden" type="datetime-local" name="inizio_riunione" id="inizio_riunione">
 		<input hidden="hidden" type="datetime-local" name="fine_riunione" id="fine_riunione">
 		<li><tr>
-			<th><label class="labelA">Indirizzo: </label></th>
-			<th><input type="text" name="indirizzo" id="indirizzo" placeholder="Indirizzo"></th>
+			<th><label class="labelL">Indirizzo: </label></th>
+			<th><input type="text" name="indirizzo_abitazione" id="indirizzo_abitazione" placeholder="Indirizzo"></th>
 		</tr></li>
 		<li><tr>
-			<th><label class="labelA">Ordine del giorno: </label></th>
+			<th><label class="labelL">Ordine del giorno: </label></th>
 			<th><input type="text" name="ordine_del_giorno" id="ordine_del_giorno" placeholder="Ordine del giorno"></th>
 		</tr></li>
 		<li><tr>
-			<th><label class="labelA">Stato: </label></th>
-			<th><input type="text" name="stato" id="stato" placeholder="Stato"><br/></th>
-		</tr></li>
-		<li><tr>
-			<th><label class="labelA">Data Riunione: </label></th>
+			<th><label class="labelL">Data Riunione: </label></th>
 			<th><input type="datetime-local" name="data_riunione" id="data_riunione" placeholder="Data riunione"><br/></th>
 		</tr></li>
 	</ul>

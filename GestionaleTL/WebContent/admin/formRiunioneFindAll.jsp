@@ -50,7 +50,7 @@
 				 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
 				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-				 <input class="btn btn-info" type="submit" id="showinseriscilavorobutton" name="showinseriscilavorobutton" value="Inserisci Lavoro">
+				 <input class="btn btn-info" type="submit" id="showinsertlavorobutton" name="showinsertlavorobutton" value="Inserisci Lavoro">
 			</form>
 		</td>
 		<td>
@@ -58,7 +58,7 @@
 				 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
 				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-				 <input class="btn btn-info" type="submit" id="showlistalavorobutton" name="showlistalavorobutton" value="Visualizza Lavori">
+				 <input class="btn btn-info" type="submit" id="showlistalavoributton" name="showlistalavoributton" value="Visualizza Lavori">
 			</form>
 		</td>
 	</tr>
@@ -66,6 +66,20 @@
 		<tr>
 			<td>
 				<jsp:include page="formRiunioneUpdate.jsp"></jsp:include>
+			</td>
+		</tr>
+	</c:if>
+	<c:if test="${loopindex==loop.index and showinsertlavoro!=null}">
+		<tr>
+			<td>
+				<jsp:include page="formLavoroInsert.jsp"></jsp:include>
+			</td>
+		</tr>
+	</c:if>
+	<c:if test="${loopindex==loop.index and showlistalavori!=null}">
+		<tr>
+			<td>
+				<jsp:include page="formLavoroFindAll.jsp"></jsp:include>
 			</td>
 		</tr>
 	</c:if>

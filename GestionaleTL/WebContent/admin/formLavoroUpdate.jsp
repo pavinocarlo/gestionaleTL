@@ -6,6 +6,11 @@
 
 <div class="formA" id="formA" name="formA">
 	<form action="MainServlet" id="updatelavoro" name="updatelavoro" method="post">
+	<input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+	<input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
+	<input hidden="hidden" id="idlavoro" name="idlavoro" value="${lavoro.id }">
+	<input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+	<input hidden="hidden" id="looplavoroindex" name="looplavoroindex" value="${looplavoro.index }">
 	<table>
 		<label>Modifica i dati del lavoro:</label>
 		<input hidden="hidden" type="text" name="id" id="id" value="${lavoro.id }">

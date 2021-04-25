@@ -116,7 +116,7 @@ public class LavoroController extends BaseController {
 		
 		int id_riunione = Integer.parseInt(request.getParameter("idriunione"));
 		List<Lavoro> listalavori = lavoroCrud.findByIdRiunione(id_riunione);
-		request.setAttribute(LISTA+LAVORO, listalavori);
+		request.setAttribute(LISTA+"lavori", listalavori);
 		request.getRequestDispatcher(HOME).include(request, response);
 	}
 

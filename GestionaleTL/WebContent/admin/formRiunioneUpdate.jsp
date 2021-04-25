@@ -3,11 +3,14 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-
+<th colspan="6">
 <div class="formA" id="formA" name="formA">
 	<form action="MainServlet" id="updateriunione" name="updateriunione" method="post">
+	<input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+	
 	<table>
 		<label>Modifica i dati della riunione:</label>
+		<input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
 		<input hidden="hidden" type="text" name="id" id="id" value="${riunione.id }">
 		<input hidden="hidden" type="datetime-local" name="data_comunicazione" id="data_comunicazione" value="${riunione.data_comunicazione }">
 		<input hidden="hidden" type="datetime-local" name="inizio_riunione" id="inizio_riunione" value="${riunione.inizio_riunione }">
@@ -49,3 +52,4 @@
 	</ul>
 	</form>
 </div>
+</th>

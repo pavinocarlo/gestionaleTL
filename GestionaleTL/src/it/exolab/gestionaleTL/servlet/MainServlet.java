@@ -91,6 +91,7 @@ public class MainServlet extends HttpServlet {
 		
 		if(request.getParameter(SHOW + UPDATE + RIUNIONE + BUTTON) != null) {
 			riunioneController.doFind(request, response);
+			riunioneController.doFindForUpdate(request, response);
 			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
 			request.setAttribute(SHOW + UPDATE + RIUNIONE, SHOW + UPDATE + RIUNIONE);
 			request.setAttribute("loopindex", request.getParameter("loopindex"));
@@ -179,6 +180,7 @@ public class MainServlet extends HttpServlet {
 	private void doActionLavoro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter(SHOW + GESTIONE + LAVORO + BUTTON) != null) {
+			
 			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
 			return;
 		}
@@ -187,18 +189,15 @@ public class MainServlet extends HttpServlet {
 //			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
 //			return;
 //		}
-		if(request.getParameter(SHOW + UPDATE + LAVORO + BUTTON) != null) {
-			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
-			request.setAttribute(SHOW + UPDATE + LAVORO, SHOW + UPDATE + LAVORO);
-			return;
-		}
+//		if(request.getParameter(SHOW + UPDATE + LAVORO + BUTTON) != null) {
+//			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
+//			request.setAttribute(SHOW + UPDATE + LAVORO, SHOW + UPDATE + LAVORO);
+//			return;
+//		}
 		
 		LavoroController lavoroController = new LavoroController(request, response);
 		
-		if(request.getParameter(INSERT + LAVORO) != null) {
-			lavoroController.doInsert(request, response);
-			return;
-		}
+		
 		if(request.getParameter(UPDATE + LAVORO) != null) {
 			lavoroController.doUpdate(request, response);
 			return;
@@ -226,7 +225,42 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute("loopindex", request.getParameter("loopindex"));
 			request.setAttribute("idriunione", request.getParameter("idriunione"));
 			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
-			
+			return;
+		}
+		if(request.getParameter(INSERT + LAVORO) != null) {
+			riunioneController.doFind(request, response);
+			lavoroController.doInsert(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("idriunione", request.getParameter("idriunione"));
+			System.out.println("sono nell'if show update lavoro button");	 						//da cancellare
+			System.out.println(																		//da cancellare
+					"loopindex:"+request.getParameter("loopindex:")+", "+
+					"looplavoroindex"+request.getParameter("looplavoroindex")+", "+
+					"idriunione"+request.getParameter("idriunione")
+					);	
+			return;
+		}
+		if(request.getParameter(SHOW + UPDATE + LAVORO + BUTTON) != null) {
+			System.out.println("sono nell'if show update lavoro button");	 													//da cancellare
+			System.out.println(																		//da cancellare
+					"loopindex:"+request.getParameter("loopindex:")+", "+
+					"looplavoroindex"+request.getParameter("looplavoroindex")+", "+
+					"idriunione"+request.getParameter("idriunione")
+					);																				//da cancellare
+			riunioneController.doFind(request, response);
+			lavoroController.doFindByIdRiunione(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("looplavoroindex", request.getParameter("loolavoropindex"));
+			request.setAttribute("idriunione", request.getParameter("idriunione"));
+			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
+			request.setAttribute(SHOW + UPDATE + LAVORO, SHOW + UPDATE + LAVORO);
+			System.out.println(																		//da cancellare
+								request.getParameter("loopindex")+", "+
+								request.getParameter("looplavoroindex")
+								);	 																//da cancellare
 			return;
 		}
 	}
