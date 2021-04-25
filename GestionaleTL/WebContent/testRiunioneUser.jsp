@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.6.0.min.js"></script> 
@@ -25,7 +24,6 @@
 		</c:choose>
 	</c:if>
 </form>
-
 <tr>
 	<div>
 		<td>Data riunione : ${riunione.data_riunione}</td><br/>
@@ -33,37 +31,50 @@
 	    <td>Indirizzo riunione: ${riunione.indirizzo_abitazione}</td><br/>
 	</div>
 </tr>
+<tr>
+	<div>
+		<c:forEach items="${riunione.listaLavori}" var="lavoro" >
+			<td>lavoro : ${lavoro.nome}</td><br/>
+				<c:forEach items="${lavoro.listaDocumenti}" var="documentazione"> 
+					<td>Documento : ${documentazione.nome}</td><br/>
+				    <td>Societa: ${documentazione.societa}</td><br/>
+				    <td>costo: ${documentazione.costo}</td><br/>
+		    	</c:forEach>	
+	    </c:forEach>
+	</div>
+</tr>
 <div id="div2">
 </div>
-		
-<div id="div3">
+	<div id="div3">
+</div>
+<div id="div4">
 </div>
 <script>
  	var c = setInterval('checkRiunione()', 5000);
 	
-
-	
 	function checkRiunione(){
-		if(${riunione.stato == 2}) {
-			$("#div2").html("Stato riunione : Riunione in corso");
-		}
-		if(${riunione.stato == 1}) {
-			$("#div2").html("Stato riunione : In attesa");
-		}
-		if(${documentazione.id != 0 }) {
-			$("#div3").html("<form action='TestServlet' method='post'><input class='btn btn-info' type='submit' name='votazione' id='votazione' value='vota'/></form>");
-		}
-
+		
 		$.ajax({
 			url     : 'TestServlet',
 			method     : 'GET',
-			data: { checkMap: 'checkMap' }
-// 			success    : function(resultText){
-// 			$('#result').html(resultText);
-// 			}
-			});
+			data: { checkMap: 'checkMap' },
+			contentType: 'text',
+			success    : function(result){
+				
+				 var dati = $.parseJSON(result);
+				 $('#div3').html('<div class="name">'+dati[1].nome+'</>');
+				
+				if(dati[0].stato == 2) {
+					$("#div2").html("Stato riunione : Riunione in corso");
+				}
+				if(dati[0].stato == 1) {
+					$("#div2").html("Stato riunione : In attesa");
+				}
+				if(dati[1].id != 0) {
+					$("#div4").html("<form action='TestServlet' method='post'><p>Seleziona il tuo voto:</p><input type='radio' id='approvo' name='approvo' value='1'><label for='approvo'>Approvo</label><br><input type='radio' id='nonapprovo' name='nonapprovo' value='2'><label for='nonapprovo'>Non Approvo</label><br><input hidden='hidden' name='iddocumentazione' id='iddocumentazione' value='"+dati[1].id+"'><input class='btn btn-info' type='submit' name='votazione' id='votazione' value='vota'/></form>");
+				}
+		}});	
 	};
-
 </script>
 
 </body>

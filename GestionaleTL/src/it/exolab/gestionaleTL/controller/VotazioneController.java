@@ -7,6 +7,8 @@ import it.exolab.gestionaleTL.crud.VotazioneCrud;
 import it.exolab.gestionaleTL.exception.AlreadyExistException;
 import it.exolab.gestionaleTL.exception.GenericException;
 import it.exolab.gestionaleTL.exception.InvalidFieldException;
+import it.exolab.gestionaleTL.model.Documentazione;
+import it.exolab.gestionaleTL.model.User;
 import it.exolab.gestionaleTL.model.Votazione;
 
 public class VotazioneController extends BaseController {
@@ -17,29 +19,28 @@ public class VotazioneController extends BaseController {
 			
 		super(request, response);	
 	}
-	
-	protected void doInsert(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException {
-			
-			Votazione votazione = new Votazione(Integer.parseInt(request.getParameter("voto")),
-										Integer.parseInt(request.getParameter("id_abitazione")),
-										Integer.parseInt(request.getParameter("id_documentazione")));
+	public void doInsert(HttpServletRequest request, HttpServletResponse response) {
+		
+		int voto = request.getParameter("approvo") != null ? 1 : 2;
+		User user = (User) request.getSession().getAttribute("user"); 
+		System.out.println("id votazione + " + request.getParameter("iddocumentazione"));
+		Votazione votazione = new Votazione(voto, user.getId_abitazione(),
+										Integer.parseInt(request.getParameter("iddocumentazione")));
 								
 	//		if(validate(user)) {
 				
-			votazioneCrud.insert(votazione);
+			try {
+				votazioneCrud.insert(votazione);
+			} catch (GenericException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AlreadyExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	//		}
 	}
-	
-	protected void doUpdate(HttpServletRequest request, HttpServletResponse response) throws GenericException, AlreadyExistException, InvalidFieldException {
-		
-		Votazione votazione = new Votazione(Integer.parseInt(request.getParameter("voto")),
-									Integer.parseInt(request.getParameter("id_abitazione")),
-									Integer.parseInt(request.getParameter("id_documentazione")));
-							
-//		if(validate(user)) {
-			
-		votazioneCrud.update(votazione);
-//		}
-	}
-
 }

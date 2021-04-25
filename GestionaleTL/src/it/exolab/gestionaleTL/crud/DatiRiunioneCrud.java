@@ -44,7 +44,26 @@ public class DatiRiunioneCrud {
 	
 	public Entry<Integer, Integer> find(int id_riunione) {
 		
-		Entry<Integer, Integer> datiAttuali = null;
+		Entry<Integer, Integer> datiAttuali = new Entry<Integer, Integer>() {
+			
+			@Override
+			public Integer setValue(Integer value) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Integer getValue() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Integer getKey() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		};
 		
 		for(Entry<Integer, Integer> dati : DatiRiunione.getInstance().getMappaDati().entrySet()) {
 			if(dati.getKey() == id_riunione) {

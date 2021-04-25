@@ -9,12 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import it.exolab.gestionaleTL.controller.DatiRiunioneController;
 import it.exolab.gestionaleTL.controller.DocumentazioneController;
 import it.exolab.gestionaleTL.controller.RigaPresenzaController;
 import it.exolab.gestionaleTL.controller.RiunioneController;
+import it.exolab.gestionaleTL.controller.VotazioneController;
 import it.exolab.gestionaleTL.model.Documentazione;
 import it.exolab.gestionaleTL.model.Riunione;
+import it.exolab.gestionaleTL.model.Votazione;
 
 
 /**
@@ -39,35 +43,39 @@ public class TestServlet extends HttpServlet {
 		
 
 		String op = request.getParameter("checkMap");
-		if(op.equals("checkMap")) {
+		if(op.equals("checkMap") && op != null) {
 			DatiRiunioneController datiRiunioneController = new DatiRiunioneController(request, response);
 			Riunione riunione = (Riunione) request.getSession().getAttribute("riunione");
 			Entry<Integer, Integer> datiAttuali = datiRiunioneController.doCheckRiunione(riunione.getId());
-			if(datiAttuali == null) {
-				request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+			if(datiAttuali.getKey() == null) {
+				System.out.println("1 if");
 				return;
 			}
 			
-			if(datiAttuali.getValue() == 0) {
+			if(datiAttuali.getValue() == 0 && datiAttuali.getValue() != null) {
 				riunione.setStato(2);
-				request.getSession().setAttribute("riunione", riunione);
-				request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+				Gson gson = new Gson();
+				String riunioneString = gson.toJson(riunione);
+				response.getWriter().append(riunioneString);
+				System.out.println("2 if");
 				return;
 			}
 			if(datiAttuali.getValue() != 0) {
 				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 				riunione.setStato(2);
 				Documentazione documentazione = documentazioneController.doFind(datiAttuali.getValue());
-				request.setAttribute("documentazione", documentazione);
-				request.getSession().setAttribute("riunione", riunione);
-				request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+				Gson gson = new Gson();
+				String riunioneString = gson.toJson(riunione);
+				String documentazioneString = gson.toJson(documentazione);
+				String result = "["+riunioneString+","+documentazioneString+"]";
+				response.getWriter().append(result);
+				System.out.println("3 if");
 				return;
 			}
 		}
 		
 		
 		request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
-//		response.getWriter().append(ret);
 	}
 
 	/**
@@ -118,7 +126,10 @@ public class TestServlet extends HttpServlet {
 		
 		if(request.getParameter("votazione") != null) {
 			
-			
+			VotazioneController votazioneController = new VotazioneController(request, response);
+			votazioneController.doInsert(request, response);
+			request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+			return;
 		}
 
 	}
