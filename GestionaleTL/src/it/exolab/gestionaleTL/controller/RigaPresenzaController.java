@@ -32,6 +32,8 @@ public class RigaPresenzaController extends BaseController {
 	
 	public void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	
+	
 		RigaPresenza rigaPresenza = rigaPresenzaCrud.findByUserRiunione(Integer.parseInt((String)request.getParameter("user_id")),
 																		Integer.parseInt((String)request.getParameter("riunione_id")));
 									

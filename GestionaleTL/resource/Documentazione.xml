@@ -34,6 +34,7 @@
 		select
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
+		d.documento as documentazione_documento,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM documentazione AS d
@@ -47,6 +48,7 @@
 		select
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
+		d.documento as documentazione_documento,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM documentazione AS d
@@ -58,7 +60,8 @@
 	
 	select
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
-		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato
+		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
+		d.documento as documentazione_documento
 		FROM riunione AS ri
 		INNER JOIN lavoro AS l ON ri.id=l.id_riunione
 		INNER JOIN documentazione AS d ON d.id_lavoro=l.id
@@ -77,6 +80,8 @@
 	    <result property="nome" column="documentazione_nome"/>
 	    <result property="societa" column="documentazione_societa"/>
 	    <result property="stato" column="documentazione_stato"/>
+	    <result property="documento" column="documentazione_documento"/>
+	    
 	    
 	    <association property="listaVoti" javaType="it.exolab.gestionaleTL.model.Votazione">
 	  

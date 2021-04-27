@@ -9,8 +9,9 @@
 	<form action="MainServlet" id="insertlavoro" name="insertlavoro" method="post">
 	<ul>
 		<label>Inserisci i dati di un nuovo lavoro:</label>
-		<input hidden="hidden" type="text" name="idriunione" id="idriunione" value="${idriunione}">
+		<input hidden="hidden" type="text" name="idriunione" id="idriunione" value="${listariunioni[loopindex].id}">
 		<input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+		<input hidden="hidden" type="text" name="loopindex" id="loopindex" value="${loopindex}">
 		<tr>
 			
 			<th colspan="3"><label class="labelA">Nome: </label><input style="width: 500px;" type="text" name="nome" id="nome" placeholder="Nome"></th>

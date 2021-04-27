@@ -51,10 +51,9 @@ public class TestServlet extends HttpServlet {
 				System.out.println("1 if");
 				return;
 			}
-			
+			Gson gson = new Gson();
 			if(datiAttuali.getValue() == 0 && datiAttuali.getValue() != null) {
 				riunione.setStato(2);
-				Gson gson = new Gson();
 				String riunioneString = gson.toJson(riunione);
 				response.getWriter().append(riunioneString);
 				System.out.println("2 if");
@@ -64,7 +63,6 @@ public class TestServlet extends HttpServlet {
 				DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 				riunione.setStato(2);
 				Documentazione documentazione = documentazioneController.doFind(datiAttuali.getValue());
-				Gson gson = new Gson();
 				String riunioneString = gson.toJson(riunione);
 				String documentazioneString = gson.toJson(documentazione);
 				String result = "["+riunioneString+","+documentazioneString+"]";
@@ -115,17 +113,23 @@ public class TestServlet extends HttpServlet {
 			request.getRequestDispatcher("testRiunione.jsp").include(request, response);
 			return;
 		}
-		
-		if(request.getParameter("partecipariunione") != null) {
-			
-			RigaPresenzaController rigaPresenzaController = new RigaPresenzaController(request, response);
-			rigaPresenzaController.doUpdate(request, response);
-			request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
-			return;
+	
+		String partecipazione = request.getParameter("partecipariunione");
+		boolean flag = false;
+		if(partecipazione != null) {
+			flag = true;
 		}
-		
+		if(flag) {
+			if(partecipazione.equals("partecipariunione") && partecipazione != null) {
+				System.out.println("sono arrivato dalll'ajax nella partecipazione");
+				RigaPresenzaController rigaPresenzaController = new RigaPresenzaController(request, response);
+				rigaPresenzaController.doUpdate(request, response);
+				//request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);
+				return;
+			}
+		}		
 		if(request.getParameter("votazione") != null) {
-			
+			System.out.println("sono arrivato dalll'ajax nella votazione");
 			VotazioneController votazioneController = new VotazioneController(request, response);
 			votazioneController.doInsert(request, response);
 			request.getRequestDispatcher("testRiunioneUser.jsp").include(request, response);

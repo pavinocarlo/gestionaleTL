@@ -33,9 +33,6 @@
 		<li><tr>
 			<th><label class="labelA">Password: </label></th>
 			<th><label> l'utente riceverà la password generata automaticamente. </label></th>
-			<!-- 
-			<th><input type="password" name="password" id="password" placeholder="Password"><br/></th>
-			 -->
 		</tr></li>
 		<li><tr>
 			<th><label class="labelA">Data di accesso: </label></th>

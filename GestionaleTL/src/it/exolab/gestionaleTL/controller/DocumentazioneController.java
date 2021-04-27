@@ -119,5 +119,46 @@ public class DocumentazioneController extends BaseController {
 		
 		
 	}
+	
+	protected byte[] uploadDocumento(String field) throws IOException, ServletException {
+
+		byte[] ret = null;
+
+		Part filePart = request.getPart(field);
+
+		FileOutputStream outputStream = null;
+		InputStream fileContent = null;
+
+		try {
+
+			// creating a new file with file path and the file name
+			fileContent = filePart.getInputStream();
+			// getting the input stream
+			int readBytes = 0;
+			byte[] readArray = new byte[1024];
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// initializing a byte array with size 1024
+
+			while ((readBytes = fileContent.read(readArray)) != -1) {
+
+				baos.write(readArray, 0, readBytes);
+			} // this loop will write the contents of the byte array unitl the end to the
+				// output stream
+			ret = baos.toByteArray();
+
+		} catch (Exception ex) {
+			System.out.println("Error Writing File: " + ex);
+		} finally {
+			if (outputStream != null) {
+				outputStream.close();
+				// closing the output stream
+			}
+			if (fileContent != null) {
+				fileContent.close();
+				// clocsing the input stream
+			}
+		}
+		return ret;
+	}
 
 }

@@ -10,20 +10,7 @@
 <body>
 <div id="div1">
 </div>
-<form action="TestServlet" method="post">
-	<c:if test="${riunione.stato == 2 }">
-		<input hidden="hidden" name="riunione_id" id="riunione_id" value="${riunione.id}">
-		<input hidden="hidden" name="user_id" id="user_id" value="${user.id}">
-		<c:choose>
-		    <c:when test="${rigapresenza.presenza == 2 or empty rigapresenza.presenza }">
-		        <td><input class="btn btn-info" type="submit" name="partecipariunione" id="partecipariunione" value="partecipa"/></td>
-		    </c:when>
-		    <c:otherwise>
-		        <a>Stai partecipando alla riunione</a>
-		    </c:otherwise>
-		</c:choose>
-	</c:if>
-</form>
+
 <tr>
 	<div>
 		<td>Data riunione : ${riunione.data_riunione}</td><br/>
@@ -39,17 +26,25 @@
 					<td>Documento : ${documentazione.nome}</td><br/>
 				    <td>Societa: ${documentazione.societa}</td><br/>
 				    <td>costo: ${documentazione.costo}</td><br/>
+				    <input hidden="hidden" name="iddocumentazione" id="iddocumentazione" value="${documentazione.id}">
 		    	</c:forEach>	
 	    </c:forEach>
 	</div>
 </tr>
 <div id="div2">
 </div>
-	<div id="div3">
+<input hidden="hidden" name="buttonPresence" id="buttonPresence" value="on">
+<div id="div3">
 </div>
+<input hidden="hidden" name="buttonVote" id="buttonVote" value="on">
 <div id="div4">
 </div>
+<div id="div5">
+</div>
+
 <script>
+	var flag = false;
+	
  	var c = setInterval('checkRiunione()', 5000);
 	
 	function checkRiunione(){
@@ -60,21 +55,70 @@
 			data: { checkMap: 'checkMap' },
 			contentType: 'text',
 			success    : function(result){
+		
+			if(!(flag && dati == null) ){	
 				
-				 var dati = $.parseJSON(result);
-				 $('#div3').html('<div class="name">'+dati[1].nome+'</>');
+				if(result.length != 0) {
+					
+					var dati = $.parseJSON(result);
 				
-				if(dati[0].stato == 2) {
-					$("#div2").html("Stato riunione : Riunione in corso");
+					if(dati.stato == 2) {
+						$("#div2").html("Stato riunione : Riunione in corso");
+						if($("#buttonPresence").val() === "on" ) {
+							
+							$("#div3").html("<input hidden='hidden' name='riunione_id' id='riunione_id' value='"+dati.id+"'><input hidden='hidden' name='user_id' id='user_id' value='"+${user.id}+"'><input class='btn btn-info' type='submit' name='partecipariunione' id='partecipariunione' value='partecipa' onclick='buttonPresenceOff()'/>");
+						}
+						else{
+							$("#div3").html("<a></a>");
+						}
+					}
+					if($("#buttonVote").val() === "on" && dati[1] != null && dati[1].id != 0 ) {
+						$("#div5").html("<div class='name'>'"+dati[1].nome+"'</></br><p>Seleziona il tuo voto:</p><input type='radio' id='approvo' name='approvo' value='1'><label for='approvo'>Approvo</label><br><input type='radio' id='nonapprovo' name='nonapprovo' value='2'><label for='nonapprovo'>Non Approvo</label><br><input hidden='hidden' name='iddocumentazione' id='iddocumentazione' value='"+dati[1].id+"'><input class='btn btn-info' type='submit' name='votazione' id='votazione' value='vota' onclick='votazione()'/>");
+						
+					}
+					if(dati[1] == null) {
+						$("#div5").html("<a>Non c'e' votazione</a>");
+					}
+					if($("#buttonVote").val() === "off") {
+						$("#div5").html("<a>Hai votato</a>");
+					}
 				}
-				if(dati[0].stato == 1) {
+				else{
 					$("#div2").html("Stato riunione : In attesa");
 				}
-				if(dati[1].id != 0) {
-					$("#div4").html("<form action='TestServlet' method='post'><p>Seleziona il tuo voto:</p><input type='radio' id='approvo' name='approvo' value='1'><label for='approvo'>Approvo</label><br><input type='radio' id='nonapprovo' name='nonapprovo' value='2'><label for='nonapprovo'>Non Approvo</label><br><input hidden='hidden' name='iddocumentazione' id='iddocumentazione' value='"+dati[1].id+"'><input class='btn btn-info' type='submit' name='votazione' id='votazione' value='vota'/></form>");
-				}
-		}});	
+			}
+			else {
+				$("#div2").html("Stato riunione : Conclusa");
+			}
+		}});
+		
 	};
+	
+	function buttonPresenceOff() {
+        $("#buttonPresence").val("off");
+        $.ajax({
+			url     : 'TestServlet?partecipariunione=partecipariunione&user_id='+$('#user_id').val()+'&riunione_id='+$('#riunione_id').val(),
+			method     : 'POST',
+	
+			
+			contentType: 'text',
+			success    : function(){
+				alert("ora sei presente")
+			}});
+    };
+    
+    function votazione() {
+    	$("#buttonVote").val("off");
+        $.ajax({
+			url     : 'TestServlet?votazione=votazione&approvo='+$("#approvo").val()+'&nonapprovo='+$("#nonapprovo").val()+'&iddocumentazione='+$("#iddocumentazione").val(),
+			method     : 'POST',
+
+			contentType: 'text',
+			success    : function(){
+				alert("hai votato");
+			}});
+    };
+	
 </script>
 
 </body>

@@ -44,6 +44,17 @@
 			 <input class="btn btn-info" type="submit" id="showinsertuserbutton" name="showinsertuserbutton" value="Inserisci Proprietario">
 		</form>
 		</td>
+		<c:if test="${abitazione.listaUser.size()==0}">
+			<tr>
+				<td>
+					<form action="MainServlet" id="deleteabitazione" name="deleteabitazione" method="post">
+				 		<input hidden="hidden" id="idabitazione" name="idabitazione" value="${abitazione.id }">
+						<input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+						<input class="btn btn-danger" type="submit" id="deleteabitazione" name="deleteabitazione" value="Cancella Abitazione">
+					</form>
+				</td>
+			</tr>
+		</c:if>
 	</tr>
 	<tr>
 	<td>

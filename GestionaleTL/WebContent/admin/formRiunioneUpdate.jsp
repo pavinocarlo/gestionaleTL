@@ -6,34 +6,34 @@
 <th colspan="6">
 <div class="formA" id="formA" name="formA">
 	<form action="MainServlet" id="updateriunione" name="updateriunione" method="post">
-	<input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+	<input hidden="hidden" type="text" id="searchriunione" name="searchriunione" value="${searchriunione}">
 	
 	<table>
 		<label>Modifica i dati della riunione:</label>
 		<input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
-		<input hidden="hidden" type="text" name="id" id="id" value="${riunione.id }">
-		<input hidden="hidden" type="datetime-local" name="data_comunicazione" id="data_comunicazione" value="${riunione.data_comunicazione }">
-		<input hidden="hidden" type="datetime-local" name="inizio_riunione" id="inizio_riunione" value="${riunione.inizio_riunione }">
-		<input hidden="hidden" type="datetime-local" name="fine_riunione" id="fine_riunione" value="${riunione.fine_riunione }">
+		<input hidden="hidden" type="text" name="id" id="id" value="${listariunioni[loopindex].id }">
+		<input hidden="hidden" type="datetime-local" name="data_comunicazione" id="data_comunicazione" value="${listariunioni[loopindex].data_comunicazione }">
+		<input hidden="hidden" type="datetime-local" name="inizio_riunione" id="inizio_riunione" value="${listariunioni[loopindex].inizio_riunione }">
+		<input hidden="hidden" type="datetime-local" name="fine_riunione" id="fine_riunione" value="${listariunioni[loopindex].fine_riunione }">
 		<tr>
 			<td><label class="labelL">Ordine del giorno: </label></td>
-			<td><input type="text" name="ordine_del_giorno" id="ordine_del_giorno" value="${riunione.ordine_del_giorno }" placeholder="${riunione.ordine_del_giorno }"></td>
+			<td><input type="text" name="ordine_del_giorno" id="ordine_del_giorno" value="${listariunioni[loopindex].ordine_del_giorno }" placeholder="${listariunioni[loopindex].ordine_del_giorno }"></td>
 		</tr>
 		<tr>
 			<td><label class="labelL">Luogo: </label></td>
-			<td><input type="text" name="luogo" id="luogo" value="${riunione.luogo}" placeholder="${riunione.luogo}"><br/></td>
+			<td><input type="text" name="luogo" id="luogo" value="${listariunioni[loopindex].luogo}" placeholder="${listariunioni[loopindex].luogo}"><br/></td>
 		</tr>
 		<tr>
 			<td><label class="labelL">Stato: </label></td>
-			<td><input type="text" name="stato" id="stato" value="${riunione.stato}" placeholder="${riunione.stato}"><br/></td>
+			<td><input type="text" name="stato" id="stato" value="${listariunioni[loopindex].stato}" placeholder="${listariunioni[loopindex].stato}"><br/></td>
 		</tr>
 		<tr>
 			<td><label class="labelL">Data Riunione: </label></td>
-			<td><input type="datetime-local" name="data_riunione" id="data_riunione" value="${riunione.data_riunione}" placeholder="${riunione.data_riunione}"><br/></td>
+			<td><input type="datetime-local" name="data_riunione" id="data_riunione" value="${listariunioni[loopindex].data_riunione}" placeholder="${listariunioni[loopindex].data_riunione}"><br/></td>
 		</tr>
 		<tr>
 			<td><label class="labelL">Indirizzo: </label></td>
-			<td><input type="text" name="indirizzo_abitazione" id="indirizzo_abitazione" value="${riunione.indirizzo_abitazione}" placeholder="${riunione.indirizzo_abitazione}"><br/></td>
+			<td><input type="text" name="indirizzo_abitazione" id="indirizzo_abitazione" value="${listariunioni[loopindex].indirizzo_abitazione}" placeholder="${listariunioni[loopindex].indirizzo_abitazione}"><br/></td>
 		</tr>
 	</table>
 	<ul>

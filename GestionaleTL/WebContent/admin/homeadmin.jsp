@@ -45,7 +45,6 @@
 	</c:when>
 	<c:when test="${showgestionelavoro!=null or listalavori!=null or showupdatedocumentazione!=null or showlistadocumentazione!=null}">
 		<!-- Lavori - condizioni e template -->
-		<jsp:include page="formGestioneLavoro.jsp"></jsp:include>
 		<hr>
 		<c:if test="${showinsertlavoro!=null}">
 			<jsp:include page="formLavoroInsert.jsp"></jsp:include>
@@ -56,7 +55,6 @@
 	</c:when>
 	<c:when test="${showgestionedocumentazione!=null or listadocumentazione!=null or showupdatedocumentazione!=null}">
 		<!-- Documentazione - condizioni e template -->
-		<jsp:include page="formGestioneDocumentazione.jsp"></jsp:include>
 		<hr>
 		<c:if test="${showinsertdocumentazione!=null}">
 			<jsp:include page="formDocumentazioneInsert.jsp"></jsp:include>
@@ -78,7 +76,6 @@
 	</c:when>
 	<c:when test="${showgestioneuser!=null or listauser!=null}">
 		<!-- Inquilini - condizioni e template -->
-		<jsp:include page="formGestioneUser.jsp"></jsp:include>
 		<hr>
 		<c:if test="${showinsertuser!=null}">
 			<jsp:include page="formUserInsert.jsp"></jsp:include>

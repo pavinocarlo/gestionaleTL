@@ -50,6 +50,7 @@
 		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
+		d.documento as documentazione_documento,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM riunione AS ri
@@ -74,6 +75,7 @@
 		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
+		d.documento as documentazione_documento,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM riunione AS ri
@@ -98,6 +100,7 @@
 		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
+		d.documento as documentazione_documento,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione
 		FROM riunione AS ri
@@ -123,6 +126,7 @@
 		l.stato AS lavoro_stato, l.id_riunione AS lavoro_id_riunione,
 		d.id AS documentazione_id, d.id_lavoro AS documentazione_id_lavoro, d.nome AS documentazione_nome, 
 		d.costo AS documentazione_costo, d.`società` AS documentazione_societa, d.stato AS documentazione_stato,
+		d.documento as documentazione_documento,
 		v.id AS votazione_id, v.voto AS votazione_voto,
 		v.id_abitazione as votazione_id_abitazione, v.id_documentazione AS votazione_id_documentazione,
 		a.id AS abitazione_id, a.interno AS abitazione_interno, a.indirizzo AS abitazione_indirizzo,
@@ -181,6 +185,7 @@
 		    <result property="nome" column="documentazione_nome"/>
 		    <result property="societa" column="documentazione_societa"/>
 		    <result property="stato" column="documentazione_stato"/>
+		    <result property="documento" column="documentazione_documento"/>
 		    
 		    <association property="listaVoti" javaType="it.exolab.gestionaleTL.model.Votazione">
 		  

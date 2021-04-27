@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
@@ -40,8 +40,9 @@
 		<td>
 			<form action="MainServlet">
 				 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
-				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
+				
 				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+				 <input hidden="hidden" id="riunione" name="riunione" value="${riunione}">
 				 <input class="btn btn-warning" type="submit" id="showupdateriunionebutton" name="showupdateriunionebutton" value="Modifica Riunione">
 			</form>
 		</td>
@@ -50,6 +51,7 @@
 				 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
 				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+				 <input hidden="hidden" id="riunione" name="riunione" value="${riunione}">
 				 <input class="btn btn-info" type="submit" id="showinsertlavorobutton" name="showinsertlavorobutton" value="Inserisci Lavoro">
 			</form>
 		</td>
@@ -58,6 +60,7 @@
 				 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 				 <input hidden="hidden" id="idriunione" name="idriunione" value="${riunione.id }">
 				 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+				 <input hidden="hidden" id="riunione" name="riunione" value="${riunione}">
 				 <input class="btn btn-info" type="submit" id="showlistalavoributton" name="showlistalavoributton" value="Visualizza Lavori">
 			</form>
 		</td>

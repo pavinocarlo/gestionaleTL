@@ -91,11 +91,10 @@ public class MainServlet extends HttpServlet {
 		
 		if(request.getParameter(SHOW + UPDATE + RIUNIONE + BUTTON) != null) {
 			riunioneController.doFind(request, response);
-			riunioneController.doFindForUpdate(request, response);
 			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
 			request.setAttribute(SHOW + UPDATE + RIUNIONE, SHOW + UPDATE + RIUNIONE);
+			request.setAttribute("searchriunione", request.getParameter("searchriunione"));
 			request.setAttribute("loopindex", request.getParameter("loopindex"));
-			request.setAttribute("idriunione", request.getParameter("idriunione"));
 			return;
 		}
 		if(request.getParameter(INSERT + RIUNIONE) != null) {
@@ -179,22 +178,6 @@ public class MainServlet extends HttpServlet {
 	
 	private void doActionLavoro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter(SHOW + GESTIONE + LAVORO + BUTTON) != null) {
-			
-			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
-			return;
-		}
-//		if(request.getParameter(SHOW + INSERT + LAVORO + BUTTON) != null) {
-//			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
-//			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
-//			return;
-//		}
-//		if(request.getParameter(SHOW + UPDATE + LAVORO + BUTTON) != null) {
-//			request.setAttribute(SHOW + GESTIONE + LAVORO, SHOW + GESTIONE + LAVORO);
-//			request.setAttribute(SHOW + UPDATE + LAVORO, SHOW + UPDATE + LAVORO);
-//			return;
-//		}
-		
 		LavoroController lavoroController = new LavoroController(request, response);
 		
 		
@@ -214,16 +197,14 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
 			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
 			request.setAttribute("loopindex", request.getParameter("loopindex"));
-			request.setAttribute("idriunione", request.getParameter("idriunione"));
-			
 			return;
 		}
 		if(request.getParameter(SHOW + "lista" + "lavori" + BUTTON) != null) {
+			
 			riunioneController.doFind(request, response);
-			lavoroController.doFindByIdRiunione(request, response);
 			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
 			request.setAttribute("loopindex", request.getParameter("loopindex"));
-			request.setAttribute("idriunione", request.getParameter("idriunione"));
+			request.setAttribute("looplavoroindex", request.getParameter("looplavoroindex"));
 			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
 			return;
 		}
@@ -233,49 +214,21 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
 			request.setAttribute(SHOW + INSERT + LAVORO, SHOW + INSERT + LAVORO);
 			request.setAttribute("loopindex", request.getParameter("loopindex"));
-			request.setAttribute("idriunione", request.getParameter("idriunione"));
-			System.out.println("sono nell'if show update lavoro button");	 						//da cancellare
-			System.out.println(																		//da cancellare
-					"loopindex:"+request.getParameter("loopindex:")+", "+
-					"looplavoroindex"+request.getParameter("looplavoroindex")+", "+
-					"idriunione"+request.getParameter("idriunione")
-					);	
+			request.setAttribute("looplavoroindex", request.getParameter("looplavoroindex"));
 			return;
 		}
 		if(request.getParameter(SHOW + UPDATE + LAVORO + BUTTON) != null) {
-			System.out.println("sono nell'if show update lavoro button");	 													//da cancellare
-			System.out.println(																		//da cancellare
-					"loopindex:"+request.getParameter("loopindex:")+", "+
-					"looplavoroindex"+request.getParameter("looplavoroindex")+", "+
-					"idriunione"+request.getParameter("idriunione")
-					);																				//da cancellare
 			riunioneController.doFind(request, response);
-			lavoroController.doFindByIdRiunione(request, response);
 			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
-			request.setAttribute("loopindex", request.getParameter("loopindex"));
-			request.setAttribute("looplavoroindex", request.getParameter("loolavoropindex"));
-			request.setAttribute("idriunione", request.getParameter("idriunione"));
 			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
 			request.setAttribute(SHOW + UPDATE + LAVORO, SHOW + UPDATE + LAVORO);
-			System.out.println(																		//da cancellare
-								request.getParameter("loopindex")+", "+
-								request.getParameter("looplavoroindex")
-								);	 																//da cancellare
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("looplavoroindex", request.getParameter("looplavoroindex"));
 			return;
 		}
 	}
 	
 	private void doActionDocumentazione(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(request.getParameter(SHOW + GESTIONE + DOCUMENTAZIONE + BUTTON) != null) {
-			request.setAttribute(SHOW + GESTIONE + DOCUMENTAZIONE, SHOW + GESTIONE + DOCUMENTAZIONE);
-			return;
-		}
-		if(request.getParameter(SHOW + INSERT + DOCUMENTAZIONE + BUTTON) != null) {
-			request.setAttribute(SHOW + GESTIONE + DOCUMENTAZIONE, SHOW + GESTIONE + DOCUMENTAZIONE);
-			request.setAttribute(SHOW + INSERT + DOCUMENTAZIONE, SHOW + INSERT + DOCUMENTAZIONE);
-			return;
-		}
 		
 		DocumentazioneController documentazioneController = new DocumentazioneController(request, response);
 		
@@ -283,12 +236,54 @@ public class MainServlet extends HttpServlet {
 			documentazioneController.doInsert(request, response);
 			return;
 		}
-		if(request.getParameter(UPDATE + DOCUMENTAZIONE) != null) {
-			documentazioneController.doUpdate(request, response);
-			return;
-		}
 		if(request.getParameter(FIND + DOCUMENTAZIONE) != null) {
 			documentazioneController.doFind(request, response);
+			return;
+		}
+		
+		RiunioneController riunioneController = new RiunioneController(request, response);
+		
+		if(request.getParameter(SHOW + INSERT + DOCUMENTAZIONE + BUTTON) != null) {
+			riunioneController.doFind(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
+			request.setAttribute(SHOW + INSERT + DOCUMENTAZIONE, SHOW + INSERT + DOCUMENTAZIONE);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("looplavoroindex", request.getParameter("looplavoroindex"));
+			return;
+		}
+		
+		if(request.getParameter(SHOW + "lista" + DOCUMENTAZIONE + BUTTON) != null) {
+			riunioneController.doFind(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
+			request.setAttribute(SHOW + "lista" + DOCUMENTAZIONE, SHOW + "lista" + DOCUMENTAZIONE);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("looplavoroindex", request.getParameter("looplavoroindex"));
+			return;
+		}
+		
+		if(request.getParameter(SHOW + UPDATE + DOCUMENTAZIONE + BUTTON) != null) {
+			riunioneController.doFind(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
+			request.setAttribute(SHOW + "lista" + DOCUMENTAZIONE, SHOW + "lista" + DOCUMENTAZIONE);
+			request.setAttribute(SHOW + UPDATE + DOCUMENTAZIONE, SHOW + UPDATE + DOCUMENTAZIONE);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("looplavoroindex", request.getParameter("looplavoroindex"));
+			request.setAttribute("loopdocumentazioneindex", request.getParameter("loopdocumentazioneindex"));
+			return;
+		}
+		
+		if(request.getParameter(UPDATE + DOCUMENTAZIONE) != null) {
+			riunioneController.doFind(request, response);
+			documentazioneController.doUpdate(request, response);
+			request.setAttribute(SHOW + GESTIONE + RIUNIONE, SHOW + GESTIONE + RIUNIONE);
+			request.setAttribute(SHOW + "lista" + "lavori", SHOW + "lista" + "lavori");
+			request.setAttribute(SHOW + "lista" + DOCUMENTAZIONE, SHOW + "lista" + DOCUMENTAZIONE);
+			request.setAttribute("loopindex", request.getParameter("loopindex"));
+			request.setAttribute("looplavoroindex", request.getParameter("looplavoroindex"));
+			request.setAttribute("loopdocumentazioneindex", request.getParameter("loopdocumentazioneindex"));
 			return;
 		}
 	}

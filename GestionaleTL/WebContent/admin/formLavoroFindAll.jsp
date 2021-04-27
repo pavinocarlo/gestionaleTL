@@ -6,7 +6,7 @@
 <th colspan="6">
 <div class="formA" id="formA" name="formA">
 	<c:choose>
-		<c:when test="${listalavori.size()>0}">
+		<c:when test="${listariunioni[loopindex].listaLavori.size()>0}">
 			<c:out value="Lista dei lavori associati a questa riunione:"/>
 		</c:when>
 		<c:otherwise>
@@ -16,7 +16,9 @@
 	<br/>
 	<input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 	<input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
-	<c:forEach items="${listalavori}" var="lavoro" varStatus="looplavoro">
+	<input hidden="hidden" id="loopindex" name="loopindex" value="${loopindex}">
+	<input hidden="hidden" id="idriunione" name="idriunione" value="${idriunione}">
+	<c:forEach items="${listariunioni[loopindex].listaLavori}" var="lavoro" varStatus="looplavoro">
 	<table class="table table-striped">
 	<input hidden="hidden" type="text" id="id_riunione" value="${lavoro.id_riunione }">
 	<tr>
@@ -39,18 +41,23 @@
 			 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 			 <input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
 			 <input hidden="hidden" id="idlavoro" name="idlavoro" value="${lavoro.id }">
-			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+			 <input hidden="hidden" type="text" id="idriunione" name="idriunione" value="${lavoro.id_riunione }">
+			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loopindex }">
 			 <input hidden="hidden" id="looplavoroindex" name="looplavoroindex" value="${looplavoro.index }">
 			 <input class="btn btn-warning" type="submit" id="showupdatelavorobutton" name="showupdatelavorobutton" value="Modifica Lavoro">
 		</form>
 		</td>
 		<td>
 		<form action="MainServlet">
-			 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
+			  <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 			 <input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
 			 <input hidden="hidden" id="idlavoro" name="idlavoro" value="${lavoro.id }">
-			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+			 <input hidden="hidden" type="text" id="idriunione" name="idriunione" value="${lavoro.id_riunione }">
+			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loopindex }">
 			 <input hidden="hidden" id="looplavoroindex" name="looplavoroindex" value="${looplavoro.index }">
+			 
+			 <input hidden="hidden" id="lavoro" name="lavoro" value="${lavoro}">
+			 
 			 <input class="btn btn-info" type="submit" id="showlistadocumentazionebutton" name="showlistadocumentazionebutton" value="Visualizza Documentazione">
 		</form>
 		</td>
@@ -59,7 +66,8 @@
 			 <input hidden="hidden" type="text" id="searchriunione" name="searchriunione" val="${searchriunione}">
 			 <input hidden="hidden" type="text" id="searchlavoro" name="searchlavoro" val="${searchlavoro}">
 			 <input hidden="hidden" id="idlavoro" name="idlavoro" value="${lavoro.id }">
-			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loop.index }">
+			 <input hidden="hidden" type="text" id="idriunione" name="idriunione" value="${lavoro.id_riunione }">
+			 <input hidden="hidden" id="loopindex" name="loopindex" value="${loopindex }">
 			 <input hidden="hidden" id="looplavoroindex" name="looplavoroindex" value="${looplavoro.index }">
 			 <input class="btn btn-info" type="submit" id="showinsertdocumentazionebutton" name="showinsertdocumentazionebutton" value="Inserisci Documentazione">
 		</form>
@@ -67,7 +75,7 @@
 	</tr>
 	<tr>
 	<td>
-	<c:if test="${looplavoroindex==looplavoro.index}">
+	<c:if test="${looplavoroindex==looplavoro.index and successoplaceholder!=null}">
 		<jsp:include page="/formSuccess.jsp"></jsp:include>
 	</c:if>
 	</td>
@@ -76,6 +84,20 @@
 		<tr>
 			<td>
 				<jsp:include page="formLavoroUpdate.jsp"></jsp:include>
+			</td>
+		</tr>
+	</c:if>
+	<c:if test="${looplavoroindex==looplavoro.index and showinsertdocumentazione!=null}">
+		<tr>
+			<td>
+				<jsp:include page="formDocumentazioneInsert.jsp"></jsp:include>
+			</td>
+		</tr>
+	</c:if>
+	<c:if test="${looplavoroindex==looplavoro.index and showlistadocumentazione!=null}">
+		<tr>
+			<td>
+				<jsp:include page="formDocumentazioneFindAll.jsp"></jsp:include>
 			</td>
 		</tr>
 	</c:if>

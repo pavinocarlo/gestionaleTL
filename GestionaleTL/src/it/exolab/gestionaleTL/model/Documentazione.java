@@ -9,6 +9,7 @@ public class Documentazione {
 	private double costo;
 	private Integer stato;
 	private String nome, societa;
+	private byte[] documento;
 	private List<Votazione> listaVoti= new ArrayList<Votazione>();
 	
 	public Documentazione() {
@@ -48,10 +49,9 @@ public class Documentazione {
 
 	@Override
 	public String toString() {
-		return "Documentazione [id=" + id + ", id_lavoro=" + id_lavoro + ", stato=" + stato + ", costo=" + costo
+		return "Documentazione [id=" + id + ", id_lavoro=" + id_lavoro + ", costo=" + costo + ", stato=" + stato
 				+ ", nome=" + nome + ", societa=" + societa + ", listaVoti=" + listaVoti + "]";
 	}
-
 
 	public Integer getStato() {
 		return stato;
@@ -100,5 +100,15 @@ public class Documentazione {
 	public void setId_lavoro(int id_lavoro) {
 		this.id_lavoro = id_lavoro;
 	}
+
+	public byte[] getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(byte[] documento) {
+		this.documento = documento;
+	}
+	
+	
 
 }
